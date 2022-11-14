@@ -13,7 +13,6 @@
 </div>
 
 
-
 We launch **EVA**, a vision-centric foundation model to **E**xplore the limits of **V**isual representation at sc**A**le using only publicly accessible data and academic resources. **EVA** is a vanilla ViT pre-trained to reconstruct the masked out image-text aligned vision features (*i.e.*, CLIP features) conditioned on visible image patches. Via this pretext task, we can efficiently scale up EVA to one billion parameters, and sets new records on a broad range of representative vision downstream tasks.
 
 Code and model weights will be released here.
@@ -23,7 +22,7 @@ Code and model weights will be released here.
 ## Summary of EVA's performance
 
 **image & video classification**
-<table border="1" width="120%">
+<table border="1" width="100%">
 	<tr align="center">
         <th> </th><th> </th><th colspan="3">image classification</th><th colspan="3">video classification</th>
     </tr>
@@ -36,17 +35,23 @@ Code and model weights will be released here.
 </table>
 <br>
 
-**image & video classification**
-<table border="1" width="120%">
+**object detection & segmentation**
+<table border="1" width="200%">
 	<tr align="center">
         <th> </th><th> </th><th colspan="4">COCO object detection & instance segmentation</th><th colspan="2">LVIS object detection & instance segmentation</th><th colspan="2">semantic segmentation</th>
     </tr>
     <tr align="center">
-        <th>model</th><th>#param.</th><th>COCO det (test)</th><th>COCO det (val)</th><th>COCO ins seg (test)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
+        <th>model</th><th>#param.</th><th>COCO det (test-dev)</th><th>COCO det (val)</th><th>COCO ins seg (test-dev)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
     </tr>
     <tr align="center">
-        <th>EVA</th><th>1.0B</th><th>64.7</th><th>64.5</th><th>55.5</th><th>55.0</th><th>62.2</th><th>55.0</th><th>53.4</th><th>62.3</th>
+        <th>EVA</th><th>1.0B</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7384#results">64.7</a></th><th>64.5</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7383#results">55.5</th><th>55.0</th><th>62.2</th><th>55.0</th><th>53.4</th><th>62.3</th>
     </tr>
 </table>
 <br>
 
+
+## Hiring
+
+We are hiring at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
+
+If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
