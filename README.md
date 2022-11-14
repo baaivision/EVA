@@ -3,7 +3,7 @@
 <h3>Exploring the Limits of Masked Visual Representation Learning at Scale</h3>
 
 
-[Yuxin Fang](https://bit.ly/YuxinFang_GoogleScholar)<sup>2,1</sup>, [Wen Wang](https://scholar.google.com/citations?user=1ks0R04AAAAJ&hl)<sup>3,1</sup>, [Binhui Xie](https://binhuixie.github.io/)<sup>4,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Ledell Yu Wu](https://scholar.google.com/citations?user=-eJHVt8AAAAJ&hl=en)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
+[Yuxin Fang](https://bit.ly/YuxinFang_GoogleScholar)<sup>2,1</sup>, [Wen Wang](https://scholar.google.com/citations?user=1ks0R04AAAAJ&hl)<sup>3,1</sup>, [Binhui Xie](https://binhuixie.github.io/)<sup>4,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Ledell Wu](https://scholar.google.com/citations?user=-eJHVt8AAAAJ&hl=en)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
  
 <sup>1</sup>[BAAI](https://www.baai.ac.cn/english.html), <sup>2</sup>[HUST](http://english.hust.edu.cn/), <sup>3</sup>[ZJU](https://www.zju.edu.cn/english/), <sup>4</sup>[BIT](https://english.bit.edu.cn/)
 
@@ -30,7 +30,7 @@ Code and model weights will be released here.
         <th>model</th><th>#param.</th><th>IN-1K</th><th>IN-1K, zero-shot</th><th>12 avg. zero-shot</th><th>K400</th><th>K600</th><th>K700</th>
     </tr>
     <tr align="center">
-        <th>EVA</th><th>1.0B</th><th>89.7</th><th>78.2</th><th>72.5</th><th>89.7</th><th>89.8</th><th>82.9</th>
+        <th>EVA</th><th>1.0B</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/cls/ft_1k_cls_sz560_89p7.txt">89.7</a></th><th>78.2</th><th>72.5</th><th>89.7</th><th>89.8</th><th>82.9</th>
     </tr>
 </table>
 <br>
@@ -44,13 +44,13 @@ Code and model weights will be released here.
         <th>model</th><th>#param.</th><th>COCO det (test-dev)</th><th>COCO det (val)</th><th>COCO ins seg (test-dev)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
     </tr>
     <tr align="center">
-        <th>EVA</th><th>1.0B</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7384#results">64.7</a></th><th>64.5</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7383#results">55.5</th><th>55.0</th><th>62.2</th><th>55.0</th><th>53.4</th><th>62.3</th>
+        <th>EVA</th><th>1.0B</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7384#results">64.7</a></th><th>64.5</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7383#results">55.5</th><th>55.0</th><th>62.2</th><th>55.0</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4.txt">53.4</a></th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/sem_seg/ft_ade20k_sem_seg_ms_62p3.txt">62.3</a></th>
     </tr>
 </table>
 <br>
 
 
-## Hiring
+## We are Hiring
 
 We are hiring at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
 
