@@ -41,7 +41,7 @@ Code and model weights will be released here.
         <th> </th><th> </th><th colspan="4">COCO object detection & instance segmentation</th><th colspan="2">LVIS object detection & instance segmentation</th><th colspan="2">semantic segmentation</th>
     </tr>
     <tr align="center">
-        <th>model</th><th>#param.</th><th>COCO det (test-dev)</th><th>COCO det (val)</th><th>COCO ins seg (test-dev)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
+        <th>model</th><th>#param.</th><th>COCO det (test)</th><th>COCO det (val)</th><th>COCO ins seg (test)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
     </tr>
     <tr align="center">
         <th>EVA</th><th>1.0B</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7384#results">64.7</a></th><th>64.5</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7383#results">55.5</th><th>55.0</th><th>62.2</th><th>55.0</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4.txt">53.4</a></th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/sem_seg/ft_ade20k_sem_seg_ms_62p3.txt">62.3</a></th>
