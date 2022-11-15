@@ -7,8 +7,8 @@
  
 <sup>1</sup>[BAAI](https://www.baai.ac.cn/english.html), <sup>2</sup>[HUST](http://english.hust.edu.cn/), <sup>3</sup>[ZJU](https://www.zju.edu.cn/english/), <sup>4</sup>[BIT](https://english.bit.edu.cn/)
 
-
-ArXiv Preprint ([arXiv 2211.07636](https://arxiv.org/abs/2211.07636))
+[![Paper](http://img.shields.io/badge/paper-arxiv.2211.07636-B31B1B.svg)](https://arxiv.org/abs/2211.07636)
+<!-- ArXiv Preprint ([arXiv 2211.07636](https://arxiv.org/abs/2211.07636)) -->
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco-minival)](https://paperswithcode.com/sota/instance-segmentation-on-coco-minival?p=eva-exploring-the-limits-of-masked-visual)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco)](https://paperswithcode.com/sota/instance-segmentation-on-coco?p=eva-exploring-the-limits-of-masked-visual)
