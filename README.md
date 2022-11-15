@@ -8,7 +8,7 @@
 <sup>1</sup>[BAAI](https://www.baai.ac.cn/english.html), <sup>2</sup>[HUST](http://english.hust.edu.cn/), <sup>3</sup>[ZJU](https://www.zju.edu.cn/english/), <sup>4</sup>[BIT](https://english.bit.edu.cn/)
 
 
-<!-- ArXiv Preprint ([arXiv 2204.02964](https://arxiv.org/abs/2204.02964)) -->
+ArXiv Preprint ([arXiv 2211.07636](https://arxiv.org/abs/2211.07636))
 
 </div>
 
@@ -49,6 +49,19 @@ Code and model weights will be released here.
 </table>
 <br>
 
+
+
+## Citation
+If you find our work helpful, please star this repo and cite the related articles. Thanks for your support!
+
+```
+@article{EVA,
+  title={EVA: Exploring the Limits of Masked Visual Representation Learning at Scale},
+  author={Fang, Yuxin and Wang, Wen and Xie, Binhui and Sun, Quan and Wu, Ledell and Wang, Xinggang and Huang, Tiejun and Wang, Xinlong and Cao, Yue},
+  journal={arXiv preprint arXiv:2211.07636},
+  year={2022}
+}
+```
 
 ## We are Hiring
 
