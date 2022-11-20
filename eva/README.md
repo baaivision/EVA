@@ -6,7 +6,7 @@
 We provide **all pre-trained & fine-tuned** EVAs for the community. 
 The following table summarizes the basic statistics of MIM pre-trained EVA and image classification EVA.
 
-| model name | #param. |pre-training epochs on merged-30M | intermeidate fine-tuning epochs on ImageNet-21K | fine-tuning epochs on ImageNet-1K | IN-1K top-1 |weight |
+| model name | #param. |pre-training epochs on merged-30M | intermeidate fine-tuning epochs on IN-21K | fine-tuning epochs on IN-1K | IN-1K top-1 acc. |weight |
 |------------|:------:|:------------------:|:------:|:------:|:------:|:------:|
 | `eva_psz14` | 1.0B | 150 | - | - | - | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14.pt) (`2GB`) |
 | `eva_psz14to16` | 1.0B | 150 | - | - | - | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14to16.pt) (`2GB`) | 
