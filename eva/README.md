@@ -307,7 +307,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 ## Evaluate EVA Finetuned model on ImageNet-1K
 
-- Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
 ```bash    
 
 MODEL_NAME=eva_g_patch14
@@ -343,7 +343,7 @@ Expected results:
 * Acc@1 89.622 Acc@5 98.930 loss 0.948
 ```
 
-- Evaluate the fine-tuned EVA (`560px, patch_size=14`) on **ImageNet-1K val** with a single node:
+Evaluate the fine-tuned EVA (`560px, patch_size=14`) on **ImageNet-1K val** with a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
