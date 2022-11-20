@@ -1,0 +1,13 @@
+torch==1.12.0
+torchvision==0.13.0
+timm==0.5.4
+Pillow
+blobfile
+mypy
+numpy
+pytest
+requests
+einops
+tensorboardX
+deepspeed==0.7.5
+scipy

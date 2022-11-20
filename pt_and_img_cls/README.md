@@ -19,17 +19,33 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 
 
 
+
 ## Summary of EVA's image classification performance
 
 | model | IN-1K | IN-V2 | IN-ReaL | IN-Adv. | IN-Ren. | IN-Ske. | ObjectNet |
 |:------------:|:------------------:|:------:|:------:| :------:|:------:|:------:|:------:|
 | EVA | 89.6 | 81.6 | 90.8 | 86.2 | 88.3 | 67.7 | 60.9 |
 
-For reference, [`timm`](https://github.com/rwightman/pytorch-image-models) collects some open-sourced state-of-the-art models' image classification results [here](https://github.com/rwightman/pytorch-image-models/tree/main/results).
+For reference, [timm](https://github.com/rwightman/pytorch-image-models) collects some open-sourced state-of-the-art models' image classification results [here](https://github.com/rwightman/pytorch-image-models/tree/main/results).
 
 Compared with other open-sourced models, EVA achieves the state-of-the-art performance in all the classification benchmarks we evaluated.
 
 For zero-shot classification performance of EVA-CLIP, please refer to our [wandb logs](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy).
+
+
+## Setup
+
+
+First, clone the repo and install required packages:
+```
+git clone git@github.com:baaivision/EVA.git
+cd pt_and_img_cls
+pip install -r requirements.txt
+```
+
+The core packages including: [Pytorch](https://pytorch.org/) version 1.12.0, [torchvision](https://pytorch.org/vision/stable/index.html) version 0.13.0, [timm](https://github.com/rwightman/pytorch-image-models) version 0.5.4 and [DeepSpeed](https://github.com/microsoft/DeepSpeed) version 0.7.5 *etc*.
+
+
 
 ## Pre-train EVA on the merged-30M image dataset
 
@@ -598,3 +614,7 @@ Expected results:
 * * Acc@1 60.907 Acc@5 82.768 loss 2.305
 ```
 
+## Acknowledgement
+
+This part of EVA is built using the awesome [BEiT](https://github.com/microsoft/unilm/tree/master/beit), [BEiTv2](https://github.com/microsoft/unilm/tree/master/beit), [CLIP](https://github.com/openai/CLIP), [MAE](https://github.com/facebookresearch/mae/), [timm](https://github.com/rwightman/pytorch-image-models) and [DeepSpeed](https://github.com/microsoft/DeepSpeed) libraries.
+Thanks for their wonderful works!
