@@ -26,10 +26,11 @@
 
 We launch **EVA**, a vision-centric foundation model to **E**xplore the limits of **V**isual representation at sc**A**le using only publicly accessible data and academic resources. **EVA** is a vanilla ViT pre-trained to reconstruct the masked out image-text aligned vision features (*i.e.*, CLIP features) conditioned on visible image patches. Via this pretext task, we can efficiently scale up EVA to one billion parameters, and sets new records on a broad range of representative vision downstream tasks.
 
-Code and model weights will be released here.
+**EVA is the first open-sourced 1-billion-parameter vision foundation model that achieves state-of-the-art performance on a broad range of downstream tasks.**
 
 ## News
 
+- `Nov 20, 2022`: release code & model of [pre-training and image classification](eva/README.md).
 - `Nov 18, 2022`: release wandb [log & statistics](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy) of 1.3B EVA-CLIP training.
 
 <span id="eva_performance_summary"></span>
