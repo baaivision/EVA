@@ -6,13 +6,13 @@
 We provide **all pre-trained & fine-tuned** EVAs for the community. 
 The following table summarizes the basic statistics of MIM pre-trained EVA and image classification EVA.
 
-| model name | pre-training epochs on merged-30M | intermeidate fine-tuning epochs on ImageNet-21K | fine-tuning epochs on ImageNet-1K | IN-1K top-1 acc. |weight |
+| model name | pre-training epochs on merged-30M | intermeidate fine-tuning epochs on ImageNet-21K | fine-tuning epochs on ImageNet-1K | IN-1K top-1 |weight |
 |------------|:------------------:|:------:|:------:|:------:|:------:|
 | `eva_psz14` | 150 | - | - | - | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14.pt) (`2GB`) |
 | `eva_psz14to16` | 150 | - | - | - | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14to16.pt) (`2GB`) | 
 | `eva_21k_224px_psz14` | 150 | 60 | - | - | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_224px_psz14.pt) (`2GB`) |
-| `eva_21k_1k_336px_psz14_ema` | 150 | 60 | - | 89.6 | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt) (`4GB`) |
-| `eva_21k_1k_560px_psz14_ema` | 150 | 60 | - | 89.7 | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_1k_560px_psz14_ema_89p7.pt) (`4GB`) |
+| `eva_21k_1k_336px_psz14_ema` | 150 | 60 | 10 | 89.6 | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt) (`4GB`) |
+| `eva_21k_1k_560px_psz14_ema` | 150 | 60 | 15 | 89.7 | [HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_1k_560px_psz14_ema_89p7.pt) (`4GB`) |
 
 - `eva_psz14to16` model interpolates the kernel size of `patch_embed` from `14x14` to `16x16`. This is useful for object detection, instance segmentation & semantic segmentation, *etc*. See `interpolate_patch_14to16.py` for implementation details.
 - For MIM pre-trained EVA and EVA-CLIP, we use `deepspeed` `fp16` format. IN-1K fine-tuned EVA weights are larger (`4GB` *v.s.* `2GB`) because ema updates models with `fp32` format. The weights of other downstream tasks are also with `fp32` format.
@@ -305,7 +305,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 
 
-## Evaluate EVA Finetuned model on ImageNet-1K (Image Classification)
+## Evaluate EVA Finetuned model on ImageNet-1K
 
 - Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
 ```bash    
@@ -379,7 +379,7 @@ Expected results:
 * * Acc@1 89.712 Acc@5 98.958 loss 0.881
 ```
 
-## Robust Evaluation on ImageNet-1K Variants (Image Classification)
+## Evaluation on ImageNet-1K Variants
 
 
 Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:
