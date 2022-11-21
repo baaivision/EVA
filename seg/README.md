@@ -1,0 +1,165 @@
+# EVA: Semantic Segmentation
+
+EVA semantic segmentation is bulit with [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2), [ViT-Adapter](https://arxiv.org/abs/2205.08534) and [Mask2Former](https://arxiv.org/abs/2112.01527). Thanks for their awesome work!
+
+## Usage
+
+Install [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2).
+
+```bash
+# env: same as vit-adapter
+# recommended environment: torch1.9 + cuda11.1
+pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+pip install mmcv-full==1.4.2 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.0/index.html
+pip install timm==0.4.12
+pip install mmdet==2.22.0 # for Mask2Former
+pip install mmsegmentation==0.20.2
+
+ln -s ../detection/ops ./
+cd ops & sh make.sh # compile deformable attention
+```
+
+## Data preparation
+
+Please prepare COCO-Stuff-164K & ADE20K datasets according to the [guidelines](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md#prepare-datasets) in MMSegmentation.
+
+## Prepare EVA pre-trained weight
+
+| model name | #param. |pre-training epochs on merged-30M | weight |
+|------------|:------:|:------------------:|:------:|
+| `eva_psz14to16` | 1.0B | 150 | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14to16.pt) (`2GB`) |
+
+EVA is pre-trained with `patch_size` = `14x14`. While `eva_psz14to16` model interpolates the kernel size of `patch_embed` from `14x14` to `16x16`. This is useful for object detection, instance segmentation & semantic segmentation, *etc*. See [`interpolate_patch_14to16.py`](interpolate_patch_14to16.py) for implementation details.
+
+## Results and Models
+
+EVA use ViT-Adapter + Mask2Former as the segmentation head. We evaluate EVA on COCO-Stuff-164K and ADE20K segmentation benchmarks.
+
+
+### COCO-Stuff-164K
+
+| init. model weight | batch size | iter | crop size | mIoU (ss) | config | seg model weight |logs|
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [`eva_psz14to16`](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14to16.pt) | 32 | 60k | 896 | 53.4 | [config](configs/coco_stuff164k/eva_mask2former_896_60k_cocostuff164k_ss.py) | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_sem_seg_mask2former_cocostuff_53p4.pth) | [training](../logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4_training_log.txt) \| [evaluation](../logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4.txt)
+
+
+
+### ADE20K
+
+| init. model weight | batch size | iter | crop size | mIoU | config | seg model weight |logs|
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [`eva_sem_seg_coco`](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_sem_seg_mask2former_cocostuff_53p4.pth) | 64 | 20k | 896 | 61.5 (ss) \| 62.3 (ms) | [config](configs/ade20k/eva_mask2former_896_20k_coco164k2ade20k_ss.py) | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth) | [training](../logs/sem_seg/ft_ade20k_sem_seg_ms_62p3_training_log.txt) \| [evaluation](../logs/sem_seg/ft_ade20k_sem_seg_ms_62p3.txt)
+
+
+## Evaluation
+
+### COCO-Stuff-164K
+
+To evaluate EVA on **COCO-Stuff-164K** using a single node with 8 gpus:
+
+- single-scale evaluation
+```bash
+SEG_CONFIG=eva_mask2former_896_60k_cocostuff164k_ss
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch \
+    configs/coco_stuff164k/${SEG_CONFIG}.py \
+    /path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth \
+    --eval mIoU
+
+
+# expected results
+Summary:
++-------+-------+-------+
+|  aAcc |  mIoU |  mAcc |
++-------+-------+-------+
+| 74.08 | 53.36 | 66.09 |
++-------+-------+-------+
+```
+
+
+
+### ADE20K
+
+To evaluate EVA on **ADE20K** using a single node with 8 gpus:
+
+- single-scale evaluation
+```bash
+SEG_CONFIG=eva_mask2former_896_20k_coco164k2ade20k_ss
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch \
+    configs/ade20k/${SEG_CONFIG}.py \
+    /path/to/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth \
+    --eval mIoU
+
+
+# expected results
+Summary:
++-------+-------+-------+
+|  aAcc |  mIoU |  mAcc |
++-------+-------+-------+
+| 87.15 | 61.47 | 75.75 |
++-------+-------+-------+
+
+```
+
+
+- multi-scale evaluation
+```bash
+SEG_CONFIG=eva_mask2former_896_20k_coco164k2ade20k_ms
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch \
+    configs/ade20k/${SEG_CONFIG}.py \
+    /path/to/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth \
+    --eval mIoU
+
+
+# expected results
+Summary:
++-------+-------+-------+
+|  aAcc |  mIoU |  mAcc |
++-------+-------+-------+
+| 87.35 | 62.25 | 76.14 |
++-------+-------+-------+
+
+```
+
+
+
+## Training
+
+### COCO-Stuff-164K
+
+To train EVA on **COCO-Stuff-164K** using 4 nodes (`total_batch_size=32`):
+
+```bash
+SEG_CONFIG=eva_mask2former_896_60k_cocostuff164k_ss
+MODEL_OUTPUT_ROOT=/path/to/seg/output/
+pretrained=/path/to/eva_psz14.pt
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env train.py --launcher pytorch \
+    configs/coco_stuff164k/${SEG_CONFIG}.py \
+    --work-dir ${MODEL_OUTPUT_ROOT}/${SEG_CONFIG}/lr1.5e-5_lrd0.95_enc6_dec8 \
+    --options model.pretrained=${pretrained}
+```
+
+### ADE20K
+
+To train EVA on **ADE20K** using 8 nodes (`total_batch_size=64`):
+
+```bash
+SEG_CONFIG=eva_mask2former_896_20k_coco164k2ade20k_ss
+MODEL_OUTPUT_ROOT=/path/to/seg/output/
+pretrained=/path/to/eva_psz14.pt
+load_from=/path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env train.py --launcher pytorch \
+    configs/coco_stuff164k/${SEG_CONFIG}.py \
+    --work-dir ${MODEL_OUTPUT_ROOT}/${SEG_CONFIG}/lr2.5e-5_lrd0.95_enc6_dec8 \
+    --options model.pretrained=${pretrained} \
+    model.load_from=${load_from}
+```
