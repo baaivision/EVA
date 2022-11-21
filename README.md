@@ -1,15 +1,13 @@
 <div align="center">
-<h1>EVA</h1>
-<h3>Exploring the Limits of Masked Visual Representation Learning at Scale</h3>
-
+<h1>EVA: An Open Billion-Scale Vision Foundation Model </h1>
+<h3><a href="https://arxiv.org/abs/2211.07636">EVA: Exploring the Limits of Masked Visual Representation Learning at Scale</a></h3>
 
 [Yuxin Fang](https://bit.ly/YuxinFang_GoogleScholar)<sup>2,1</sup>, [Wen Wang](https://scholar.google.com/citations?user=1ks0R04AAAAJ&hl)<sup>3,1</sup>, [Binhui Xie](https://binhuixie.github.io/)<sup>4,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Ledell Wu](https://scholar.google.com/citations?user=-eJHVt8AAAAJ&hl=en)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
  
 <sup>1</sup>[BAAI](https://www.baai.ac.cn/english.html), <sup>2</sup>[HUST](http://english.hust.edu.cn/), <sup>3</sup>[ZJU](https://www.zju.edu.cn/english/), <sup>4</sup>[BIT](https://english.bit.edu.cn/)
 
-[![Paper](http://img.shields.io/badge/paper-arxiv.2211.07636-B31B1B.svg)](https://arxiv.org/abs/2211.07636)
+<!-- [![Paper](http://img.shields.io/badge/paper-arxiv.2211.07636-B31B1B.svg)](https://arxiv.org/abs/2211.07636) -->
 <!-- ArXiv Preprint ([arXiv 2211.07636](https://arxiv.org/abs/2211.07636)) -->
-
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco)](https://paperswithcode.com/sota/instance-segmentation-on-coco?p=eva-exploring-the-limits-of-masked-visual)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco-minival)](https://paperswithcode.com/sota/instance-segmentation-on-coco-minival?p=eva-exploring-the-limits-of-masked-visual)
@@ -90,8 +88,14 @@ If you find our work helpful, please star this repo and cite the related article
 }
 ```
 
-## We are Hiring
+## License
 
-We are hiring at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
+The content of this project itself is licensed under [LICENSE](LICENSE).
+
+## Contact
+
+For help or issues using EVA, please open a GitHub [issue](https://github.com/baaivision/EVA/issues/new).
+
+**We are hiring** at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
 
 If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
