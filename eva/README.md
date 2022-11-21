@@ -22,17 +22,17 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 
 ## Summary of EVA's image classification performance
 
-| model | IN-1K | IN-V2 | IN-ReaL | IN-Adv. | IN-Ren. | IN-Ske. | ObjectNet |
+| model | [IN-1K](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet.csv) | [IN-V2](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenetv2-matched-frequency.csv) | [IN-ReaL](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-real.csv) | [IN-Adv.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-a.csv) | [IN-Ren.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv) | [IN-Ske.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv) | ObjectNet |
 |:------------:|:------------------:|:------:|:------:| :------:|:------:|:------:|:------:|
 | EVA | 89.6 | 81.6 | 90.8 | 86.2 | 88.3 | 67.7 | 60.9 |
 
 > The top-1 accuracy of ImageNet-1K variants are better than the results we reported in our paper for we fix a bug. We will update the new results in the revision soon. 
 
-For reference, [timm](https://github.com/rwightman/pytorch-image-models) collects some open-sourced state-of-the-art models' image classification results [here](https://github.com/rwightman/pytorch-image-models/tree/main/results).
+For reference, [timm](https://github.com/rwightman/pytorch-image-models) collects some open-sourced state-of-the-art models' image classification results [here](https://github.com/rwightman/pytorch-image-models/tree/main/results) ([IN-1K](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet.csv), [IN-V2](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenetv2-matched-frequency.csv), [IN-ReaL](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-real.csv), [IN-Adv.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-a.csv), [IN-Ren.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv), [IN-Ske.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv)).
 
-Compared with other open-sourced models, EVA achieves the state-of-the-art performance in all the classification benchmarks we evaluated.
+Compared with other open-sourced models, EVA achieves the state-of-the-art performance in all the classification benchmarks we evaluated. 
 
-For zero-shot classification performance of EVA-CLIP, please refer to our [wandb logs](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy).
+For zero-shot classification performance of EVA-CLIP, please refer to [`clip`](clip) and [wandb logs](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy).
 
 
 ## Setup
