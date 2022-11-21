@@ -1,5 +1,6 @@
 # Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)
 
+## Model Card
 
 | model name | #param. | precision | data  |  batch size | IN-1K zero-shot top-1 | weight |
 |:-----------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -7,10 +8,12 @@
 
 The ImageNet-1K zero-shot classification performance is higher than our paper (`78.5` *v.s.* `78.2`) because of longer training.
 
-To our knowledge, EVA-CLIP is the largest performant open-sourced CLIP model evaluated via zero-shot classification performance. 
+We choose to train a 1.3B CLIP model, not because it is easy, but because it is hard. Please refer to [this note](https://docs.google.com/document/d/1FXosAZ3wMrzThgnWR6KSkXIz4IMItq3umDGos38pJps/edit) for a glance of the challenges in training very large CLIP.
+
+To our knowledge, EVA-CLIP is the largest performant open-sourced CLIP model evaluated via zero-shot classification performance.
 We will updates the results in our paper soon.
 
-For more details of EVA-CLIP, please refer to Section 2.3.5 of our [paper](https://arxiv.org/pdf/2211.07636.pdf).
+For more details of EVA-CLIP, please refer to Section 2.3.5 of [our paper](https://arxiv.org/pdf/2211.07636.pdf).
 
 
 ## Usage
