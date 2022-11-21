@@ -34,6 +34,16 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 - `Nov 18, 2022`: release wandb [log & statistics](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy) of 1.3B EVA-CLIP training.
 
 <span id="eva_performance_summary"></span>
+
+## Catalog
+
+- [x] [Pre-training](eva)
+- [x] [Image Classification](eva)
+- [] Video Classification
+- [] Object Detection & Instance Segmentation
+- [x] [Semantic Segmentation](seg)
+- [] CLIP
+
 ## Summary of EVA's performance
 
 **image & video classification**
