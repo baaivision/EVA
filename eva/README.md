@@ -26,6 +26,8 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 |:------------:|:------------------:|:------:|:------:| :------:|:------:|:------:|:------:|
 | EVA | 89.6 | 81.6 | 90.8 | 86.2 | 88.3 | 67.7 | 60.9 |
 
+> The top-1 accuracy of ImageNet-1K variants are better than the results we reported in our paper for we fix a bug. We will update the new results in the revision soon. 
+
 For reference, [timm](https://github.com/rwightman/pytorch-image-models) collects some open-sourced state-of-the-art models' image classification results [here](https://github.com/rwightman/pytorch-image-models/tree/main/results).
 
 Compared with other open-sourced models, EVA achieves the state-of-the-art performance in all the classification benchmarks we evaluated.
