@@ -1,0 +1,41 @@
+DATA:
+    ROOT: 'data/'
+    TRAIN_FILE: 'data/k700_train.txt'
+    VAL_FILE: 'data/k700_val.txt'
+    DATASET: kinetics700
+    NUM_FRAMES: 8
+    TUBELET_SIZE: 1
+    NUM_CLASSES: 700
+    LABEL_LIST: 'labels/kinetics700_labels.csv'
+MODEL:
+    ARCH: eva-1b/14
+    DROP_PATH_RATE: 0.2
+    PRETRAINED: /path/to/eva_video_k722.pth  # download from https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_video_k722.pth
+    PRETRAINED_MODE: 'eva_k722'
+    CLASS_MAPPING: 'data/k722_to_k700_mapping.npy'
+AUG:
+    LABEL_SMOOTH: 0.1
+    MIXUP: 0.
+    CUTMIX: 0.
+    COLOR_JITTER: 0.8
+    GRAY_SCALE: 0.2
+TRAIN:
+    BATCH_SIZE: 1
+    ACCUMULATION_STEPS: 4
+    BETAS: (0.9, 0.98)
+    EPS: 1e-6
+    LR: 1.e-6
+    WARMUP_START_LR: 1.e-6
+    LR_MIN: 1.e-6
+    LAYER_WISE_DECAY: 0.95
+    WEIGHT_DECAY: 0.05
+    EPOCHS: 2
+    WARMUP_EPOCHS: 0.
+    USE_CHECKPOINT: True
+MYCLIP:
+    USE_LEARNABLE_POS_EMB: True
+    STOP_GRAD_CONV1: False
+    USE_MEAN_POOLING: True
+    USE_TEXT_EMBED: False
+    FT_FRAMES: 8
+    FT_IMAGE_SIZE: 224

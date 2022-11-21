@@ -1,0 +1,802 @@
+[2022-11-08 08:36:20 eva-1b/14] (main_k722.py 473): INFO working dir: /home/binhuixie/outputs/cvpr/K722_1b_ft/k400/k722init_allft-1108-01
+[2022-11-08 08:36:27 eva-1b/14] (main_k722.py 499): INFO AUG:
+  COLOR_JITTER: 0.8
+  CUTMIX: 0.0
+  GRAY_SCALE: 0.2
+  LABEL_SMOOTH: 0.1
+  MIXUP: 0.0
+  MIXUP_SWITCH_PROB: 0.5
+BASE: ['']
+DATA:
+  DATASET: kinetics400
+  INPUT_SIZE: 224
+  LABEL_LIST: labels/kinetics_400_labels.csv
+  NUM_CLASSES: 400
+  NUM_FRAMES: 16
+  ROOT: data/
+  TRAIN_FILE: data/k400_train.txt
+  TUBELET_SIZE: 1
+  VAL_FILE: data/k400_val.txt
+LOCAL_RANK: 0
+MODEL:
+  ARCH: eva-1b/14
+  CLASS_MAPPING: data/k722_to_k400_mapping.npy
+  DROP_PATH_RATE: 0.2
+  FIX_FINE_TUNE: 0
+  FIX_TEXT: True
+  INIT_VALUES: 0.0
+  PRETRAINED: /home/binhuixie/outputs/cvpr/K722_1b/k722_ft_1104/ckpt_epoch_39.pth
+  PRETRAINED_MODE: eva_k722
+  RESUME: None
+MYCLIP:
+  CHECKPOINT_SEGMENTS: 3
+  FT_FRAMES: 8
+  FT_IMAGE_SIZE: 224
+  NUM_EXTRA_TOKENS: 1
+  STOP_GRAD_CONV1: False
+  USE_GLOBAL_ATTEN: True
+  USE_LEARNABLE_POS_EMB: True
+  USE_MEAN_POOLING: True
+  USE_SAME_PE: False
+  USE_TEXT_EMBED: False
+OUTPUT: /home/binhuixie/outputs/cvpr/K722_1b_ft/k400/k722init_allft-1108-01
+PRINT_FREQ: 10
+SAVE_FREQ: 1
+SEED: 1024
+TEST:
+  BATCH_SIZE: 2
+  MULTI_VIEW: False
+  NUM_CLIP: 4
+  NUM_CROP: 3
+  ONLY_TEST: False
+TRAIN:
+  ACCUMULATION_STEPS: 2
+  AUTO_RESUME: False
+  BATCH_SIZE: 1
+  BETAS: (0.9, 0.98)
+  EPOCHS: 1
+  EPS: 1e-06
+  LAYER_WISE_DECAY: 0.95
+  LR: 1e-06
+  LR_MIN: 1e-06
+  LR_SCHEDULER: cosine
+  LR_SCHEDULER_WARMUP_PREFIX: True
+  OPTIMIZER: adamw
+  OPT_LEVEL: O1
+  USE_CHECKPOINT: True
+  WARMUP_EPOCHS: 0.0
+  WARMUP_START_LR: 1e-06
+  WEIGHT_DECAY: 0.05
+WANDB: True
+[2022-11-08 08:36:55 eva-1b/14] (yclip_mae.py 295): INFO Loading masked key head.weight from data/k722_to_k400_mapping.npy
+[2022-11-08 08:36:55 eva-1b/14] (yclip_mae.py 295): INFO Loading masked key head.bias from data/k722_to_k400_mapping.npy
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO cls_token requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO pos_embed requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO patch_embed.proj.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO patch_embed.proj.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.norm1.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.norm1.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.attn.q_bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.attn.v_bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.norm2.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.norm2.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.0.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.norm1.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.norm1.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.attn.q_bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.attn.v_bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.norm2.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.norm2.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.1.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.2.norm1.weight requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.2.norm1.bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.2.attn.q_bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.2.attn.v_bias requires_grad = True
+[2022-11-08 08:36:57 eva-1b/14] (main_k722.py 142): INFO blocks.2.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.2.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.3.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.4.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.5.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.6.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.7.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.8.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.9.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.10.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.11.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.12.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.13.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.14.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.15.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.16.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.17.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.18.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.19.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.20.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.21.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.22.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.23.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.24.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.25.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.26.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.27.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.28.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.29.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.30.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.31.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.32.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.33.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.34.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.35.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.36.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.37.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.38.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.norm1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.norm1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.attn.q_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.attn.v_bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.attn.qkv.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.attn.proj.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.attn.proj.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.norm2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.norm2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.mlp.fc1.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.mlp.fc1.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.mlp.fc2.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO blocks.39.mlp.fc2.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO fc_norm.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO fc_norm.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO head.weight requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 142): INFO head.bias requires_grad = True
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 148): INFO number of params: 1017.1164MB
+[2022-11-08 08:36:58 eva-1b/14] (main_k722.py 159): INFO Assigned values: [0.12208654873684796, 0.12851215656510312, 0.13527595427905592, 0.14239574134637467, 0.14989025404881545, 0.1577792147882268, 0.16608338398760716, 0.174824614723797, 0.18402591023557582, 0.19371148445850087, 0.2039068257457904, 0.21463876394293727, 0.22593554099256555, 0.23782688525533216, 0.2503440897424549, 0.26352009446574204, 0.27738957312183377, 0.2919890243387724, 0.3073568677250236, 0.323533544973709, 0.3405616262881148, 0.3584859224085419, 0.37735360253530725, 0.3972143184582182, 0.4181203352191771, 0.44012666865176536, 0.46329123015975304, 0.48767497911552954, 0.5133420832795048, 0.5403600876626367, 0.5688000922764597, 0.5987369392383787, 0.6302494097246091, 0.6634204312890623, 0.6983372960937497, 0.7350918906249998, 0.7737809374999998, 0.8145062499999999, 0.8573749999999999, 0.9025, 0.95, 1.0]
+[2022-11-08 08:37:17 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][0/916]	eta 4:57:08 lr_first 0.000000122 lr_last 0.000001000	time 19.4634 (19.4634)	tot_loss 0.7260 (0.7260)	mem 15881MB
+[2022-11-08 08:37:54 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][5/916]	eta 1:17:35 lr_first 0.000000122 lr_last 0.000001000	time 3.5334 (5.1107)	tot_loss 1.8200 (0.6581)	mem 27546MB
+[2022-11-08 08:38:30 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][10/916]	eta 1:06:34 lr_first 0.000000122 lr_last 0.000001000	time 3.5318 (4.4091)	tot_loss 0.4714 (0.5930)	mem 27546MB
+[2022-11-08 08:39:06 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][15/916]	eta 1:02:13 lr_first 0.000000122 lr_last 0.000001000	time 3.5228 (4.1439)	tot_loss 0.4663 (0.5630)	mem 27550MB
+[2022-11-08 08:39:42 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][20/916]	eta 0:59:49 lr_first 0.000000122 lr_last 0.000001000	time 3.5439 (4.0063)	tot_loss 0.4677 (0.5558)	mem 27557MB
+[2022-11-08 08:40:18 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][25/916]	eta 0:58:24 lr_first 0.000000122 lr_last 0.000001000	time 3.6179 (3.9333)	tot_loss 0.4693 (0.5462)	mem 27557MB
+[2022-11-08 08:40:54 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][30/916]	eta 0:57:13 lr_first 0.000000122 lr_last 0.000001000	time 3.5516 (3.8755)	tot_loss 0.5247 (0.5462)	mem 27557MB
+[2022-11-08 08:41:30 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][35/916]	eta 0:56:18 lr_first 0.000000122 lr_last 0.000001000	time 3.5431 (3.8346)	tot_loss 0.4673 (0.5629)	mem 27557MB
+[2022-11-08 08:42:07 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][40/916]	eta 0:55:40 lr_first 0.000000122 lr_last 0.000001000	time 3.5216 (3.8137)	tot_loss 0.4635 (0.5635)	mem 27557MB
+[2022-11-08 08:42:43 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][45/916]	eta 0:55:00 lr_first 0.000000122 lr_last 0.000001000	time 3.5268 (3.7895)	tot_loss 0.4872 (0.5798)	mem 27557MB
+[2022-11-08 08:43:18 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][50/916]	eta 0:54:23 lr_first 0.000000122 lr_last 0.000001000	time 3.5285 (3.7689)	tot_loss 0.4657 (0.5759)	mem 27557MB
+[2022-11-08 08:43:54 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][55/916]	eta 0:53:49 lr_first 0.000000122 lr_last 0.000001000	time 3.5191 (3.7512)	tot_loss 0.4844 (0.5704)	mem 27557MB
+[2022-11-08 08:44:30 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][60/916]	eta 0:53:22 lr_first 0.000000122 lr_last 0.000001000	time 3.5577 (3.7416)	tot_loss 0.4694 (0.5782)	mem 27557MB
+[2022-11-08 08:45:06 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][65/916]	eta 0:52:53 lr_first 0.000000122 lr_last 0.000001000	time 3.5534 (3.7296)	tot_loss 0.4687 (0.5724)	mem 27557MB
+[2022-11-08 08:45:42 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][70/916]	eta 0:52:27 lr_first 0.000000122 lr_last 0.000001000	time 3.5559 (3.7203)	tot_loss 0.4667 (0.5652)	mem 27557MB
+[2022-11-08 08:46:18 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][75/916]	eta 0:52:00 lr_first 0.000000122 lr_last 0.000001000	time 3.5318 (3.7106)	tot_loss 0.4715 (0.5629)	mem 27557MB
+[2022-11-08 08:46:55 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][80/916]	eta 0:51:40 lr_first 0.000000122 lr_last 0.000001000	time 3.5904 (3.7091)	tot_loss 0.8115 (0.5634)	mem 27557MB
+[2022-11-08 08:47:32 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][85/916]	eta 0:51:20 lr_first 0.000000122 lr_last 0.000001000	time 3.5757 (3.7075)	tot_loss 0.5431 (0.5602)	mem 27557MB
+[2022-11-08 08:48:08 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][90/916]	eta 0:50:59 lr_first 0.000000122 lr_last 0.000001000	time 3.5740 (3.7035)	tot_loss 0.4670 (0.5609)	mem 27557MB
+[2022-11-08 08:48:44 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][95/916]	eta 0:50:35 lr_first 0.000000122 lr_last 0.000001000	time 3.5696 (3.6972)	tot_loss 0.4745 (0.5563)	mem 27557MB
+[2022-11-08 08:49:20 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][100/916]	eta 0:50:12 lr_first 0.000000122 lr_last 0.000001000	time 3.5354 (3.6915)	tot_loss 0.4684 (0.5703)	mem 27557MB
+[2022-11-08 08:49:56 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][105/916]	eta 0:49:51 lr_first 0.000000122 lr_last 0.000001000	time 3.5532 (3.6891)	tot_loss 0.4671 (0.5685)	mem 27557MB
+[2022-11-08 08:50:32 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][110/916]	eta 0:49:30 lr_first 0.000000122 lr_last 0.000001000	time 3.5259 (3.6849)	tot_loss 0.7451 (0.5668)	mem 27557MB
+[2022-11-08 08:51:08 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][115/916]	eta 0:49:09 lr_first 0.000000122 lr_last 0.000001000	time 3.8029 (3.6822)	tot_loss 0.4733 (0.5627)	mem 27557MB
+[2022-11-08 08:51:44 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][120/916]	eta 0:48:48 lr_first 0.000000122 lr_last 0.000001000	time 3.5645 (3.6791)	tot_loss 0.5857 (0.5618)	mem 27557MB
+[2022-11-08 08:52:20 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][125/916]	eta 0:48:27 lr_first 0.000000122 lr_last 0.000001000	time 3.5799 (3.6759)	tot_loss 0.4682 (0.5591)	mem 27557MB
+[2022-11-08 08:52:56 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][130/916]	eta 0:48:06 lr_first 0.000000122 lr_last 0.000001000	time 3.6234 (3.6729)	tot_loss 0.4778 (0.5590)	mem 27557MB
+[2022-11-08 08:53:33 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][135/916]	eta 0:47:49 lr_first 0.000000122 lr_last 0.000001000	time 3.5220 (3.6740)	tot_loss 0.4635 (0.5711)	mem 27557MB
+[2022-11-08 08:54:09 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][140/916]	eta 0:47:28 lr_first 0.000000122 lr_last 0.000001000	time 3.5207 (3.6705)	tot_loss 0.4714 (0.5680)	mem 27557MB
+[2022-11-08 08:54:45 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][145/916]	eta 0:47:08 lr_first 0.000000122 lr_last 0.000001000	time 3.8665 (3.6691)	tot_loss 0.4751 (0.5651)	mem 27557MB
+[2022-11-08 08:55:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][150/916]	eta 0:46:50 lr_first 0.000000122 lr_last 0.000001000	time 3.5597 (3.6685)	tot_loss 0.7580 (0.5687)	mem 27557MB
+[2022-11-08 08:55:58 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][155/916]	eta 0:46:29 lr_first 0.000000122 lr_last 0.000001000	time 3.5221 (3.6657)	tot_loss 0.4674 (0.5677)	mem 27557MB
+[2022-11-08 08:56:33 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][160/916]	eta 0:46:09 lr_first 0.000000122 lr_last 0.000001000	time 3.5345 (3.6627)	tot_loss 0.4689 (0.5652)	mem 27557MB
+[2022-11-08 08:57:10 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][165/916]	eta 0:45:50 lr_first 0.000000122 lr_last 0.000001000	time 3.5513 (3.6618)	tot_loss 0.6730 (0.5647)	mem 27557MB
+[2022-11-08 08:57:46 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][170/916]	eta 0:45:31 lr_first 0.000000122 lr_last 0.000001000	time 3.5724 (3.6611)	tot_loss 0.5153 (0.5661)	mem 27557MB
+[2022-11-08 08:58:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][175/916]	eta 0:45:11 lr_first 0.000000122 lr_last 0.000001000	time 3.5353 (3.6591)	tot_loss 0.4660 (0.5657)	mem 27557MB
+[2022-11-08 08:58:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][180/916]	eta 0:44:53 lr_first 0.000000122 lr_last 0.000001000	time 3.9741 (3.6595)	tot_loss 0.4634 (0.5630)	mem 27557MB
+[2022-11-08 08:59:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][185/916]	eta 0:44:33 lr_first 0.000000122 lr_last 0.000001000	time 3.5545 (3.6579)	tot_loss 0.4745 (0.5673)	mem 27557MB
+[2022-11-08 09:00:11 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][190/916]	eta 0:44:14 lr_first 0.000000122 lr_last 0.000001000	time 3.5525 (3.6562)	tot_loss 0.4684 (0.5685)	mem 27557MB
+[2022-11-08 09:00:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][195/916]	eta 0:43:54 lr_first 0.000000122 lr_last 0.000001000	time 3.5944 (3.6543)	tot_loss 1.1802 (0.5723)	mem 27557MB
+[2022-11-08 09:01:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][200/916]	eta 0:43:35 lr_first 0.000000122 lr_last 0.000001000	time 3.5265 (3.6523)	tot_loss 0.6738 (0.5703)	mem 27557MB
+[2022-11-08 09:01:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][205/916]	eta 0:43:17 lr_first 0.000000122 lr_last 0.000001000	time 3.5262 (3.6528)	tot_loss 0.4862 (0.5759)	mem 27557MB
+[2022-11-08 09:02:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][210/916]	eta 0:42:57 lr_first 0.000000122 lr_last 0.000001000	time 3.5264 (3.6513)	tot_loss 0.4681 (0.5819)	mem 27557MB
+[2022-11-08 09:03:11 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][215/916]	eta 0:42:39 lr_first 0.000000122 lr_last 0.000001000	time 4.0355 (3.6510)	tot_loss 0.4630 (0.5831)	mem 27557MB
+[2022-11-08 09:03:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][220/916]	eta 0:42:20 lr_first 0.000000122 lr_last 0.000001000	time 3.5552 (3.6499)	tot_loss 0.7114 (0.5823)	mem 27557MB
+[2022-11-08 09:04:23 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][225/916]	eta 0:42:01 lr_first 0.000000122 lr_last 0.000001000	time 3.5503 (3.6484)	tot_loss 0.4669 (0.5885)	mem 27557MB
+[2022-11-08 09:04:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][230/916]	eta 0:41:41 lr_first 0.000000122 lr_last 0.000001000	time 3.6476 (3.6468)	tot_loss 0.4759 (0.5912)	mem 27557MB
+[2022-11-08 09:05:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][235/916]	eta 0:41:23 lr_first 0.000000122 lr_last 0.000001000	time 3.5185 (3.6466)	tot_loss 0.9897 (0.5909)	mem 27557MB
+[2022-11-08 09:06:11 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][240/916]	eta 0:41:04 lr_first 0.000000122 lr_last 0.000001000	time 3.5456 (3.6455)	tot_loss 0.4964 (0.5966)	mem 27557MB
+[2022-11-08 09:06:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][245/916]	eta 0:40:45 lr_first 0.000000122 lr_last 0.000001000	time 3.5246 (3.6442)	tot_loss 0.4647 (0.5945)	mem 27557MB
+[2022-11-08 09:07:23 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][250/916]	eta 0:40:26 lr_first 0.000000122 lr_last 0.000001000	time 3.5248 (3.6429)	tot_loss 0.4681 (0.5929)	mem 27557MB
+[2022-11-08 09:07:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][255/916]	eta 0:40:07 lr_first 0.000000122 lr_last 0.000001000	time 3.5304 (3.6419)	tot_loss 0.4903 (0.5906)	mem 27557MB
+[2022-11-08 09:08:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][260/916]	eta 0:39:48 lr_first 0.000000122 lr_last 0.000001000	time 3.5248 (3.6409)	tot_loss 0.5397 (0.5955)	mem 27557MB
+[2022-11-08 09:09:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][265/916]	eta 0:39:30 lr_first 0.000000122 lr_last 0.000001000	time 3.5605 (3.6421)	tot_loss 0.4693 (0.5932)	mem 27557MB
+[2022-11-08 09:09:48 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][270/916]	eta 0:39:12 lr_first 0.000000122 lr_last 0.000001000	time 3.5941 (3.6413)	tot_loss 0.4687 (0.5909)	mem 27557MB
+[2022-11-08 09:10:24 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][275/916]	eta 0:38:53 lr_first 0.000000122 lr_last 0.000001000	time 3.5777 (3.6404)	tot_loss 0.5731 (0.5944)	mem 27557MB
+[2022-11-08 09:11:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][280/916]	eta 0:38:34 lr_first 0.000000122 lr_last 0.000001000	time 3.5209 (3.6395)	tot_loss 0.4714 (0.5923)	mem 27557MB
+[2022-11-08 09:11:36 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][285/916]	eta 0:38:16 lr_first 0.000000122 lr_last 0.000001000	time 3.5305 (3.6392)	tot_loss 0.4658 (0.5909)	mem 27557MB
+[2022-11-08 09:12:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][290/916]	eta 0:37:57 lr_first 0.000000122 lr_last 0.000001000	time 3.5253 (3.6382)	tot_loss 0.4970 (0.5937)	mem 27557MB
+[2022-11-08 09:12:48 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][295/916]	eta 0:37:38 lr_first 0.000000122 lr_last 0.000001000	time 3.7637 (3.6375)	tot_loss 0.4649 (0.5918)	mem 27557MB
+[2022-11-08 09:13:24 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][300/916]	eta 0:37:20 lr_first 0.000000122 lr_last 0.000001000	time 3.5510 (3.6370)	tot_loss 0.4691 (0.5930)	mem 27557MB
+[2022-11-08 09:13:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][305/916]	eta 0:37:01 lr_first 0.000000122 lr_last 0.000001000	time 3.5607 (3.6362)	tot_loss 0.4638 (0.5987)	mem 27557MB
+[2022-11-08 09:14:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][310/916]	eta 0:36:43 lr_first 0.000000122 lr_last 0.000001000	time 3.5857 (3.6355)	tot_loss 0.4662 (0.5977)	mem 27557MB
+[2022-11-08 09:15:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][315/916]	eta 0:36:24 lr_first 0.000000122 lr_last 0.000001000	time 3.5238 (3.6355)	tot_loss 0.5576 (0.5960)	mem 27557MB
+[2022-11-08 09:15:48 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][320/916]	eta 0:36:06 lr_first 0.000000122 lr_last 0.000001000	time 3.9900 (3.6354)	tot_loss 0.4685 (0.5951)	mem 27557MB
+[2022-11-08 09:16:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][325/916]	eta 0:35:48 lr_first 0.000000122 lr_last 0.000001000	time 3.5544 (3.6356)	tot_loss 0.4711 (0.5934)	mem 27557MB
+[2022-11-08 09:17:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][330/916]	eta 0:35:30 lr_first 0.000000122 lr_last 0.000001000	time 3.6376 (3.6349)	tot_loss 0.4682 (0.5916)	mem 27557MB
+[2022-11-08 09:17:37 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][335/916]	eta 0:35:11 lr_first 0.000000122 lr_last 0.000001000	time 3.5310 (3.6351)	tot_loss 0.5145 (0.5918)	mem 27557MB
+[2022-11-08 09:18:13 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][340/916]	eta 0:34:53 lr_first 0.000000122 lr_last 0.000001000	time 3.5367 (3.6343)	tot_loss 0.4685 (0.5930)	mem 27557MB
+[2022-11-08 09:18:49 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][345/916]	eta 0:34:34 lr_first 0.000000122 lr_last 0.000001000	time 3.5266 (3.6335)	tot_loss 0.4792 (0.5944)	mem 27557MB
+[2022-11-08 09:19:24 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][350/916]	eta 0:34:16 lr_first 0.000000122 lr_last 0.000001000	time 3.5233 (3.6327)	tot_loss 1.3494 (0.5962)	mem 27557MB
+[2022-11-08 09:20:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][355/916]	eta 0:33:57 lr_first 0.000000122 lr_last 0.000001000	time 3.5751 (3.6324)	tot_loss 0.4649 (0.5979)	mem 27557MB
+[2022-11-08 09:20:36 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][360/916]	eta 0:33:39 lr_first 0.000000122 lr_last 0.000001000	time 3.5634 (3.6319)	tot_loss 0.4695 (0.5974)	mem 27557MB
+[2022-11-08 09:21:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][365/916]	eta 0:33:20 lr_first 0.000000122 lr_last 0.000001000	time 3.5482 (3.6311)	tot_loss 0.4743 (0.5974)	mem 27557MB
+[2022-11-08 09:21:48 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][370/916]	eta 0:33:02 lr_first 0.000000122 lr_last 0.000001000	time 3.5620 (3.6304)	tot_loss 0.4649 (0.5957)	mem 27557MB
+[2022-11-08 09:22:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][375/916]	eta 0:32:44 lr_first 0.000000122 lr_last 0.000001000	time 3.5417 (3.6310)	tot_loss 0.4678 (0.5949)	mem 27557MB
+[2022-11-08 09:23:01 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][380/916]	eta 0:32:25 lr_first 0.000000122 lr_last 0.000001000	time 3.5915 (3.6305)	tot_loss 0.4692 (0.5941)	mem 27557MB
+[2022-11-08 09:23:37 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][385/916]	eta 0:32:07 lr_first 0.000000122 lr_last 0.000001000	time 3.9792 (3.6304)	tot_loss 0.4711 (0.5935)	mem 27557MB
+[2022-11-08 09:24:13 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][390/916]	eta 0:31:49 lr_first 0.000000122 lr_last 0.000001000	time 3.5533 (3.6301)	tot_loss 0.4729 (0.5931)	mem 27557MB
+[2022-11-08 09:24:49 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][395/916]	eta 0:31:30 lr_first 0.000000122 lr_last 0.000001000	time 3.5451 (3.6294)	tot_loss 0.4666 (0.5916)	mem 27557MB
+[2022-11-08 09:25:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][400/916]	eta 0:31:12 lr_first 0.000000122 lr_last 0.000001000	time 3.5158 (3.6291)	tot_loss 0.4736 (0.5901)	mem 27557MB
+[2022-11-08 09:26:01 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][405/916]	eta 0:30:54 lr_first 0.000000122 lr_last 0.000001000	time 3.5278 (3.6295)	tot_loss 0.5382 (0.5889)	mem 27557MB
+[2022-11-08 09:26:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][410/916]	eta 0:30:36 lr_first 0.000000122 lr_last 0.000001000	time 3.6855 (3.6300)	tot_loss 0.4653 (0.5877)	mem 27557MB
+[2022-11-08 09:27:15 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][415/916]	eta 0:30:18 lr_first 0.000000122 lr_last 0.000001000	time 3.6591 (3.6304)	tot_loss 0.4753 (0.5873)	mem 27557MB
+[2022-11-08 09:27:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][420/916]	eta 0:30:00 lr_first 0.000000122 lr_last 0.000001000	time 3.5822 (3.6299)	tot_loss 0.4705 (0.5908)	mem 27557MB
+[2022-11-08 09:28:26 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][425/916]	eta 0:29:42 lr_first 0.000000122 lr_last 0.000001000	time 3.5572 (3.6293)	tot_loss 0.4659 (0.5902)	mem 27557MB
+[2022-11-08 09:29:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][430/916]	eta 0:29:23 lr_first 0.000000122 lr_last 0.000001000	time 3.5524 (3.6288)	tot_loss 0.5288 (0.5893)	mem 27557MB
+[2022-11-08 09:29:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][435/916]	eta 0:29:05 lr_first 0.000000122 lr_last 0.000001000	time 3.5310 (3.6282)	tot_loss 0.4669 (0.5911)	mem 27557MB
+[2022-11-08 09:30:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][440/916]	eta 0:28:47 lr_first 0.000000122 lr_last 0.000001000	time 3.5157 (3.6284)	tot_loss 0.4695 (0.5898)	mem 27557MB
+[2022-11-08 09:30:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][445/916]	eta 0:28:28 lr_first 0.000000122 lr_last 0.000001000	time 3.5219 (3.6279)	tot_loss 0.4645 (0.5885)	mem 27557MB
+[2022-11-08 09:31:26 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][450/916]	eta 0:28:10 lr_first 0.000000122 lr_last 0.000001000	time 3.5247 (3.6275)	tot_loss 0.4678 (0.5889)	mem 27557MB
+[2022-11-08 09:32:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][455/916]	eta 0:27:52 lr_first 0.000000122 lr_last 0.000001000	time 3.9385 (3.6275)	tot_loss 0.4855 (0.5901)	mem 27557MB
+[2022-11-08 09:32:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][460/916]	eta 0:27:33 lr_first 0.000000122 lr_last 0.000001000	time 3.5974 (3.6272)	tot_loss 0.4702 (0.5910)	mem 27557MB
+[2022-11-08 09:33:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][465/916]	eta 0:27:15 lr_first 0.000000122 lr_last 0.000001000	time 3.5459 (3.6267)	tot_loss 0.4726 (0.5898)	mem 27557MB
+[2022-11-08 09:33:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][470/916]	eta 0:26:57 lr_first 0.000000122 lr_last 0.000001000	time 3.5619 (3.6264)	tot_loss 0.4661 (0.5886)	mem 27557MB
+[2022-11-08 09:34:26 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][475/916]	eta 0:26:38 lr_first 0.000000122 lr_last 0.000001000	time 3.5236 (3.6258)	tot_loss 0.4674 (0.5875)	mem 27557MB
+[2022-11-08 09:35:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][480/916]	eta 0:26:20 lr_first 0.000000122 lr_last 0.000001000	time 3.5226 (3.6257)	tot_loss 0.5004 (0.5863)	mem 27557MB
+[2022-11-08 09:35:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][485/916]	eta 0:26:02 lr_first 0.000000122 lr_last 0.000001000	time 3.5211 (3.6253)	tot_loss 0.4820 (0.5853)	mem 27557MB
+[2022-11-08 09:36:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][490/916]	eta 0:25:44 lr_first 0.000000122 lr_last 0.000001000	time 3.5199 (3.6249)	tot_loss 1.0050 (0.5847)	mem 27557MB
+[2022-11-08 09:36:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][495/916]	eta 0:25:25 lr_first 0.000000122 lr_last 0.000001000	time 3.5213 (3.6245)	tot_loss 0.4733 (0.5854)	mem 27557MB
+[2022-11-08 09:37:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][500/916]	eta 0:25:07 lr_first 0.000000122 lr_last 0.000001000	time 3.6395 (3.6241)	tot_loss 0.4875 (0.5843)	mem 27557MB
+[2022-11-08 09:38:01 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][505/916]	eta 0:24:49 lr_first 0.000000122 lr_last 0.000001000	time 3.5220 (3.6236)	tot_loss 0.4692 (0.5855)	mem 27557MB
+[2022-11-08 09:38:37 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][510/916]	eta 0:24:31 lr_first 0.000000122 lr_last 0.000001000	time 3.6909 (3.6232)	tot_loss 0.4728 (0.5849)	mem 27557MB
+[2022-11-08 09:39:13 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][515/916]	eta 0:24:12 lr_first 0.000000122 lr_last 0.000001000	time 3.5607 (3.6233)	tot_loss 0.4685 (0.5850)	mem 27557MB
+[2022-11-08 09:39:49 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][520/916]	eta 0:23:54 lr_first 0.000000122 lr_last 0.000001000	time 3.6634 (3.6231)	tot_loss 0.4657 (0.5849)	mem 27557MB
+[2022-11-08 09:40:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][525/916]	eta 0:23:36 lr_first 0.000000122 lr_last 0.000001000	time 3.5671 (3.6227)	tot_loss 0.4650 (0.5839)	mem 27557MB
+[2022-11-08 09:41:01 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][530/916]	eta 0:23:18 lr_first 0.000000122 lr_last 0.000001000	time 3.5122 (3.6226)	tot_loss 0.4660 (0.5829)	mem 27557MB
+[2022-11-08 09:41:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][535/916]	eta 0:23:00 lr_first 0.000000122 lr_last 0.000001000	time 3.5192 (3.6226)	tot_loss 0.5196 (0.5835)	mem 27557MB
+[2022-11-08 09:42:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][540/916]	eta 0:22:42 lr_first 0.000000122 lr_last 0.000001000	time 3.5222 (3.6224)	tot_loss 0.4674 (0.5836)	mem 27557MB
+[2022-11-08 09:42:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][545/916]	eta 0:22:23 lr_first 0.000000122 lr_last 0.000001000	time 3.7134 (3.6222)	tot_loss 0.4950 (0.5865)	mem 27557MB
+[2022-11-08 09:43:26 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][550/916]	eta 0:22:05 lr_first 0.000000122 lr_last 0.000001000	time 3.8631 (3.6225)	tot_loss 0.4647 (0.5880)	mem 27557MB
+[2022-11-08 09:44:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][555/916]	eta 0:21:47 lr_first 0.000000122 lr_last 0.000001000	time 3.5539 (3.6222)	tot_loss 0.5057 (0.5901)	mem 27557MB
+[2022-11-08 09:44:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][560/916]	eta 0:21:29 lr_first 0.000000122 lr_last 0.000001000	time 3.5229 (3.6218)	tot_loss 0.4712 (0.5897)	mem 27557MB
+[2022-11-08 09:45:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][565/916]	eta 0:21:11 lr_first 0.000000122 lr_last 0.000001000	time 3.5366 (3.6218)	tot_loss 0.4657 (0.5888)	mem 27557MB
+[2022-11-08 09:45:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][570/916]	eta 0:20:53 lr_first 0.000000122 lr_last 0.000001000	time 3.5184 (3.6215)	tot_loss 0.4725 (0.5899)	mem 27557MB
+[2022-11-08 09:46:26 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][575/916]	eta 0:20:34 lr_first 0.000000122 lr_last 0.000001000	time 3.6916 (3.6213)	tot_loss 0.8597 (0.5901)	mem 27557MB
+[2022-11-08 09:47:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][580/916]	eta 0:20:16 lr_first 0.000000122 lr_last 0.000001000	time 3.5794 (3.6214)	tot_loss 0.4717 (0.5892)	mem 27557MB
+[2022-11-08 09:47:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][585/916]	eta 0:19:58 lr_first 0.000000122 lr_last 0.000001000	time 3.5528 (3.6210)	tot_loss 1.5372 (0.5895)	mem 27557MB
+[2022-11-08 09:48:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][590/916]	eta 0:19:40 lr_first 0.000000122 lr_last 0.000001000	time 3.5575 (3.6207)	tot_loss 0.4947 (0.5912)	mem 27557MB
+[2022-11-08 09:48:50 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][595/916]	eta 0:19:22 lr_first 0.000000122 lr_last 0.000001000	time 3.5371 (3.6204)	tot_loss 0.4653 (0.5921)	mem 27557MB
+[2022-11-08 09:49:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][600/916]	eta 0:19:03 lr_first 0.000000122 lr_last 0.000001000	time 3.5504 (3.6200)	tot_loss 0.4653 (0.5923)	mem 27557MB
+[2022-11-08 09:50:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][605/916]	eta 0:18:45 lr_first 0.000000122 lr_last 0.000001000	time 3.5220 (3.6201)	tot_loss 0.4686 (0.5929)	mem 27557MB
+[2022-11-08 09:50:37 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][610/916]	eta 0:18:27 lr_first 0.000000122 lr_last 0.000001000	time 3.5246 (3.6197)	tot_loss 0.5754 (0.5952)	mem 27557MB
+[2022-11-08 09:51:13 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][615/916]	eta 0:18:09 lr_first 0.000000122 lr_last 0.000001000	time 3.5285 (3.6193)	tot_loss 0.4679 (0.5942)	mem 27557MB
+[2022-11-08 09:51:49 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][620/916]	eta 0:17:51 lr_first 0.000000122 lr_last 0.000001000	time 3.6949 (3.6190)	tot_loss 0.4647 (0.5958)	mem 27557MB
+[2022-11-08 09:52:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][625/916]	eta 0:17:33 lr_first 0.000000122 lr_last 0.000001000	time 3.5221 (3.6186)	tot_loss 0.4636 (0.5953)	mem 27557MB
+[2022-11-08 09:53:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][630/916]	eta 0:17:14 lr_first 0.000000122 lr_last 0.000001000	time 3.5191 (3.6183)	tot_loss 0.4644 (0.5943)	mem 27557MB
+[2022-11-08 09:53:36 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][635/916]	eta 0:16:56 lr_first 0.000000122 lr_last 0.000001000	time 3.5642 (3.6179)	tot_loss 0.4806 (0.5936)	mem 27557MB
+[2022-11-08 09:54:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][640/916]	eta 0:16:38 lr_first 0.000000122 lr_last 0.000001000	time 3.5273 (3.6175)	tot_loss 0.4667 (0.5940)	mem 27557MB
+[2022-11-08 09:54:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][645/916]	eta 0:16:20 lr_first 0.000000122 lr_last 0.000001000	time 3.5263 (3.6171)	tot_loss 0.4663 (0.5932)	mem 27557MB
+[2022-11-08 09:55:24 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][650/916]	eta 0:16:02 lr_first 0.000000122 lr_last 0.000001000	time 4.1829 (3.6172)	tot_loss 0.4660 (0.5924)	mem 27557MB
+[2022-11-08 09:55:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][655/916]	eta 0:15:43 lr_first 0.000000122 lr_last 0.000001000	time 3.5382 (3.6168)	tot_loss 0.5078 (0.5934)	mem 27557MB
+[2022-11-08 09:56:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][660/916]	eta 0:15:25 lr_first 0.000000122 lr_last 0.000001000	time 3.5220 (3.6164)	tot_loss 0.4826 (0.5943)	mem 27557MB
+[2022-11-08 09:57:11 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][665/916]	eta 0:15:07 lr_first 0.000000122 lr_last 0.000001000	time 3.5185 (3.6160)	tot_loss 0.4669 (0.5943)	mem 27557MB
+[2022-11-08 09:57:46 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][670/916]	eta 0:14:49 lr_first 0.000000122 lr_last 0.000001000	time 3.5536 (3.6157)	tot_loss 0.4690 (0.5939)	mem 27557MB
+[2022-11-08 09:58:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][675/916]	eta 0:14:31 lr_first 0.000000122 lr_last 0.000001000	time 3.5167 (3.6156)	tot_loss 0.4708 (0.5931)	mem 27557MB
+[2022-11-08 09:58:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][680/916]	eta 0:14:13 lr_first 0.000000122 lr_last 0.000001000	time 3.5247 (3.6159)	tot_loss 0.4731 (0.5922)	mem 27557MB
+[2022-11-08 09:59:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][685/916]	eta 0:13:55 lr_first 0.000000122 lr_last 0.000001000	time 3.5257 (3.6157)	tot_loss 0.4740 (0.5913)	mem 27557MB
+[2022-11-08 10:00:11 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][690/916]	eta 0:13:37 lr_first 0.000000122 lr_last 0.000001000	time 3.5315 (3.6154)	tot_loss 0.4670 (0.5917)	mem 27557MB
+[2022-11-08 10:00:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][695/916]	eta 0:13:18 lr_first 0.000000122 lr_last 0.000001000	time 3.5292 (3.6153)	tot_loss 0.4660 (0.5910)	mem 27557MB
+[2022-11-08 10:01:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][700/916]	eta 0:13:00 lr_first 0.000000122 lr_last 0.000001000	time 3.5205 (3.6150)	tot_loss 0.4666 (0.5922)	mem 27557MB
+[2022-11-08 10:01:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][705/916]	eta 0:12:42 lr_first 0.000000122 lr_last 0.000001000	time 3.5912 (3.6151)	tot_loss 0.4689 (0.5918)	mem 27557MB
+[2022-11-08 10:02:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][710/916]	eta 0:12:24 lr_first 0.000000122 lr_last 0.000001000	time 3.5511 (3.6149)	tot_loss 0.4635 (0.5910)	mem 27557MB
+[2022-11-08 10:03:10 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][715/916]	eta 0:12:06 lr_first 0.000000122 lr_last 0.000001000	time 3.5405 (3.6147)	tot_loss 0.4798 (0.5906)	mem 27557MB
+[2022-11-08 10:03:46 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][720/916]	eta 0:11:48 lr_first 0.000000122 lr_last 0.000001000	time 3.5490 (3.6144)	tot_loss 0.4699 (0.5903)	mem 27557MB
+[2022-11-08 10:04:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][725/916]	eta 0:11:30 lr_first 0.000000122 lr_last 0.000001000	time 3.5177 (3.6145)	tot_loss 0.4713 (0.5907)	mem 27557MB
+[2022-11-08 10:04:58 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][730/916]	eta 0:11:12 lr_first 0.000000122 lr_last 0.000001000	time 3.5200 (3.6144)	tot_loss 0.4715 (0.5900)	mem 27557MB
+[2022-11-08 10:05:34 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][735/916]	eta 0:10:54 lr_first 0.000000122 lr_last 0.000001000	time 3.5240 (3.6143)	tot_loss 0.5265 (0.5893)	mem 27557MB
+[2022-11-08 10:06:10 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][740/916]	eta 0:10:36 lr_first 0.000000122 lr_last 0.000001000	time 3.5231 (3.6141)	tot_loss 0.4728 (0.5899)	mem 27557MB
+[2022-11-08 10:06:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][745/916]	eta 0:10:18 lr_first 0.000000122 lr_last 0.000001000	time 3.5760 (3.6143)	tot_loss 2.9851 (0.5908)	mem 27557MB
+[2022-11-08 10:07:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][750/916]	eta 0:09:59 lr_first 0.000000122 lr_last 0.000001000	time 3.5632 (3.6141)	tot_loss 0.4985 (0.5922)	mem 27557MB
+[2022-11-08 10:07:58 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][755/916]	eta 0:09:41 lr_first 0.000000122 lr_last 0.000001000	time 3.5390 (3.6138)	tot_loss 0.5072 (0.5914)	mem 27557MB
+[2022-11-08 10:08:34 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][760/916]	eta 0:09:23 lr_first 0.000000122 lr_last 0.000001000	time 3.5384 (3.6135)	tot_loss 0.4652 (0.5907)	mem 27557MB
+[2022-11-08 10:09:10 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][765/916]	eta 0:09:05 lr_first 0.000000122 lr_last 0.000001000	time 3.5170 (3.6138)	tot_loss 0.4683 (0.5903)	mem 27557MB
+[2022-11-08 10:09:46 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][770/916]	eta 0:08:47 lr_first 0.000000122 lr_last 0.000001000	time 3.5219 (3.6136)	tot_loss 0.4700 (0.5898)	mem 27557MB
+[2022-11-08 10:10:22 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][775/916]	eta 0:08:29 lr_first 0.000000122 lr_last 0.000001000	time 3.5241 (3.6133)	tot_loss 0.4850 (0.5892)	mem 27557MB
+[2022-11-08 10:10:59 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][780/916]	eta 0:08:11 lr_first 0.000000122 lr_last 0.000001000	time 3.5275 (3.6137)	tot_loss 0.4650 (0.5889)	mem 27557MB
+[2022-11-08 10:11:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][785/916]	eta 0:07:53 lr_first 0.000000122 lr_last 0.000001000	time 3.5719 (3.6139)	tot_loss 0.4717 (0.5883)	mem 27557MB
+[2022-11-08 10:12:11 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][790/916]	eta 0:07:35 lr_first 0.000000122 lr_last 0.000001000	time 3.5712 (3.6136)	tot_loss 0.4670 (0.5877)	mem 27557MB
+[2022-11-08 10:12:47 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][795/916]	eta 0:07:17 lr_first 0.000000122 lr_last 0.000001000	time 3.5622 (3.6135)	tot_loss 0.6079 (0.5875)	mem 27557MB
+[2022-11-08 10:13:23 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][800/916]	eta 0:06:59 lr_first 0.000000122 lr_last 0.000001000	time 3.5209 (3.6135)	tot_loss 0.4772 (0.5868)	mem 27557MB
+[2022-11-08 10:14:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][805/916]	eta 0:06:41 lr_first 0.000000122 lr_last 0.000001000	time 3.5207 (3.6138)	tot_loss 0.4714 (0.5861)	mem 27557MB
+[2022-11-08 10:14:35 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][810/916]	eta 0:06:23 lr_first 0.000000122 lr_last 0.000001000	time 3.6219 (3.6136)	tot_loss 0.4658 (0.5856)	mem 27557MB
+[2022-11-08 10:15:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][815/916]	eta 0:06:04 lr_first 0.000000122 lr_last 0.000001000	time 3.5551 (3.6138)	tot_loss 2.5206 (0.5861)	mem 27557MB
+[2022-11-08 10:15:48 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][820/916]	eta 0:05:46 lr_first 0.000000122 lr_last 0.000001000	time 3.5379 (3.6137)	tot_loss 0.8618 (0.5858)	mem 27557MB
+[2022-11-08 10:16:24 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][825/916]	eta 0:05:28 lr_first 0.000000122 lr_last 0.000001000	time 3.5486 (3.6138)	tot_loss 0.4691 (0.5856)	mem 27557MB
+[2022-11-08 10:17:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][830/916]	eta 0:05:10 lr_first 0.000000122 lr_last 0.000001000	time 3.5201 (3.6137)	tot_loss 0.4692 (0.5880)	mem 27557MB
+[2022-11-08 10:17:36 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][835/916]	eta 0:04:52 lr_first 0.000000122 lr_last 0.000001000	time 3.5823 (3.6135)	tot_loss 0.4722 (0.5876)	mem 27557MB
+[2022-11-08 10:18:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][840/916]	eta 0:04:34 lr_first 0.000000122 lr_last 0.000001000	time 3.5579 (3.6137)	tot_loss 0.4673 (0.5870)	mem 27557MB
+[2022-11-08 10:18:48 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][845/916]	eta 0:04:16 lr_first 0.000000122 lr_last 0.000001000	time 3.5570 (3.6135)	tot_loss 0.5008 (0.5877)	mem 27557MB
+[2022-11-08 10:19:24 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][850/916]	eta 0:03:58 lr_first 0.000000122 lr_last 0.000001000	time 3.5295 (3.6134)	tot_loss 0.4669 (0.5870)	mem 27557MB
+[2022-11-08 10:20:00 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][855/916]	eta 0:03:40 lr_first 0.000000122 lr_last 0.000001000	time 3.5628 (3.6135)	tot_loss 0.4971 (0.5879)	mem 27557MB
+[2022-11-08 10:20:36 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][860/916]	eta 0:03:22 lr_first 0.000000122 lr_last 0.000001000	time 3.5522 (3.6133)	tot_loss 0.6108 (0.5874)	mem 27557MB
+[2022-11-08 10:21:12 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][865/916]	eta 0:03:04 lr_first 0.000000122 lr_last 0.000001000	time 3.7454 (3.6132)	tot_loss 0.4714 (0.5881)	mem 27557MB
+[2022-11-08 10:21:49 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][870/916]	eta 0:02:46 lr_first 0.000000122 lr_last 0.000001000	time 3.5475 (3.6137)	tot_loss 0.4722 (0.5877)	mem 27557MB
+[2022-11-08 10:22:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][875/916]	eta 0:02:28 lr_first 0.000000122 lr_last 0.000001000	time 3.5989 (3.6136)	tot_loss 0.4794 (0.5884)	mem 27557MB
+[2022-11-08 10:23:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][880/916]	eta 0:02:10 lr_first 0.000000122 lr_last 0.000001000	time 3.5461 (3.6138)	tot_loss 0.5332 (0.5879)	mem 27557MB
+[2022-11-08 10:23:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][885/916]	eta 0:01:52 lr_first 0.000000122 lr_last 0.000001000	time 3.5688 (3.6137)	tot_loss 0.5205 (0.5873)	mem 27557MB
+[2022-11-08 10:24:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][890/916]	eta 0:01:33 lr_first 0.000000122 lr_last 0.000001000	time 3.5460 (3.6136)	tot_loss 0.4890 (0.5872)	mem 27557MB
+[2022-11-08 10:24:49 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][895/916]	eta 0:01:15 lr_first 0.000000122 lr_last 0.000001000	time 3.5424 (3.6134)	tot_loss 0.4682 (0.5883)	mem 27557MB
+[2022-11-08 10:25:25 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][900/916]	eta 0:00:57 lr_first 0.000000122 lr_last 0.000001000	time 3.6009 (3.6134)	tot_loss 0.4643 (0.5903)	mem 27557MB
+[2022-11-08 10:26:02 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][905/916]	eta 0:00:39 lr_first 0.000000122 lr_last 0.000001000	time 3.5189 (3.6136)	tot_loss 0.4917 (0.5897)	mem 27557MB
+[2022-11-08 10:26:38 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][910/916]	eta 0:00:21 lr_first 0.000000122 lr_last 0.000001000	time 3.5197 (3.6135)	tot_loss 1.2161 (0.5910)	mem 27557MB
+[2022-11-08 10:27:14 eva-1b/14] (main_k722.py 359): INFO Train: [0/10][915/916]	eta 0:00:03 lr_first 0.000000122 lr_last 0.000001000	time 3.5483 (3.6136)	tot_loss 0.4742 (0.5904)	mem 27557MB
+[2022-11-08 10:27:22 eva-1b/14] (main_k722.py 378): INFO EPOCH 0 training takes 1:50:24
+[2022-11-08 10:27:22 eva-1b/14] (main_k722.py 398): INFO 4 * 3 views inference
+[2022-11-08 10:27:45 eva-1b/14] (main_k722.py 436): INFO Test: [0/78]	Acc@1: 100.000	Acc@5: 100.000
+[2022-11-08 10:30:40 eva-1b/14] (main_k722.py 436): INFO Test: [10/78]	Acc@1: 90.909	Acc@5: 100.000
+[2022-11-08 10:33:35 eva-1b/14] (main_k722.py 436): INFO Test: [20/78]	Acc@1: 90.476	Acc@5: 97.619
+[2022-11-08 10:36:30 eva-1b/14] (main_k722.py 436): INFO Test: [30/78]	Acc@1: 87.097	Acc@5: 96.774
+[2022-11-08 10:39:25 eva-1b/14] (main_k722.py 436): INFO Test: [40/78]	Acc@1: 89.024	Acc@5: 96.341
+[2022-11-08 10:42:20 eva-1b/14] (main_k722.py 436): INFO Test: [50/78]	Acc@1: 84.314	Acc@5: 96.078
+[2022-11-08 10:45:14 eva-1b/14] (main_k722.py 436): INFO Test: [60/78]	Acc@1: 85.246	Acc@5: 96.721
+[2022-11-08 10:48:09 eva-1b/14] (main_k722.py 436): INFO Test: [70/78]	Acc@1: 85.915	Acc@5: 96.479
+[2022-11-08 10:50:10 eva-1b/14] (main_k722.py 442): INFO  * Acc@1 89.686 Acc@5 98.264
+[2022-11-08 10:50:10 eva-1b/14] (main_k722.py 219): INFO Accuracy of the network on (19760) test videos: 89.7% (acc@1) / 98.3% (acc@5)
+[2022-11-08 10:50:10 eva-1b/14] (main_k722.py 243): INFO Max accuracy: 89.69%
+[2022-11-08 10:50:10 eva-1b/14] (tools.py 57): INFO /home/binhuixie/outputs/cvpr/K722_1b_ft/k400/k722init_allft-1108-01/ckpt_epoch_0.pth saving......
+[2022-11-08 10:50:33 eva-1b/14] (tools.py 59): INFO /home/binhuixie/outputs/cvpr/K722_1b_ft/k400/k722init_allft-1108-01/ckpt_epoch_0.pth saved !!!
+[2022-11-08 10:50:55 eva-1b/14] (tools.py 63): INFO /home/binhuixie/outputs/cvpr/K722_1b_ft/k400/k722init_allft-1108-01/best.pth saved !!!
