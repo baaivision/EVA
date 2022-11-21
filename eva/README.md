@@ -8,11 +8,11 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 
 | model name | #param. |pre-training epochs on merged-30M | intermeidate fine-tuning epochs on IN-21K | fine-tuning epochs on IN-1K | IN-1K top-1 acc. |weight |
 |------------|:------:|:------------------:|:------:|:------:|:------:|:------:|
-| `eva_psz14` | 1.0B | 150 | - | - | - | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14.pt) (`2GB`) |
-| `eva_psz14to16` | 1.0B | 150 | - | - | - | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14to16.pt) (`2GB`) | 
-| `eva_21k_224px_psz14` | 1.0B | 150 | 60 | - | - | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_224px_psz14.pt) (`2GB`) |
-| `eva_21k_1k_336px_psz14_ema` | 1.0B | 150 | 60 | 10 | 89.6 | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt) (`4GB`) |
-| `eva_21k_1k_560px_psz14_ema` | 1.0B | 150 | 60 | 15 | 89.7 | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_21k_1k_560px_psz14_ema_89p7.pt) (`4GB`) |
+| `eva_psz14` | 1.0B | 150 | - | - | - | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14.pt) (`2GB`) |
+| `eva_psz14to16` | 1.0B | 150 | - | - | - | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14to16.pt) (`2GB`) | 
+| `eva_21k_224px_psz14` | 1.0B | 150 | 60 | - | - | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_21k_224px_psz14.pt) (`2GB`) |
+| `eva_21k_1k_336px_psz14_ema` | 1.0B | 150 | 60 | 10 | 89.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt) (`4GB`) |
+| `eva_21k_1k_560px_psz14_ema` | 1.0B | 150 | 60 | 15 | 89.7 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_560px_psz14_ema_89p7.pt) (`4GB`) |
 
 - `eva_psz14to16` model interpolates the kernel size of `patch_embed` from `14x14` to `16x16`. This is useful for object detection, instance segmentation & semantic segmentation, *etc*. See [`interpolate_patch_14to16.py`](interpolate_patch_14to16.py) for implementation details.
 - For MIM pre-trained EVA and EVA-CLIP, we use `deepspeed` `fp16` format. IN-1K fine-tuned EVA weights are larger (`4GB` *v.s.* `2GB`) because ema updates models with `fp32` format. The weights of other downstream tasks are also with `fp32` format.
