@@ -46,6 +46,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 ## Summary of EVA's performance
 
+<div align="center">
 **image & video classification**
 <table border="1" width="100%">
 	<tr align="center">
@@ -73,7 +74,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
     </tr>
 </table>
 <br>
-
+</div>
 
 
 ## Citation
