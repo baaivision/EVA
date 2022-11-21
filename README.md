@@ -63,7 +63,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 **object detection & segmentation**
 <table border="1" width="200%">
 	<tr align="center">
-        <th> </th><th> </th><th colspan="4">COCO object detection & instance segmentation</th><th colspan="2">LVIS object detection & instance segmentation</th><th colspan="2">semantic segmentation</th>
+        <th> </th><th> </th><th colspan="4">COCO det & seg</th><th colspan="2">LVIS det & seg</th><th colspan="2">sem seg</th>
     </tr>
     <tr align="center">
         <th>model</th><th>#param.</th><th>COCO det (test)</th><th>COCO det (val)</th><th>COCO ins seg (test)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
