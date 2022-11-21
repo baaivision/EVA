@@ -56,7 +56,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
         <th>model</th><th>#param.</th><th>IN-1K</th><th>IN-1K, zero-shot</th><th>12 avg. zero-shot</th><th>K400</th><th>K600</th><th>K700</th>
     </tr>
     <tr align="center">
-        <th>EVA</th><th>1.0B</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/cls/ft_1k_cls_sz560_89p7.txt">89.7</a></th><th><a href="https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy">78.2</a></th><th>72.5</th><th>89.7</th><th>89.8</th><th>82.9</th>
+        <th>EVA</th><th>1.0B</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/cls/ft_1k_cls_sz560_89p7.txt">89.7</a></th><th><a href="https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy">78.5</a></th><th>72.5+</th><th>89.7</th><th>89.8</th><th>82.9</th>
     </tr>
 </table>
 <br>

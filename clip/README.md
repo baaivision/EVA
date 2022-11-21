@@ -1,12 +1,16 @@
 # Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)
 
 
-| model name | #param. | precision | data | samples seen |  batch size | IN-1K zero-shot top-1 | weight |
-|:-----------:|:------:|:----------:|:------:|:------:|:------:|:------:|:------:|
-| `eva_clip_psz14` | 1.3B | `fp16` | [LAION-400M](https://laion.ai/laion-400-open-dataset/) | 8B | 41K | 78.5 | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_clip_psz14.pt) (`2GB`) |
+| model name | #param. | precision | data  |  batch size | IN-1K zero-shot top-1 | weight |
+|:-----------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| `eva_clip_psz14` | 1.3B | `fp16` | [LAION-400M](https://laion.ai/laion-400-open-dataset/) | 41K | 78.5 | [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_clip_psz14.pt) (`2GB`) |
 
+The ImageNet-1K zero-shot classification performance is higher than our paper (`78.5` *v.s.* `78.2`) because of longer training.
 
-For more details, please refer to Section 2.3.5 of our [paper](https://arxiv.org/pdf/2211.07636.pdf).
+To our knowledge, EVA-CLIP is the largest performant open-sourced CLIP model evaluated via zero-shot classification performance. 
+We will updates the results in our paper soon.
+
+For more details of EVA-CLIP, please refer to Section 2.3.5 of our [paper](https://arxiv.org/pdf/2211.07636.pdf).
 
 
 ## Usage
