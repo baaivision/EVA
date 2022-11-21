@@ -97,5 +97,4 @@ The content of this project itself is licensed under [LICENSE](LICENSE).
 For help or issues using EVA, please open a GitHub [issue](https://github.com/baaivision/EVA/issues/new).
 
 **We are hiring** at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
-
 If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
