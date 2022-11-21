@@ -63,10 +63,10 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 **object detection & segmentation**
 <table border="1" width="200%">
 	<tr align="center">
-        <th> </th><th> </th><th colspan="4">COCO det & seg</th><th colspan="2">LVIS det & seg</th><th colspan="2">sem seg</th>
+        <th> </th><th> </th><th colspan="4">COCO det & ins seg</th><th colspan="2">LVIS det & ins seg</th><th colspan="2">sem seg</th>
     </tr>
     <tr align="center">
-        <th>model</th><th>#param.</th><th>COCO det (test)</th><th>COCO det (val)</th><th>COCO ins seg (test)</th><th>COCO ins seg (val)</th><th>LVIS det</th><th>LVIS ins seg</th><th>COCO-Stuff</th><th>ADE20K</th>
+        <th>model</th><th>#param.</th><th>det (test)</th><th>det (val)</th><th>seg (test)</th><th>seg (val)</th><th>det</th><th>seg</th><th>COCO-Stuff</th><th>ADE20K</th>
     </tr>
     <tr align="center">
         <th>EVA</th><th>1.0B</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7384#results">64.7</a></th><th>64.5</th><th><a href="https://codalab.lisn.upsaclay.fr/competitions/7383#results">55.5</th><th>55.0</th><th>62.2</th><th>55.0</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4.txt">53.4</a></th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/sem_seg/ft_ade20k_sem_seg_ms_62p3.txt">62.3</a></th>
