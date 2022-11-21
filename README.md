@@ -39,10 +39,10 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 - [x] [Pre-training](eva)
 - [x] [Image Classification](eva)
-- [] Video Classification
-- [] Object Detection & Instance Segmentation
+- [ ] Video Classification
+- [ ] Object Detection & Instance Segmentation
 - [x] [Semantic Segmentation](seg)
-- [] CLIP
+- [ ] CLIP
 
 ## Summary of EVA's performance
 
