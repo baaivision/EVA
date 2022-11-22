@@ -39,7 +39,6 @@ First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) (or lat
 ```bash
 $ conda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0
 $ pip install ftfy regex tqdm
-$ pip install git+https://github.com/openai/CLIP.git
 ```
 
 The training code of our 1.3B EVA-CLIP will be available at [FlagAI](https://github.com/FlagAI-Open/FlagAI). Please stay tuned.
