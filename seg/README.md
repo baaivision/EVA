@@ -25,9 +25,13 @@ Please prepare COCO-Stuff-164K & ADE20K datasets according to the [guidelines](
 
 ## Prepare EVA pre-trained weight
 
+<div align="center">
+
 | model name | #param. |pre-training epochs on merged-30M | weight |
 |------------|:------:|:------------------:|:------:|
 | `eva_psz14to16` | 1.0B | 150 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14to16.pt) (`2GB`) |
+
+</div>
 
 EVA is pre-trained with `patch_size` = `14x14`. While `eva_psz14to16` model interpolates the kernel size of `patch_embed` from `14x14` to `16x16`. This is useful for object detection, instance segmentation & semantic segmentation, *etc*. See [`interpolate_patch_14to16.py`](interpolate_patch_14to16.py) for implementation details.
 
@@ -38,17 +42,23 @@ EVA use ViT-Adapter + Mask2Former as the segmentation head. We evaluate EVA on C
 
 ### COCO-Stuff-164K
 
+<div align="center">
+
 | init. model weight | batch size | iter | crop size | mIoU (ss) | config | seg model weight |logs|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [`eva_psz14to16`](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14to16.pt) | 32 | 60k | 896 | **53.4** | [config](configs/coco_stuff164k/eva_mask2former_896_60k_cocostuff164k_ss.py) | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_cocostuff_53p4.pth) | [training](../logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4_training_log.txt) \| [evaluation](../logs/sem_seg/ft_cocstuff164k_sem_seg_ss_53p4.txt)
 
-
+</div>
 
 ### ADE20K
+
+<div align="center">
 
 | init. model weight | batch size | iter | crop size | mIoU | config | seg model weight |logs|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | [`eva_sem_seg_coco`](https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_cocostuff_53p4.pth) | 64 | 20k | 896 | **61.5** (ss) \| **62.3** (ms) | [config](configs/ade20k/eva_mask2former_896_20k_coco164k2ade20k_ss.py) | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth) | [training](../logs/sem_seg/ft_ade20k_sem_seg_ms_62p3_training_log.txt) \| [evaluation](../logs/sem_seg/ft_ade20k_sem_seg_ms_62p3.txt)
+
+</div>
 
 
 ## Evaluation
