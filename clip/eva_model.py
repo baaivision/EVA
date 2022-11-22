@@ -14,7 +14,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from .vit_model import VisionTransformer
+from vit_model import VisionTransformer
 
 class LayerNorm(nn.LayerNorm):
     """Subclass torch's LayerNorm to handle fp16."""

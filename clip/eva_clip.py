@@ -11,7 +11,7 @@ from typing import Optional, Tuple, Any, Union, List
 import torch
 from torchvision.transforms import Normalize, Compose, InterpolationMode, ToTensor, Resize, CenterCrop
 
-from .eva_model import EVA_CLIP, convert_weights_to_fp16
+from eva_model import EVA_CLIP, convert_weights_to_fp16
 
 OPENAI_DATASET_MEAN = (0.48145466, 0.4578275, 0.40821073)
 OPENAI_DATASET_STD = (0.26862954, 0.26130258, 0.27577711)
