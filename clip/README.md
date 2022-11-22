@@ -2,9 +2,13 @@
 
 ## Model Card
 
+<div align="center">
+
 | model name | #param. | precision | data  |  batch size | IN-1K zero-shot top-1 | weight |
 |:-----------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | `eva_clip_psz14` | 1.3B | `fp16` | [LAION-400M](https://laion.ai/laion-400-open-dataset/) | 41K | 78.5 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt) (`2GB`) |
+
+</div>
 
 The ImageNet-1K zero-shot classification performance is higher than our paper (`78.5` *v.s.* `78.2`) because of longer training.
 

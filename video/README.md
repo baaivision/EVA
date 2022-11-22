@@ -5,14 +5,20 @@ We provide all checkpoints of our EVAs for video recognition.
 
 ### Prepare EVA pre-trained weight
 
+<div align="center">
+
 | model name | #param. |pre-training epochs on merged-30M |                                      weight                                      |
 |------------|:------:|:------------------:|:--------------------------------------------------------------------------------:|
 | `eva_psz14` | 1.0B | 150 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14.pt) (`2GB`) |
+
+</div>
 
 EVA is an open billion-scale vision foundation model, [pre-trained](../eva) on the merged-30M dataset.
 
 
 ### Kinetics fine-tuned weights
+
+<div align="center">
 
 |   dataset   |     model name     |                                     init. weight                                     |  acc@1   |                       config                       |                                          weight                                          |                   logs                   |
 |:-----------:|:------------------:|:------------------------------------------------------------------------------------:|:--------:|:--------------------------------------------------:|:----------------------------------------------------------------------------------------:|:----------------------------------------:|
@@ -20,6 +26,8 @@ EVA is an open billion-scale vision foundation model, [pre-trained](../eva) on t
 | Kinetics400 |  `eva_video_k400`  | [`eva_video_k722`](https://huggingface.co/BAAI/EVA/blob/main/eva_video_k722.pth) | **89.7** |       [config](configs/kinetics400_ft.yaml)        | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_video_k400.pth) (`4.8GB`) | [ft_k400](../logs/video/ft_k400_log.txt) |
 | Kinetics600 |  `eva_video_k600`  | [`eva_video_k722`](https://huggingface.co/BAAI/EVA/blob/main/eva_video_k722.pth) | **89.8** |       [config](configs/kinetics600_ft.yaml)        | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_video_k600.pth) (`4.8GB`) | [ft_k600](../logs/video/ft_k600_log.txt) |                                                         
 | Kinetics700 |  `eva_video_k700`  | [`eva_video_k722`](https://huggingface.co/BAAI/EVA/blob/main/eva_video_k722.pth) | **82.9** |       [config](configs/kinetics700_ft.yaml)        | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_video_k700.pth) (`4.8GB`) | [ft_k700](../logs/video/ft_k700_log.txt) |                                                      
+
+</div>
 
 All pre-trained weights can be downloaded using the following script. 
 If problems occur with the automatic download, please follow the instructions for a manual download within the script.
