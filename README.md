@@ -81,7 +81,7 @@ All EVA model checkpoints (16 in total) are now available at [🤗 Hugging Face 
 
 
 ## Citation
-If you find our work helpful, please star this repo and cite the related articles. Thanks for your support!
+If you find our work helpful, please **star🌟** this repo and **cite📑** our paper. Thanks for your support!
 
 ```
 @article{EVA,
