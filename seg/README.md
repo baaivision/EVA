@@ -30,8 +30,8 @@ pip install timm==0.4.12
 pip install mmdet==2.22.0 # for Mask2Former
 pip install mmsegmentation==0.20.2
 
-ln -s ../detection/ops ./
-cd ops & sh make.sh # compile deformable attention
+# compile deformable attention
+cd ops & sh make.sh
 ```
 
 ## Data preparation
