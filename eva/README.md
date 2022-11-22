@@ -1,22 +1,5 @@
 # EVA: Pre-training and Image Classification 
 
-**Table of Contents**
-
-- [EVA: Pre-training and Image Classification](#eva-pre-training-and-image-classification)
-  - [Model Card](#model-card)
-  - [Summary of EVA's image classification performance](#summary-of-evas-image-classification-performance)
-  - [Setup](#setup)
-  - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
-<<<<<<< HEAD
-  - [Evaluation on ImageNet-1K variants](#evaluation-on-imagenet-1k-variants)
-=======
-  - [Evaluate EVA on ImageNet-1K variants (ImageNet-V2/ReaL/Adv/Rendition/Sketch)](#evaluation-on-imagenet-1k-variants)
->>>>>>> f35d528f764e749307ac3c5973a72d73158f6093
-  - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
-  - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
-  - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
-  - [Acknowledgement](#acknowledgement)
-
 ## Model Card
 
 
