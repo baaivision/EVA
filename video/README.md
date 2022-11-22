@@ -1,5 +1,26 @@
 # EVA: Video Action Recognition
 
+**Table of Contents**
+
+- [EVA: Video Action Recognition](#eva-video-action-recognition)
+  - [Model Card](#model-card)
+    - [Prepare EVA pre-trained weight](#prepare-eva-pre-trained-weight)
+    - [Kinetics fine-tuned weights](#kinetics-fine-tuned-weights)
+  - [Setup](#setup)
+  - [Datasets](#datasets)
+    - [Prepare videos](#prepare-videos)
+    - [Generate file list](#generate-file-list)
+  - [Evaluation](#evaluation)
+    - [Kinetics-400 Evaluation](#kinetics-400-evaluation)
+    - [Kinetics-600 Evaluation](#kinetics-600-evaluation)
+    - [Kinetics-700 Evaluation](#kinetics-700-evaluation)
+  - [Training](#training)
+    - [Kinetics-722 intermediate fine-tune](#kinetics-722-intermediate-fine-tune)
+    - [Kinetics-400 fine-tune](#kinetics-400-fine-tune)
+    - [Kinetics-600 fine-tune](#kinetics-600-fine-tune)
+    - [Kinetics-700 fine-tune](#kinetics-700-fine-tune)
+  - [Acknowledgment](#acknowledgment)
+
 ## Model Card
 We provide all checkpoints of our EVAs for video recognition.
 
@@ -174,7 +195,7 @@ To train EVA with 8 frames on **Kinetics-722** using 16 nodes (`total_batch_size
 ```bash
 VIDEO_CONFIG=configs/kinetics722_intermediate_ft.yaml
 OUTPUT_ROOT=/path/to/video/output/
-pretrained=pretrained/eva_psz14.pt
+pretrained=pretrained/eva_psz14.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_psz14.pt
     
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes \
 --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR --master_port=12355 \
@@ -189,7 +210,7 @@ For example, to train EVA with 16 frames on **Kinetics-400** using 8 nodes (`tot
 ```bash
 VIDEO_CONFIG=configs/kinetics400_ft.yaml
 OUTPUT_ROOT=/path/to/video/output/
-pretrained=pretrained/eva_video_k722.pth
+pretrained=pretrained/eva_video_k722.pth # https://huggingface.co/BAAI/EVA/blob/main/eva_video_k722.pth
     
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes \
 --node_rank=$NODE_RANK --master_addr=$MASTER_ADDR --master_port=12355 \

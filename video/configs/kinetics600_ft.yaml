@@ -10,7 +10,7 @@ DATA:
 MODEL:
     ARCH: eva-1b/14
     DROP_PATH_RATE: 0.2
-    PRETRAINED: /path/to/eva_video_k722.pth  # download from https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_video_k722.pth
+    PRETRAINED: /path/to/eva_video_k722.pth  # download from https://huggingface.co/BAAI/EVA/blob/main/eva_video_k722.pth
     PRETRAINED_MODE: 'eva_k722'
     CLASS_MAPPING: 'data/k722_to_k600_mapping.npy'
 AUG:

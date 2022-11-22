@@ -1,8 +1,23 @@
 # EVA: Semantic Segmentation
 
-EVA semantic segmentation is bulit with [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2), [ViT-Adapter](https://arxiv.org/abs/2205.08534) and [Mask2Former](https://arxiv.org/abs/2112.01527). Thanks for their awesome work!
+**Table of Contents**
 
-## Usage
+- [EVA: Semantic Segmentation](#eva-semantic-segmentation)
+  - [Setup](#setup)
+  - [Data preparation](#data-preparation)
+  - [Prepare EVA pre-trained weight](#prepare-eva-pre-trained-weight)
+  - [Results and Models](#results-and-models)
+    - [COCO-Stuff-164K](#coco-stuff-164k)
+    - [ADE20K](#ade20k)
+  - [Evaluation](#evaluation)
+    - [COCO-Stuff-164K](#coco-stuff-164k-1)
+    - [ADE20K](#ade20k-1)
+  - [Training](#training)
+    - [COCO-Stuff-164K](#coco-stuff-164k-2)
+    - [ADE20K](#ade20k-2)
+  - [Acknowledgement](#acknowledgement)
+
+## Setup
 
 Install [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2).
 
@@ -74,7 +89,7 @@ SEG_CONFIG=eva_mask2former_896_60k_cocostuff164k_ss
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
 --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch \
     configs/coco_stuff164k/${SEG_CONFIG}.py \
-    /path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth \
+    /path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth \ # https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_cocostuff_53p4.pth
     --eval mIoU
 
 
@@ -100,7 +115,7 @@ SEG_CONFIG=eva_mask2former_896_20k_coco164k2ade20k_ss
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
 --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch \
     configs/ade20k/${SEG_CONFIG}.py \
-    /path/to/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth \
+    /path/to/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth \ # https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth
     --eval mIoU
 
 
@@ -122,7 +137,7 @@ SEG_CONFIG=eva_mask2former_896_20k_coco164k2ade20k_ms
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
 --master_addr=$MASTER_ADDR --master_port=12355 --use_env test.py --launcher pytorch \
     configs/ade20k/${SEG_CONFIG}.py \
-    /path/to/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth \
+    /path/to/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth \ # https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_ade_ss61p5_ms62p3.pth
     --eval mIoU
 
 
@@ -147,7 +162,7 @@ To train EVA on **COCO-Stuff-164K** using 4 nodes (`total_batch_size=32`):
 ```bash
 SEG_CONFIG=eva_mask2former_896_60k_cocostuff164k_ss
 MODEL_OUTPUT_ROOT=/path/to/seg/output/
-pretrained=/path/to/eva_psz14.pt
+pretrained=/path/to/eva_psz14to16.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_psz14to16.pt
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes --node_rank=$NODE_RANK \
 --master_addr=$MASTER_ADDR --master_port=12355 --use_env train.py --launcher pytorch \
@@ -163,8 +178,8 @@ To train EVA on **ADE20K** using 8 nodes (`total_batch_size=64`):
 ```bash
 SEG_CONFIG=eva_mask2former_896_20k_coco164k2ade20k_ss
 MODEL_OUTPUT_ROOT=/path/to/seg/output/
-pretrained=/path/to/eva_psz14.pt
-load_from=/path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth
+pretrained=/path/to/eva_psz14to16.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_psz14to16.pt
+load_from=/path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth # https://huggingface.co/BAAI/EVA/blob/main/eva_sem_seg_mask2former_cocostuff_53p4.pth
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes --node_rank=$NODE_RANK \
 --master_addr=$MASTER_ADDR --master_port=12355 --use_env train.py --launcher pytorch \
@@ -173,3 +188,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes --node_ra
     --options model.pretrained=${pretrained} \
     model.load_from=${load_from}
 ```
+
+
+## Acknowledgement
+EVA semantic segmentation is bulit with [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2), [ViT-Adapter](https://arxiv.org/abs/2205.08534) and [Mask2Former](https://arxiv.org/abs/2112.01527). Thanks for their awesome work!

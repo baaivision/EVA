@@ -10,7 +10,7 @@ DATA:
 MODEL:
     ARCH: eva-1b/14
     DROP_PATH_RATE: 0.3
-    PRETRAINED: /path/to/eva_psz14.pt  # download from https://huggingface.co/Yuxin-CV/EVA/blob/main/eva_psz14.pt
+    PRETRAINED: /path/to/eva_psz14.pt  # download from https://huggingface.co/BAAI/EVA/blob/main/eva_psz14.pt
     PRETRAINED_MODE: 'eva'
 TRAIN:
     BATCH_SIZE: 2

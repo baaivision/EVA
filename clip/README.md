@@ -1,5 +1,15 @@
 # Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)
 
+**Table of Contents**
+
+- [Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)](#contrastive-language-image-pre-training-with-eva-eva-clip)
+  - [Model Card](#model-card)
+  - [Usage](#usage)
+  - [API of EVA-CLIP](#api-of-eva-clip)
+  - [Zero-Shot Prediction](#zero-shot-prediction)
+  - [Acknowledgement](#acknowledgement)
+  
+
 ## Model Card
 
 <div align="center">
@@ -30,7 +40,7 @@ import torch
 from clip import build_eva_model_and_transforms, tokenize
 from PIL import Image
 
-eva_clip_path = /path/to/eva_clip_psz14.pt
+eva_clip_path = /path/to/eva_clip_psz14.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt
 model_name = "EVA_CLIP_g_14"
 image_path = /path/to/image.png
 caption = ["a diagram", "a dog", "a cat"]
@@ -86,7 +96,7 @@ import torch
 from torchvision.datasets import CIFAR100
 
 # Load the model
-eva_clip_path = /path/to/eva_clip_psz14.pt
+eva_clip_path = /path/to/eva_clip_psz14.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.create_model_and_transforms('EVA_CLIP_g_14', eva_clip_path)
