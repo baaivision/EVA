@@ -23,7 +23,7 @@ For more details of EVA-CLIP, please refer to Section 2.3.5 of [our paper](https
 ## Usage
 
 The usege of EVA-CLIP is similar to [OpenAI CLIP](https://github.com/openai/CLIP) and [Open CLIP](https://github.com/mlfoundations/open_clip).
-
+The training code of EVA-CLIP will be available at [FlagAI](https://github.com/FlagAI-Open/FlagAI). Please stay tuned.
 
 ```python
 import torch
