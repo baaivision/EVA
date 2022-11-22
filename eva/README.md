@@ -8,17 +8,10 @@
   - [Setup](#setup)
   - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
   - [Evaluation on ImageNet-1K variants](#evaluation-on-imagenet-1k-variants)
-    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-v2-with-a-single-node)
-    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-real-with-a-single-gpu-on-a-single-node)
-    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-adversarial-with-a-single-node)
-    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-rendition-with-a-single-node)
-    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-sketch-with-a-single-node)
-    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ObjectNet** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-objectnet-with-a-single-node)
   - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
   - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
   - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
   - [Acknowledgement](#acknowledgement)
-
 
 ## Model Card
 
@@ -151,7 +144,7 @@ Expected results:
 ## Evaluation on ImageNet-1K variants
 
 
-### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
@@ -190,8 +183,7 @@ Expected results:
 
 
 
-
-### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
@@ -230,7 +222,7 @@ Expected results:
 
 
 
-### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
@@ -269,7 +261,7 @@ Expected results:
 
 
 
-### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
@@ -308,7 +300,7 @@ Expected results:
 
 
 
-### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
@@ -346,7 +338,7 @@ Expected results:
 
 
 
-### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ObjectNet** with a single node:
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ObjectNet** with a single node:
 ```bash     
 
 MODEL_NAME=eva_g_patch14
