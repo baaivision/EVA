@@ -1,5 +1,25 @@
 # EVA: Pre-training and Image Classification 
 
+**Table of Contents**
+
+- [EVA: Pre-training and Image Classification](#eva-pre-training-and-image-classification)
+  - [Model Card](#model-card)
+  - [Summary of EVA's image classification performance](#summary-of-evas-image-classification-performance)
+  - [Setup](#setup)
+  - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
+  - [Evaluation on ImageNet-1K variants](#evaluation-on-imagenet-1k-variants)
+    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-v2-with-a-single-node)
+    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-real-with-a-single-gpu-on-a-single-node)
+    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-adversarial-with-a-single-node)
+    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-rendition-with-a-single-node)
+    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-imagenet-sketch-with-a-single-node)
+    - [Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ObjectNet** with a single node:](#evaluate-the-fine-tuned-eva-336px-patch_size14-on-objectnet-with-a-single-node)
+  - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
+  - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
+  - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
+  - [Acknowledgement](#acknowledgement)
+
+
 ## Model Card
 
 
@@ -51,6 +71,317 @@ pip install -r requirements.txt
 
 The core packages including: [Pytorch](https://pytorch.org/) version 1.12.0, [torchvision](https://pytorch.org/vision/stable/index.html) version 0.13.0, [timm](https://github.com/rwightman/pytorch-image-models) version 0.5.4 and [DeepSpeed](https://github.com/microsoft/DeepSpeed) version 0.7.5 *etc*.
 
+
+
+
+## Evaluate EVA on ImageNet-1K
+
+Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
+```bash    
+
+MODEL_NAME=eva_g_patch14
+
+sz=448
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DATA_PATH=/path/to/ImageNet-1K/
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 89.622 Acc@5 98.930 loss 0.948
+```
+
+Evaluate the fine-tuned EVA (`560px, patch_size=14`) on **ImageNet-1K val** with a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=560
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_560px_psz14_ema_89p7.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_560px_psz14_ema_89p7.pt
+
+DATA_PATH=/path/to/ImageNet-1K/
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* * Acc@1 89.712 Acc@5 98.958 loss 0.881
+```
+
+## Evaluation on ImageNet-1K variants
+
+
+### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DATA_PATH=/path/to/imagenetv2/ImageNetV2-matched-frequency
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --robust_test 'imagenet_v2' \
+        --data_path ${DATA_PATH} \
+        --eval_data_path ${DATA_PATH} \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 81.570 Acc@5 96.230 loss 1.274
+```
+
+
+
+
+### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DATA_PATH=/path/to/ImageNet-1K
+
+
+python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --real_labels real.json \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 90.828 Acc@5 98.683 loss 0.947
+```
+
+
+
+### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DATA_PATH=/path/to/imagenet-a
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --robust_test 'imagenet_a' \
+        --data_path ${DATA_PATH} \
+        --eval_data_path ${DATA_PATH} \
+        --nb_classes 200 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 86.154 Acc@5 96.509 loss 0.979
+```
+
+
+
+
+### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DATA_PATH=/path/to/imagenet-r
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --robust_test 'imagenet_r' \
+        --data_path ${DATA_PATH} \
+        --eval_data_path ${DATA_PATH} \
+        --nb_classes 200 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 88.283 Acc@5 95.830 loss 0.965
+```
+
+
+
+### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DATA_PATH=/path/to/imagenet_sketch
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH} \
+        --eval_data_path ${DATA_PATH} \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 67.724 Acc@5 87.964 loss 1.955
+```
+
+
+
+### Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ObjectNet** with a single node:
+```bash     
+
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_1k_336px_psz14_ema_89p6.pt
+
+DUMMY_DATA_PATH=/path/to/ImageNet-1K
+DATA_PATH=/sharefs/baai-mmdataset/clip_benchmark_datasets/objectnet/objectnet-1.0/images
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --robust_test 'objectnet' \
+        --data_path ${DUMMY_DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH} \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* * Acc@1 60.907 Acc@5 82.768 loss 2.305
+```
 
 
 ## Pre-train EVA on the merged-30M image dataset
@@ -175,7 +506,7 @@ scale_low=0.5
 EXP_NAME=sz${sz}_cropscalelow${scale_low}_bsz8x8x${update_freq}x${batch_size}_lr${lr}_lrd${lrd}_b2${b2}_eps${eps}_partial_frz${partial_freeze}_ep${ep}_wmep${wmep}_reprob${reprob}_dpr${dpr}_mixup${mixup}_cutmix${cutmix}_crop_pct${crop_pct}
 
 # path to MIM pre-trained ckpt
-PRETRAIN_CHKPT=/path/to/eva_psz14.pt
+PRETRAIN_CHKPT=/path/to/eva_psz14.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_psz14.pt
 
 OUTPUT_DIR=/path/to/output/{EXP_NAME}
 
@@ -255,7 +586,7 @@ EXP_NAME=sz${sz}_cropscalelow${scale_low}_bsz4x8x${update_freq}x${batch_size}_lr
 
 
 # path to ImageNet-21K Intermediate fine-tuned ckpt
-PRETRAIN_CHKPT=/path/to/eva_21k_224px_psz14.pt
+PRETRAIN_CHKPT=/path/to/eva_21k_224px_psz14.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_21k_224px_psz14.pt
 
 OUTPUT_DIR=/path/to/output/{EXP_NAME}
 
@@ -301,324 +632,6 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 
 
-
-
-
-
-
-
-
-
-
-
-## Evaluate EVA Finetuned model on ImageNet-1K
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
-```bash    
-
-MODEL_NAME=eva_g_patch14
-
-sz=448
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DATA_PATH=/path/to/ImageNet-1K/
-
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --data_path ${DATA_PATH}/train \
-        --eval_data_path ${DATA_PATH}/val \
-        --nb_classes 1000 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* Acc@1 89.622 Acc@5 98.930 loss 0.948
-```
-
-Evaluate the fine-tuned EVA (`560px, patch_size=14`) on **ImageNet-1K val** with a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=560
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_560px_psz14_ema_89p7.pt
-
-DATA_PATH=/path/to/ImageNet-1K/
-
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --data_path ${DATA_PATH}/train \
-        --eval_data_path ${DATA_PATH}/val \
-        --nb_classes 1000 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* * Acc@1 89.712 Acc@5 98.958 loss 0.881
-```
-
-## Evaluation on ImageNet-1K Variants
-
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=336
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DATA_PATH=/path/to/imagenetv2/ImageNetV2-matched-frequency
-
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --robust_test 'imagenet_v2' \
-        --data_path ${DATA_PATH} \
-        --eval_data_path ${DATA_PATH} \
-        --nb_classes 1000 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* Acc@1 81.570 Acc@5 96.230 loss 1.274
-```
-
-
-
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=336
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DATA_PATH=/path/to/ImageNet-1K
-
-
-python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --real_labels real.json \
-        --data_path ${DATA_PATH}/train \
-        --eval_data_path ${DATA_PATH}/val \
-        --nb_classes 1000 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* Acc@1 90.828 Acc@5 98.683 loss 0.947
-```
-
-
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=336
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DATA_PATH=/path/to/imagenet-a
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --robust_test 'imagenet_a' \
-        --data_path ${DATA_PATH} \
-        --eval_data_path ${DATA_PATH} \
-        --nb_classes 200 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* Acc@1 86.154 Acc@5 96.509 loss 0.979
-```
-
-
-
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=336
-batch_size=16
-crop_pct=1.0
-
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DATA_PATH=/path/to/imagenet-r
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --robust_test 'imagenet_r' \
-        --data_path ${DATA_PATH} \
-        --eval_data_path ${DATA_PATH} \
-        --nb_classes 200 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* Acc@1 88.283 Acc@5 95.830 loss 0.965
-```
-
-
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=336
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DATA_PATH=/path/to/imagenet_sketch
-
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --data_path ${DATA_PATH} \
-        --eval_data_path ${DATA_PATH} \
-        --nb_classes 1000 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* Acc@1 67.724 Acc@5 87.964 loss 1.955
-```
-
-
-
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:
-```bash     
-
-MODEL_NAME=eva_g_patch14
-
-sz=336
-batch_size=16
-crop_pct=1.0
-
-EVAL_CKPT=/path/to/eva_21k_1k_336px_psz14_ema_89p6.pt
-
-DUMMY_DATA_PATH=/path/to/ImageNet-1K
-DATA_PATH=/sharefs/baai-mmdataset/clip_benchmark_datasets/objectnet/objectnet-1.0/images
-
-python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
-        --robust_test 'objectnet' \
-        --data_path ${DUMMY_DATA_PATH}/train \
-        --eval_data_path ${DATA_PATH} \
-        --nb_classes 1000 \
-        --data_set image_folder \
-        --model ${MODEL_NAME} \
-        --finetune ${EVAL_CKPT} \
-        --input_size ${sz} \
-        --batch_size ${batch_size} \
-        --crop_pct ${crop_pct} \
-        --no_auto_resume \
-        --dist_eval \
-        --eval \
-        --enable_deepspeed
-```
-
-Expected results:
-```
-* * Acc@1 60.907 Acc@5 82.768 loss 2.305
-```
 
 ## Acknowledgement
 
