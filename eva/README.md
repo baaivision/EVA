@@ -38,7 +38,7 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 
 | model | [IN-1K](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet.csv) | [IN-V2](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenetv2-matched-frequency.csv) | [IN-ReaL](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-real.csv) | [IN-Adv.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-a.csv) | [IN-Ren.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv) | [IN-Ske.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv) | ObjectNet |
 |:------------:|:------------------:|:------:|:------:| :------:|:------:|:------:|:------:|
-| EVA | 89.6 | 81.6 | 90.8 | 86.2 | 88.3 | 67.7 | 60.9 |
+| EVA (`336px`) | 89.6 | 81.6 | 90.8 | 86.2 | 88.3 | 67.7 | 60.9 |
 
 </div>
 
