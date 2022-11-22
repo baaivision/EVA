@@ -57,7 +57,7 @@ For zero-shot classification performance of EVA-CLIP, please refer to [`clip`](c
 First, clone the repo and install required packages:
 ```
 git clone git@github.com:baaivision/EVA.git
-cd pt_and_img_cls
+cd eva
 pip install -r requirements.txt
 ```
 
