@@ -82,7 +82,7 @@ Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with
 
 MODEL_NAME=eva_g_patch14
 
-sz=448
+sz=336
 batch_size=16
 crop_pct=1.0
 
