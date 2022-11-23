@@ -446,7 +446,7 @@ OUTPUT_DIR=/path/to/output/${epochs}/${EXP_NAME}
 
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
---master_addr=$MASTER_ADDR --master_port=12355 --use_env run_beit_pretraining.py \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_eva_pretraining.py \
         --data_path ${DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
         --log_dir ${OUTPUT_DIR}/tb_log \
