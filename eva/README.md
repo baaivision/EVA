@@ -68,6 +68,11 @@ The core packages including: [Pytorch](https://pytorch.org/) version 1.12.0, [to
 
 ## Evaluate EVA on ImageNet-1K
 
+We use the standard ImageNet-1K dataset. 
+Download it from http://image-net.org.
+Then, move and extract the training and validation images to labeled subfolders, using the [shell script](https://github.com/pytorch/examples/blob/main/imagenet/extract_ILSVRC.sh).
+
+
 Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
 ```bash    
 
