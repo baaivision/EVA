@@ -55,9 +55,13 @@ For zero-shot classification performance of EVA-CLIP, please refer to [`clip`](c
 
 
 First, clone the repo and install required packages:
-```
+```bash
+conda create --name eva python=3.8 -y
+conda activate eva
+
 git clone git@github.com:baaivision/EVA.git
 cd eva
+pip install torch==1.12.0+cu116 torchvision==0.13.0+cu116 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu116
 pip install -r requirements.txt
 ```
 
