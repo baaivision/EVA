@@ -28,7 +28,11 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 ## News
 
+<div align="center">
+
 **All the code & 16x state-of-the-art billion-scale models that are open-sourced!**
+
+</div>
 
 - `Nov 22, 2022`: release code & model of [object detection and instance segmentation](det/README.md).
 - `Nov 22, 2022`: release code & model of [object detection and instance segmentation](det/README.md).
