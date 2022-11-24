@@ -4,6 +4,7 @@
 
 - [Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)](#contrastive-language-image-pre-training-with-eva-eva-clip)
   - [Model Card](#model-card)
+  - [Benchmark](#benchmark)
   - [Usage](#usage)
   - [Acknowledgement](#acknowledgement)
   
@@ -28,6 +29,206 @@ For more details of EVA-CLIP, please refer to Section 2.3.5 of [our paper](https
 
 We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal learning, representation leaning, AIGC, *etc*.
 
+## Benchmark
+### `Image Classification`
+
+The top-1 accuracy of ImageNet-1K variants and ObjectNet
+
+| model | IN-1K | IN-V2 | IN-R | IN-Adv. | IN-Ske. | ObjectNet |
+|-------|:-----:|:-----:|:----:| :------:|:-------:|:---------:|
+| OpenAI CLIP-L | 75.55 | 69.86 | 87.83 | 70.76 | 59.58 | 68.98 |
+| Open CLIP-H | 77.96 | 70.87 | 89.33 | 59.33 | 66.58 | 69.71 |
+| Open CLIP-g | 76.65 | 69.56 | 88.69 | 57.19 | 65.17 | 67.53 |
+| EVA CLIP-g | **78.53** | **71.52** | **92.5** | **73.59** | **67.31** | **72.33** |
+ 
+> [Whole Benchmark](./Benchmark.md) 
+
+### `Action Recognition`
+
+<table>
+   <tr>
+      <td rowspan=1>Dataset</td>
+      <td rowspan=1>Model</td>
+      <td rowspan=1>acc@1</td>
+      <td rowspan=1>acc@5</td>
+   </tr>
+   <tr>
+      <td rowspan=4>UCF101</td>
+      <td>OpenAI CLIP-L</td>
+      <td>76.39 </td>
+      <td>94.86 </td>
+   </tr>
+   <tr>
+      <td>Open CLIP-H</td>
+      <td><b>78.16</b></td>
+      <td><b>95.02</b></td>
+   </tr>
+   <tr>
+      <td>Open CLIP-g</td>
+      <td>77.73 </td>
+      <td>94.98 </td>
+   </tr>
+   <tr>
+      <td>EVA CLIP-g</td>
+      <td>76.05 </td>
+      <td>93.64</td>
+   </tr>
+   <tr>
+      <td rowspan=4>Kinetics400</td>
+      <td>OpenAI CLIP-L</td>
+      <td>52.88 </td>
+      <td>76.06 </td>
+   </tr>
+   <tr>
+      <td>Open CLIP-H</td>
+      <td>51.63</td>
+      <td>74.49</td>
+   </tr>
+   <tr>
+      <td>Open CLIP-g</td>
+      <td>50.35 </td>
+      <td>73.03 </td>
+   </tr>
+   <tr>
+      <td>EVA CLIP-g</td>
+      <td><b>54.04</b></td>
+      <td><b>76.42</b></td>
+   </tr>
+   <tr>
+      <td rowspan=4>Kinetics600</td>
+      <td>OpenAI CLIP-L</td>
+      <td>52.41 </td>
+      <td>76 </td>
+   </tr>
+   <tr>
+      <td>Open CLIP-H</td>
+      <td>52.25</td>
+      <td>74.92</td>
+   </tr>
+   <tr>
+      <td>Open CLIP-g</td>
+      <td>50.79 </td>
+      <td>73.53 </td>
+   </tr>
+   <tr>
+      <td>EVA CLIP-g</td>
+      <td><b>52.76</b></td>
+      <td><b>75.99</b></td>
+   </tr>
+   <tr>
+      <td rowspan=4>Kinetics700</td>
+      <td>OpenAI CLIP-L</td>
+      <td>45.73 </td>
+      <td>69.63 </td>
+   </tr>
+   <tr>
+      <td>Open CLIP-H</td>
+      <td>44.64</td>
+      <td>67.54</td>
+   </tr>
+   <tr>
+      <td>Open CLIP-g</td>
+      <td>43.6 </td>
+      <td>66.39 </td>
+   </tr>
+   <tr>
+      <td>EVA CLIP-g</td>
+      <td><b>46.65</b></td>
+      <td><b>70.16</b></td>
+   </tr>
+</table>
+
+### `Retrieval`
+<table>
+   <tr>
+      <td rowspan=2>Dataset</td>
+      <td rowspan=2>Model</td>
+      <td colspan=3>Text-to-Image Retrival</td>
+      <td colspan=3>Image-to-Text Retrival</td>
+   </tr>
+   <tr>
+      <td>R@1</td>
+      <td>R@5</td>
+      <td>R@10</td>
+      <td>R@1</td>
+      <td>R@5</td>
+      <td>R@10</td>
+   </tr>
+   <tr>
+      <td rowspan=4>Flickr30k</td>
+      <td>OpenAI CLIP-L</td>
+      <td>65.18 </td>
+      <td>87.28 </td>
+      <td>92 </td>
+      <td>85.2 </td>
+      <td>97.3 </td>
+      <td>99 </td>
+   </tr>
+   <tr>
+      <td>Open CLIP-H</td>
+      <td><b>77.78</b></td>
+      <td><b>94.14</b></td>
+      <td><b>96.62</b></td>
+      <td><b>90.8</b></td>
+      <td><b>99.3</b></td>
+      <td>99.7</td>
+   </tr>
+   <tr>
+      <td>Open CLIP-g</td>
+      <td>76.52 </td>
+      <td>93.62 </td>
+      <td>96.28 </td>
+      <td>90.8 </td>
+      <td>99.1 </td>
+      <td><b>99.8</b></td>
+   </tr>
+   <tr>
+      <td>EVA CLIP-g</td>
+      <td>72.64 </td>
+      <td>91.6 </td>
+      <td>95.12 </td>
+      <td>88.3 </td>
+      <td>98.3 </td>
+      <td>99.3 </td>
+   </tr>
+   <tr>
+      <td rowspan=4>MSCOCO</td>
+      <td>OpenAI CLIP-L</td>
+      <td>36.51 </td>
+      <td>61.01 </td>
+      <td>71.11 </td>
+      <td>56.34 </td>
+      <td>79.32 </td>
+      <td>86.66 </td>
+   </tr>
+   <tr>
+      <td>Open CLIP-H</td>
+      <td><b>49.47</b></td>
+      <td><b>73.4</b></td>
+      <td><b>81.53</b></td>
+      <td><b>65.96</b></td>
+      <td><b>86.06</b></td>
+      <td><b>91.9</b></td>
+   </tr>
+   <tr>
+      <td>Open CLIP-g</td>
+      <td>47.99 </td>
+      <td>72.37 </td>
+      <td>80.75 </td>
+      <td>64.96 </td>
+      <td>85.3 </td>
+      <td>91.46 </td>
+   </tr>
+   <tr>
+      <td>EVA CLIP-g</td>
+      <td>44.07 </td>
+      <td>68.5 </td>
+      <td>77.33 </td>
+      <td>61.76 </td>
+      <td>83.28 </td>
+      <td>89.96 </td>
+   </tr>
+</table>
 
 ## Usage
 
