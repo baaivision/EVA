@@ -35,7 +35,6 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 </div>
 
 - `Nov 22, 2022`: release code & model of [object detection and instance segmentation](det/README.md).
-- `Nov 22, 2022`: release code & model of [object detection and instance segmentation](det/README.md).
 - `Nov 21, 2022`: release code & model of [video classification](video/README.md), [semantic segmentation](seg/README.md), [EVA-CLIP](clip/README.md).
 - `Nov 20, 2022`: release code & model of [pre-training and image classification](eva/README.md).
 - `Nov 18, 2022`: release wandb [log & statistics](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy) of 1.1B EVA-CLIP training.
