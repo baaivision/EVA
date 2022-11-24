@@ -14,13 +14,13 @@
 
 | model name | #param. | precision | data  |  batch size | IN-1K zero-shot top-1 | weight |
 |:-----------:|:------:|:------:|:------:|:------:|:------:|:------:|
-| `eva_clip_psz14` | 1.3B | `fp16` | [LAION-400M](https://laion.ai/laion-400-open-dataset/) | 41K | 78.5 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt) (`2GB`) |
+| `eva_clip_psz14` | 1.1B | `fp16` | [LAION-400M](https://laion.ai/laion-400-open-dataset/) | 41K | 78.5 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt) (`2GB`) |
 
 </div>
 
 > The ImageNet-1K zero-shot classification performance is higher than our paper (`78.5` *v.s.* `78.2`) because of longer training.
 
-We choose to train a 1.3B CLIP model, not because it is easy, but because it is hard. Please refer to [this note](https://docs.google.com/document/d/1FXosAZ3wMrzThgnWR6KSkXIz4IMItq3umDGos38pJps/edit) for a glance of the challenges in training very large CLIP.
+We choose to train a 1.1B CLIP model, not because it is easy, but because it is hard. Please refer to [this note](https://docs.google.com/document/d/1FXosAZ3wMrzThgnWR6KSkXIz4IMItq3umDGos38pJps/edit) for a glance of the challenges in training very large CLIP.
 
 To our knowledge, EVA-CLIP is **the largest performant open-sourced CLIP model** evaluated via zero-shot classification performance.
 We will updates the results in our paper soon.
@@ -41,7 +41,7 @@ $ conda install --yes -c pytorch pytorch=1.7.1 torchvision cudatoolkit=11.0
 $ pip install ftfy regex tqdm
 ```
 
-The training code of our 1.3B EVA-CLIP will be available at [FlagAI](https://github.com/FlagAI-Open/FlagAI). Please stay tuned.
+The training code of our 1.1B EVA-CLIP will be available at [FlagAI](https://github.com/FlagAI-Open/FlagAI). Please stay tuned.
 
 
 An example:
