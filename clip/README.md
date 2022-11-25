@@ -4,7 +4,10 @@
 
 - [Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)](#contrastive-language-image-pre-training-with-eva-eva-clip)
   - [Model Card](#model-card)
-  - [Benchmark](#benchmark)
+  - [EVA-CLIP Zero-shot Evaluation Results](#eva-clip-zero-shot-evaluation-results)
+    - [Zero-shot Image Classification Evaluation](#zero-shot-image-classification-evaluation)
+    - [Zero-shot Video Action Recognition Evaluation](#zero-shot-video-action-recognition-evaluation)
+    - [Zero-shot Retrieval Evaluation](#zero-shot-retrieval-evaluation)
   - [Usage](#usage)
   - [Acknowledgement](#acknowledgement)
   
@@ -29,10 +32,16 @@ For more details of EVA-CLIP, please refer to Section 2.3.5 of [our paper](https
 
 We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal learning, representation leaning, AIGC, *etc*.
 
-## Benchmark
-### `Image Classification`
+## EVA-CLIP Zero-shot Evaluation Results
 
-The top-1 accuracy of ImageNet-1K variants and ObjectNet
+
+[**All 33 Benchmark Results**](./Benchmark.md) 
+
+### Zero-shot Image Classification Evaluation
+
+The top-1 accuracy of ImageNet-1K variants and ObjectNet.
+
+<div align="center">
 
 | model | IN-1K | IN-V2 | IN-R | IN-Adv. | IN-Ske. | ObjectNet |
 |-------|:-----:|:-----:|:----:| :------:|:-------:|:---------:|
@@ -41,11 +50,26 @@ The top-1 accuracy of ImageNet-1K variants and ObjectNet
 | Open CLIP-g | 76.65 | 69.56 | 88.69 | 57.19 | 65.17 | 67.53 |
 | EVA CLIP-g | **78.53** | **71.52** | **92.5** | **73.59** | **67.31** | **72.33** |
  
-> [Whole Benchmark](./Benchmark.md) 
+</div>
 
-### `Action Recognition`
+### Zero-shot Video Action Recognition Evaluation
 
-<table>
+
+The top-1 accuracy of video action recognition benchmarks.
+
+<div align="center">
+
+| model | UCF-101 | Kinetics-400 | Kinetics-600 | Kinetics-700 |
+|-------|:-----:|:-----:|:----:| :----:|
+| OpenAI CLIP-L | 76.39 | 52.88 | 52.41 | 45.73 | 
+| Open CLIP-H   | **78.16** | 51.63 | 52.25 | 44.64 | 
+| Open CLIP-g   | 77.73 | 50.35 | 50.79 | 43.60 | 
+| EVA CLIP-g    | 76.05 | **54.04** | **52.76** | **46.65** |
+
+</div>
+
+
+<!-- <table>
    <tr>
       <td rowspan=1>Dataset</td>
       <td rowspan=1>Model</td>
@@ -136,9 +160,12 @@ The top-1 accuracy of ImageNet-1K variants and ObjectNet
       <td><b>46.65</b></td>
       <td><b>70.16</b></td>
    </tr>
-</table>
+</table> -->
 
-### `Retrieval`
+### Zero-shot Retrieval Evaluation
+
+<div align="center">
+
 <table>
    <tr>
       <td rowspan=2>Dataset</td>
@@ -229,6 +256,8 @@ The top-1 accuracy of ImageNet-1K variants and ObjectNet
       <td>89.96 </td>
    </tr>
 </table>
+
+</div>
 
 ## Usage
 

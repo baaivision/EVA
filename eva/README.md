@@ -7,7 +7,7 @@
   - [Summary of EVA's image classification performance](#summary-of-evas-image-classification-performance)
   - [Setup](#setup)
   - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
-  - [Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske, ObjectNet)](#evaluation-on-imagenet-1k-variants-in-v2-in-real-in-adv-in-ren-in-ske-objectnet)
+  - [Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)](#evaluation-on-imagenet-1k-variants-in-v2-in-real-in-adv-in-ren-in-ske-objectnet)
   - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
   - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
   - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
@@ -149,7 +149,7 @@ Expected results:
 * * Acc@1 89.712 Acc@5 98.958 loss 0.881
 ```
 
-## Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske, ObjectNet)
+## Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)
 
 
 Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:

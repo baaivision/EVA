@@ -1,5 +1,8 @@
-## Benchmark
-### Image Classification
+## EVA-CLIP Zero-shot Evaluation Results
+### Zero-shot Image Classification Evaluation
+
+<div align="center">
+
 <table>
    <tr>
       <td rowspan=1>Dataset</td>
@@ -29,7 +32,7 @@
       <td>95.51 </td>
    </tr>
    <tr>
-      <td rowspan=4>ImageNet-a</td>
+      <td rowspan=4>ImageNet-Adversarial</td>
       <td>OpenAI CLIP-L</td>
       <td>70.76 </td>
       <td>90.76 </td>
@@ -50,7 +53,7 @@
       <td>90.93 </td>
    </tr>
    <tr>
-      <td rowspan=4>ImageNet-r</td>
+      <td rowspan=4>ImageNet-Rendition</td>
       <td>OpenAI CLIP-L</td>
       <td>87.83 </td>
       <td>97.11 </td>
@@ -71,7 +74,7 @@
       <td>98.24 </td>
    </tr>
    <tr>
-      <td rowspan=4>ImageNet-sketch</td>
+      <td rowspan=4>ImageNet-Sketch</td>
       <td>OpenAI CLIP-L</td>
       <td>59.58 </td>
       <td>84.25 </td>
@@ -92,7 +95,7 @@
       <td>89.07 </td>
    </tr>
    <tr>
-      <td rowspan=4>ImageNet-v2</td>
+      <td rowspan=4>ImageNet-V2</td>
       <td>OpenAI CLIP-L</td>
       <td>69.86 </td>
       <td>90.91 </td>
@@ -574,12 +577,14 @@
       <td>58.38 </td>
       <td>- </td>
    </tr>
-   
-   
 </table>
 
+</div>
 
-### Action Recognition
+### Zero-shot Video Action Recognition Evaluation
+
+<div align="center">
+
 
 <table>
    <tr>
@@ -674,7 +679,13 @@
    </tr>
 </table>
 
-### Retrieval
+</div>
+
+
+### Zero-shot Retrieval Evaluation
+
+<div align="center">
+
 <table>
    <tr>
       <td rowspan=2>Dataset</td>
@@ -765,3 +776,5 @@
       <td>89.96 </td>
    </tr>
 </table>
+</div>
+
