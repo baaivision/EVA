@@ -27,6 +27,10 @@ All model weights related to object detection and instance segmentation are avai
 # recommended environment: torch1.9 + cuda11.1
 pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 pip install mmcv-full==1.6.1 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.9.0/index.html  # for soft-nms
+
+# build EVA det / Detectron2 from source
+cd /path/to/EVA/det
+python -m pip install -e .
 ```
 
 And then install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html#build-detectron2-from-source).
