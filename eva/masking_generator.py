@@ -1,26 +1,16 @@
-"""
-Originally inspired by impl at https://github.com/zhunzhong07/Random-Erasing, Apache 2.0
-Copyright Zhun Zhong & Liang Zheng
-
-Hacked together by / Copyright 2020 Ross Wightman
-
-Modified by Hangbo Bao, for generating the masked position for visual image transformer
-"""
 # --------------------------------------------------------
-# BEIT: BERT Pre-Training of Image Transformers (https://arxiv.org/abs/2106.08254)
-# Github source: https://github.com/microsoft/unilm/tree/master/beit
-# Copyright (c) 2021 Microsoft
+# EVA: Exploring the Limits of Masked Visual Representation Learning at Scale (https://arxiv.org/abs/2211.07636)
+# Github source: https://github.com/baaivision/EVA
+# Copyright (c) 2022 Beijing Academy of Artificial Intelligence (BAAI)
 # Licensed under The MIT License [see LICENSE for details]
-# By Hangbo Bao
-# Based on timm, DINO and DeiT code bases
+# By Yuxin Fang
+# Based on timm, DINO, DeiT and BEiT codebases
 # https://github.com/rwightman/pytorch-image-models/tree/master/timm
-# Originally inspired by impl at https://github.com/zhunzhong07/Random-Erasing, Apache 2.0
-# Copyright Zhun Zhong & Liang Zheng
-#
-# Hacked together by / Copyright 2020 Ross Wightman
-#
-# Modified by Hangbo Bao, for generating the masked position for visual image transformer
+# https://github.com/facebookresearch/deit
+# https://github.com/facebookresearch/dino
+# https://github.com/microsoft/unilm/tree/master/beit
 # --------------------------------------------------------'
+
 import random
 import math
 import numpy as np

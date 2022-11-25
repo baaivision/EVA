@@ -1,19 +1,16 @@
 # --------------------------------------------------------
-# BEIT: BERT Pre-Training of Image Transformers (https://arxiv.org/abs/2106.08254)
-# Github source: https://github.com/microsoft/unilm/tree/master/beit
-# Copyright (c) 2021 Microsoft
+# EVA: Exploring the Limits of Masked Visual Representation Learning at Scale (https://arxiv.org/abs/2211.07636)
+# Github source: https://github.com/baaivision/EVA
+# Copyright (c) 2022 Beijing Academy of Artificial Intelligence (BAAI)
 # Licensed under The MIT License [see LICENSE for details]
-# By Hangbo Bao
-# Based on timm, DINO and DeiT code bases
+# By Yuxin Fang
+# Based on timm, DINO, DeiT and BEiT codebases
 # https://github.com/rwightman/pytorch-image-models/tree/master/timm
 # https://github.com/facebookresearch/deit
 # https://github.com/facebookresearch/dino
-
-# EVA: Exploring the Limits of Masked Visual Representation Learning at Scale (https://arxiv.org/abs/2211.07636)
-# Github source: https://github.com/baaivision/EVA
-# Modified by Yuxin Fang
-
+# https://github.com/microsoft/unilm/tree/master/beit
 # --------------------------------------------------------'
+
 import datetime
 import io
 import os

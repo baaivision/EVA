@@ -1,18 +1,15 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
 # --------------------------------------------------------
-# References:
-# timm: https://github.com/rwightman/pytorch-image-models/tree/master/timm
-# DeiT: https://github.com/facebookresearch/deit
-
 # EVA: Exploring the Limits of Masked Visual Representation Learning at Scale (https://arxiv.org/abs/2211.07636)
 # Github source: https://github.com/baaivision/EVA
-# Modified by Yuxin Fang
-
-# --------------------------------------------------------
+# Copyright (c) 2022 Beijing Academy of Artificial Intelligence (BAAI)
+# Licensed under The MIT License [see LICENSE for details]
+# By Yuxin Fang
+# Based on timm, DINO, DeiT and BEiT codebases
+# https://github.com/rwightman/pytorch-image-models/tree/master/timm
+# https://github.com/facebookresearch/deit
+# https://github.com/facebookresearch/dino
+# https://github.com/microsoft/unilm/tree/master/beit
+# --------------------------------------------------------'
 
 from functools import partial
 

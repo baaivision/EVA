@@ -1,4 +1,15 @@
-
+# --------------------------------------------------------
+# EVA: Exploring the Limits of Masked Visual Representation Learning at Scale (https://arxiv.org/abs/2211.07636)
+# Github source: https://github.com/baaivision/EVA
+# Copyright (c) 2022 Beijing Academy of Artificial Intelligence (BAAI)
+# Licensed under The MIT License [see LICENSE for details]
+# By Yuxin Fang
+# Based on timm, DINO, DeiT and BEiT codebases
+# https://github.com/rwightman/pytorch-image-models/tree/master/timm
+# https://github.com/facebookresearch/deit
+# https://github.com/facebookresearch/dino
+# https://github.com/microsoft/unilm/tree/master/beit
+# --------------------------------------------------------'
 
 import argparse
 import torch
