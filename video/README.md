@@ -111,17 +111,17 @@ video
 ```
 
 ### Generate file list
-We provide a convenient script to generate annotation file list. Please follow [`notebooks/build_file_list.ipynb`](notebooks/build_file_list.ipynb) to generate file lists given downloaded videos.
+We provide a convenient script to generate an annotation file list. Please follow [`notebooks/build_file_list.ipynb`](notebooks/build_file_list.ipynb) to generate file lists given downloaded videos.
 
 
-The merged dataset coined Kinetics-722 (K-722) integrates all valid training samples from Kinetics-400 (K-400), Kinetics-600 (K-600) and Kinetics-700 (K-700). 
+The merged dataset coined Kinetics-722 (K-722) integrates all valid training samples from Kinetics-400 (K-400), Kinetics-600 (K-600), and Kinetics-700 (K-700). 
 Notably, for a fair and legal comparison, we removed leaked videos in all validation sets and duplicated videos in all training sets based on `youtube id` of the video.  
 Accordingly, the cleaned K-722 contains 0.63M training videos, covering 722 human action classes. We also provide [our data list]( https://huggingface.co/BAAI/EVA/blob/main/eva%20video%20data%20list.zip).
 
 Now, you can train and test EVA on video data.
 
 **Note:**
-Since that our method build upon [X-CLIP](https://github.com/microsoft/VideoX/tree/master/X-CLIP), it needs a textual description for each video category. For example, we provide the text description of `Kinetics-722` in the file [`labels/kinetics722_labels.csv`](labels/kinetics722_labels.csv). Here is the format:
+Since our method is built upon [X-CLIP](https://github.com/microsoft/VideoX/tree/master/X-CLIP), it needs a textual description for each video category. For example, we provide the text description of `Kinetics-722` in the file [`labels/kinetics722_labels.csv`](labels/kinetics722_labels.csv). Here is the format:
 ```bash
 $ head -n 5 labels/kinetics722_labels.csv
 id,name
@@ -131,7 +131,7 @@ id,name
 3,air drumming
 ```
 The `id` indicates the class id, while the `name` denotes the text description.
-Note that we disabled text branch.  
+Note that we disabled the text branch.  
 
 
 

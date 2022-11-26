@@ -38,7 +38,7 @@ And then install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutori
 
 ## Data preparation
 
-Please prepare COCO 2017 & LVIS v1.0 datasets according to the [guidelines](https://detectron2.readthedocs.io/en/latest/tutorials/builtin_datasets.html) in Detectron2.
+Please prepare COCO 2017 & LVIS v1.0 datasets according to the [guidelines](https://detectron2.readthedocs.io/en/latest/tutorials/builtin_datasets.html) in Detectron2.
 
 ## Prepare Objects365 pre-trained EVA weights
 
@@ -194,4 +194,4 @@ python tools/lazyconfig_train_net.py --num-gpus 8 \
 ```
 
 ## Acknowledgment
-EVA object detection and instance segmentation are bulit upon [Detectron2](https://github.com/facebookresearch/detectron2). Thanks for their awesome work!
+EVA object detection and instance segmentation are built upon [Detectron2](https://github.com/facebookresearch/detectron2). Thanks for their awesome work!

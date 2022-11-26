@@ -36,7 +36,7 @@ cd ops & sh make.sh
 
 ## Data preparation
 
-Please prepare COCO-Stuff-164K & ADE20K datasets according to the [guidelines](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md#prepare-datasets) in MMSegmentation.
+Please prepare COCO-Stuff-164K & ADE20K datasets according to the [guidelines](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md#prepare-datasets) in MMSegmentation.
 
 ## Prepare EVA pre-trained weight
 
@@ -52,7 +52,7 @@ EVA is pre-trained with `patch_size` = `14x14`. While `eva_psz14to16` model inte
 
 ## Results and Models
 
-EVA use ViT-Adapter + Mask2Former as the segmentation head. We evaluate EVA on COCO-Stuff-164K and ADE20K segmentation benchmarks.
+EVA uses ViT-Adapter + Mask2Former as the segmentation head. We evaluate EVA on COCO-Stuff-164K and ADE20K segmentation benchmarks.
 
 
 ### COCO-Stuff-164K
@@ -191,4 +191,4 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$nnodes --node_ra
 
 
 ## Acknowledgement
-EVA semantic segmentation is bulit with [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2), [ViT-Adapter](https://arxiv.org/abs/2205.08534) and [Mask2Former](https://arxiv.org/abs/2112.01527). Thanks for their awesome work!
+EVA semantic segmentation is built with [MMSegmentation v0.20.2](https://github.com/open-mmlab/mmsegmentation/tree/v0.20.2), [ViT-Adapter](https://arxiv.org/abs/2205.08534) and [Mask2Former](https://arxiv.org/abs/2112.01527). Thanks for their awesome work!
