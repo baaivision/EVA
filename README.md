@@ -30,7 +30,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 <div align="center">
 
-**All the code & 16x state-of-the-art billion-scale models that are open-sourced!**
+**All the code & 16x state-of-the-art billion-scale models are open-sourced!**
 
 </div>
 
