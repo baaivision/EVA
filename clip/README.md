@@ -24,13 +24,13 @@
 
 > The ImageNet-1K zero-shot classification performance is higher than our paper (`78.5` *v.s.* `78.2`) because of longer training.
 
-We choose to train a 1.1B CLIP model, not because it is easy, but because it is hard. Please refer to [this note](https://docs.google.com/document/d/1FXosAZ3wMrzThgnWR6KSkXIz4IMItq3umDGos38pJps/edit) for a glance of the challenges in training very large CLIP.
+We choose to train a 1.1B CLIP model, not because it is easy, but because it is hard. Please refer to [this note](https://docs.google.com/document/d/1FXosAZ3wMrzThgnWR6KSkXIz4IMItq3umDGos38pJps/edit) for a glance at the challenges in training very large CLIP.
 
 To our knowledge, EVA-CLIP is **the largest performant open-sourced CLIP model** evaluated via zero-shot classification performance.
-We will updates the results in our paper soon.
-For more details of EVA-CLIP, please refer to Section 2.3.5 of [our paper](https://arxiv.org/pdf/2211.07636.pdf).
+We will update the results in our paper soon.
+For more details about EVA-CLIP, please refer to Section 2.3.5 of [our paper](https://arxiv.org/pdf/2211.07636.pdf).
 
-We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal learning, representation leaning, AIGC, *etc*.
+We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal learning, representation learning, AIGC, *etc*.
 
 ## EVA-CLIP Zero-shot Evaluation Results
 
@@ -67,100 +67,6 @@ The top-1 accuracy of video action recognition benchmarks.
 | EVA CLIP-g    | 76.05 | **54.04** | **52.76** | **46.65** |
 
 </div>
-
-
-<!-- <table>
-   <tr>
-      <td rowspan=1>Dataset</td>
-      <td rowspan=1>Model</td>
-      <td rowspan=1>acc@1</td>
-      <td rowspan=1>acc@5</td>
-   </tr>
-   <tr>
-      <td rowspan=4>UCF101</td>
-      <td>OpenAI CLIP-L</td>
-      <td>76.39 </td>
-      <td>94.86 </td>
-   </tr>
-   <tr>
-      <td>Open CLIP-H</td>
-      <td><b>78.16</b></td>
-      <td><b>95.02</b></td>
-   </tr>
-   <tr>
-      <td>Open CLIP-g</td>
-      <td>77.73 </td>
-      <td>94.98 </td>
-   </tr>
-   <tr>
-      <td>EVA CLIP-g</td>
-      <td>76.05 </td>
-      <td>93.64</td>
-   </tr>
-   <tr>
-      <td rowspan=4>Kinetics400</td>
-      <td>OpenAI CLIP-L</td>
-      <td>52.88 </td>
-      <td>76.06 </td>
-   </tr>
-   <tr>
-      <td>Open CLIP-H</td>
-      <td>51.63</td>
-      <td>74.49</td>
-   </tr>
-   <tr>
-      <td>Open CLIP-g</td>
-      <td>50.35 </td>
-      <td>73.03 </td>
-   </tr>
-   <tr>
-      <td>EVA CLIP-g</td>
-      <td><b>54.04</b></td>
-      <td><b>76.42</b></td>
-   </tr>
-   <tr>
-      <td rowspan=4>Kinetics600</td>
-      <td>OpenAI CLIP-L</td>
-      <td>52.41 </td>
-      <td>76 </td>
-   </tr>
-   <tr>
-      <td>Open CLIP-H</td>
-      <td>52.25</td>
-      <td>74.92</td>
-   </tr>
-   <tr>
-      <td>Open CLIP-g</td>
-      <td>50.79 </td>
-      <td>73.53 </td>
-   </tr>
-   <tr>
-      <td>EVA CLIP-g</td>
-      <td><b>52.76</b></td>
-      <td><b>75.99</b></td>
-   </tr>
-   <tr>
-      <td rowspan=4>Kinetics700</td>
-      <td>OpenAI CLIP-L</td>
-      <td>45.73 </td>
-      <td>69.63 </td>
-   </tr>
-   <tr>
-      <td>Open CLIP-H</td>
-      <td>44.64</td>
-      <td>67.54</td>
-   </tr>
-   <tr>
-      <td>Open CLIP-g</td>
-      <td>43.6 </td>
-      <td>66.39 </td>
-   </tr>
-   <tr>
-      <td>EVA CLIP-g</td>
-      <td><b>46.65</b></td>
-      <td><b>70.16</b></td>
-   </tr>
-</table> -->
 
 ### Zero-shot Retrieval Evaluation
 
@@ -259,10 +165,15 @@ The top-1 accuracy of video action recognition benchmarks.
 
 </div>
 
+> The zero-shot retrieval performance of EVA-CLIP is relatively inferior to the Open CLIP-H / -g counterpart. We speculate there are two main reasons: 
+> - The size / capacity of the language tower in EVA-CLIP is much smaller / weaker than Open CLIP-H and Open CLIP-g, *i.e.*, `124M` *v.s.* `354M`. Meanwhile, retrieval tasks depend more on the capacity of the language branch compared with classification tasks.
+> - Retrieval tasks seem benefit more from the training dataset size (LAION-2B used by Open CLIP), while we only leverage LAION-400M for EVA-CLIP training. 
+> Nevertheless, it is hard to make a head-to-head comparison between different CLIP models. In the future, we will further scale up the language encoder & training data to improve the retrieval performance.
+
 ## Usage
 
-The usege of EVA-CLIP is similar to [OpenAI CLIP](https://github.com/openai/CLIP) and [Open CLIP](https://github.com/mlfoundations/open_clip).
-Here we provide a showcase in zero-shot image classification.
+The use of EVA-CLIP is similar to [OpenAI CLIP](https://github.com/openai/CLIP) and [Open CLIP](https://github.com/mlfoundations/open_clip).
+Here we provide a showcase of zero-shot image classification.
 
 First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) (or later) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:
 
@@ -306,4 +217,4 @@ print("Label probs:", text_probs)  # prints: [1.0000e+00, 2.0857e-10, 4.8534e-12
 
 
 ## Acknowledgement
-EVA-CLIP is bulit with [OpenAI CLIP](https://github.com/openai/CLIP), [Open CLIP](https://github.com/mlfoundations/open_clip) and [CLIP Benchmark](https://github.com/LAION-AI/CLIP_benchmark). Thanks for their awesome work!
+EVA-CLIP is built with [OpenAI CLIP](https://github.com/openai/CLIP), [Open CLIP](https://github.com/mlfoundations/open_clip) and [CLIP Benchmark](https://github.com/LAION-AI/CLIP_benchmark). Thanks for their awesome work!
