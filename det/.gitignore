@@ -55,3 +55,6 @@ _darcs
 /projects/*/datasets
 /models
 /snippet
+
+*.sh
+*.txt

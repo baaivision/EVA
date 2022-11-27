@@ -33,8 +33,6 @@ cd /path/to/EVA/det
 python -m pip install -e .
 ```
 
-And then install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html#build-detectron2-from-source).
-
 
 ## Data preparation
 
