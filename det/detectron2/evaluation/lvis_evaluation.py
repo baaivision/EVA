@@ -368,6 +368,9 @@ def _evaluate_predictions_on_lvis(
     from lvis import LVISEval, LVISResults
 
     logger.info(f"Evaluating with max detections per image = {max_dets_per_image}")
+
+    # if you are using the lvis challenge 2021 api (https://github.com/lvis-dataset/lvis-api/blob/5ab8be138196a776f7520dab809b9f63fac237a3/lvis/results.py#L9)
+    # use "max_dets_per_im=max_dets_per_image" instead of "max_dets=max_dets_per_image" in the following:
     lvis_results = LVISResults(lvis_gt, lvis_results, max_dets=max_dets_per_image)
     lvis_eval = LVISEval(lvis_gt, lvis_results, iou_type)
     lvis_eval.run()

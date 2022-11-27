@@ -81,8 +81,7 @@ We evaluate EVA on COCO 2017 and LVIS v1.0 benchmarks.
 
 **Object Detection**
   
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/object-detection-on-coco)](https://paperswithcode.com/sota/object-detection-on-coco?p=eva-exploring-the-limits-of-masked-visual)
-
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/object-detection-on-coco)](https://paperswithcode.com/sota/object-detection-on-coco?p=eva-exploring-the-limits-of-masked-visual) \
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/object-detection-on-coco-minival)](https://paperswithcode.com/sota/object-detection-on-coco-minival?p=eva-exploring-the-limits-of-masked-visual)
 
 To evaluate EVA on **COCO 2017 `val`** using a single node with 8 gpus:
@@ -96,9 +95,12 @@ python tools/lazyconfig_train_net.py --num-gpus 8 \
     'model.roi_heads.method="linear"' \
     "model.roi_heads.iou_threshold=0.6" \
     "model.roi_heads.override_score_thresh=0.0"
- 
-# expected results
-Summary:
+``` 
+
+Expected results:
+
+```bash
+Evaluation results for bbox:
 |   AP   |  AP50  |  AP75  |  APs   |  APm   |  APl   |
 |:------:|:------:|:------:|:------:|:------:|:------:|
 | 64.164 | 81.897 | 70.561 | 49.485 | 68.088 | 77.651 |
@@ -106,8 +108,7 @@ Summary:
 
 **Instance Segmentation**
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco)](https://paperswithcode.com/sota/instance-segmentation-on-coco?p=eva-exploring-the-limits-of-masked-visual)
-
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco)](https://paperswithcode.com/sota/instance-segmentation-on-coco?p=eva-exploring-the-limits-of-masked-visual) \
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-coco-minival)](https://paperswithcode.com/sota/instance-segmentation-on-coco-minival?p=eva-exploring-the-limits-of-masked-visual)
 
 To evaluate EVA on **COCO 2017 `val`** using a single node with 8 gpus:
@@ -122,9 +123,12 @@ python tools/lazyconfig_train_net.py --num-gpus 8 \
     "model.roi_heads.iou_threshold=0.6" \
     "model.roi_heads.override_score_thresh=0.0" \
     "model.roi_heads.maskness_thresh=0.5" # use maskness to calibrate mask predictions
- 
-# expected results
-Summary:
+```
+
+Expected results:
+
+```bash
+Evaluation results for segm:
 |   AP   |  AP50  |  AP75  |  APs   |  APm   |  APl   |
 |:------:|:------:|:------:|:------:|:------:|:------:|
 | 55.024 | 79.400 | 60.872 | 37.584 | 58.435 | 72.034 |
@@ -133,8 +137,7 @@ Summary:
 
 ### LVIS v1.0 `val`
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-lvis-v1-0-val)](https://paperswithcode.com/sota/instance-segmentation-on-lvis-v1-0-val?p=eva-exploring-the-limits-of-masked-visual)
-
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/instance-segmentation-on-lvis-v1-0-val)](https://paperswithcode.com/sota/instance-segmentation-on-lvis-v1-0-val?p=eva-exploring-the-limits-of-masked-visual) \
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/object-detection-on-lvis-v1-0-val)](https://paperswithcode.com/sota/object-detection-on-lvis-v1-0-val?p=eva-exploring-the-limits-of-masked-visual)
 
 To evaluate EVA on **LVIS v1.0 `val`** using a single node with 8 gpus:
@@ -146,10 +149,11 @@ python tools/lazyconfig_train_net.py --num-gpus 8 \
     "train.init_checkpoint=/path/to/eva_lvis.pth" \ # https://huggingface.co/BAAI/EVA/blob/main/eva_lvis.pth
     "dataloader.evaluator.max_dets_per_image=1000" \
     "model.roi_heads.maskness_thresh=0.5" # use maskness to calibrate mask predictions
+```
 
-# expected results
-Summary:
+Expected results
 
+```bash
 # object detection
 Evaluation results for bbox:
 |   AP   |  AP50  |  AP75  |  APs   |  APm   |  APl   |  APr   |  APc   |  APf   |

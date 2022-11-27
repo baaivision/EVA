@@ -81,6 +81,7 @@ class Attention(nn.Module):
         use_rel_pos=False,
         rel_pos_zero_init=True,
         input_size=None,
+        interp_type="vitdet",
     ):
         """
         Args:
@@ -106,6 +107,7 @@ class Attention(nn.Module):
         self.proj = nn.Linear(dim, dim)
 
         self.use_rel_pos = use_rel_pos
+        self.interp_type = interp_type
         if self.use_rel_pos:
             # initialize relative positional embeddings
             self.rel_pos_h = nn.Parameter(torch.zeros(2 * input_size[0] - 1, head_dim))
@@ -131,12 +133,12 @@ class Attention(nn.Module):
         if self.qk_float:
             attn = (q.float() * self.scale) @ k.float().transpose(-2, -1)
             if self.use_rel_pos:
-                attn = add_decomposed_rel_pos(attn, q, self.rel_pos_h, self.rel_pos_w, (H, W), (H, W))
+                attn = add_decomposed_rel_pos(attn, q, self.rel_pos_h, self.rel_pos_w, (H, W), (H, W), self.interp_type)
             attn = attn.softmax(dim=-1).type_as(x)
         else:
             attn = (q * self.scale) @ k.transpose(-2, -1)
             if self.use_rel_pos:
-                attn = add_decomposed_rel_pos(attn, q, self.rel_pos_h, self.rel_pos_w, (H, W), (H, W))
+                attn = add_decomposed_rel_pos(attn, q, self.rel_pos_h, self.rel_pos_w, (H, W), (H, W), self.interp_type)
             attn = attn.softmax(dim=-1)
         x = (attn @ v).view(B, self.num_heads, H, W, -1).permute(0, 2, 3, 1, 4).reshape(B, H, W, -1)
         x = self.proj(x)
@@ -224,6 +226,7 @@ class Block(nn.Module):
         input_size=None,
         beit_like_qkv_bias=False,
         beit_like_gamma=False,
+        interp_type="vitdet",
     ):
         """
         Args:
@@ -254,6 +257,7 @@ class Block(nn.Module):
             rel_pos_zero_init=rel_pos_zero_init,
             input_size=input_size if window_size == 0 else (window_size, window_size),
             beit_like_qkv_bias=beit_like_qkv_bias,
+            interp_type=interp_type,
         )
 
         self.drop_path = DropPath(drop_path) if drop_path > 0.0 else nn.Identity()
@@ -337,6 +341,7 @@ class ViT(Backbone):
         beit_like_qkv_bias=True,
         beit_like_gamma=False,
         freeze_patch_embed=False,
+        interp_type="vitdet", 
     ):
         """
         Args:
@@ -364,6 +369,7 @@ class ViT(Backbone):
             beit_like_qkv_bias (bool): beit_like_model that has gamma_1 and gamma_2 in blocks and qkv_bias=False
             beit_like_gamma (bool)
             freeze_patch_embed (bool)
+            interp_type: "vitdet" for training / fine-ting, "beit" for eval (slightly improvement at a higher res)
         """
         super().__init__()
         self.pretrain_use_cls_token = pretrain_use_cls_token
@@ -405,6 +411,7 @@ class ViT(Backbone):
                 input_size=(img_size // patch_size, img_size // patch_size),
                 beit_like_qkv_bias=beit_like_qkv_bias,
                 beit_like_gamma=beit_like_gamma,
+                interp_type=interp_type,
             )
             if use_act_checkpoint:
                 block = checkpoint_wrapper(block)

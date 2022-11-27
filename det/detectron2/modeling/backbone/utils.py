@@ -62,7 +62,7 @@ def window_unpartition(windows, window_size, pad_hw, hw):
     return x
 
 
-def get_rel_pos(q_size, k_size, rel_pos):
+def get_rel_pos(q_size, k_size, rel_pos, interp_type):
     """
     Get relative positional embeddings according to the relative positions of
         query and key sizes.
@@ -77,31 +77,47 @@ def get_rel_pos(q_size, k_size, rel_pos):
     max_rel_dist = int(2 * max(q_size, k_size) - 1)
     # Interpolate rel pos if needed.
     if rel_pos.shape[0] != max_rel_dist:
-        # steal from beit https://github.com/microsoft/unilm/tree/master/beit
-        # modified by Yuxin Fang
-        src_size = rel_pos.shape[0]
-        dst_size = max_rel_dist
+        if interp_type == "vitdet":
+            # the vitdet impl: 
+            # https://github.com/facebookresearch/detectron2/blob/96c752ce821a3340e27edd51c28a00665dd32a30/detectron2/modeling/backbone/utils.py#L77.
 
-        q = 1.0903078
-        dis = []
+            rel_pos_resized = F.interpolate(
+                rel_pos.reshape(1, rel_pos.shape[0], -1).permute(0, 2, 1),
+                size=max_rel_dist,
+                mode="linear",
+            )
+            rel_pos_resized = rel_pos_resized.reshape(-1, max_rel_dist).permute(1, 0)
+        elif interp_type == "beit":
+            # steal from beit https://github.com/microsoft/unilm/tree/master/beit
+            # modified by Yuxin Fang
 
-        cur = 1
-        for i in range(src_size // 2):
-            dis.append(cur)
-            cur += q ** (i + 1)
+            src_size = rel_pos.shape[0]
+            dst_size = max_rel_dist
 
-        r_ids = [-_ for _ in reversed(dis)]
-        x = r_ids + [0] + dis
-        t = dst_size // 2.0
-        dx = np.arange(-t, t + 0.1, 1.0)
+            q = 1.0903078
+            dis = []
 
-        all_rel_pos_bias = []
-        for i in range(rel_pos.shape[1]):
-            z = rel_pos[:, i].view(src_size).cpu().float().numpy()
-            f = interpolate.interp1d(x, z, kind='cubic', fill_value="extrapolate")
-            all_rel_pos_bias.append(
-                torch.Tensor(f(dx)).contiguous().view(-1, 1).to(rel_pos.device))
-        rel_pos_resized = torch.cat(all_rel_pos_bias, dim=-1)
+            cur = 1
+            for i in range(src_size // 2):
+                dis.append(cur)
+                cur += q ** (i + 1)
+
+            r_ids = [-_ for _ in reversed(dis)]
+            x = r_ids + [0] + dis
+            t = dst_size // 2.0
+            dx = np.arange(-t, t + 0.1, 1.0)
+
+            all_rel_pos_bias = []
+            for i in range(rel_pos.shape[1]):
+                # a hack from https://github.com/baaivision/EVA/issues/8,
+                # could also be used in fine-tuning but the performance haven't been tested.
+                z = rel_pos[:, i].view(src_size).cpu().float().detach().numpy()
+                f = interpolate.interp1d(x, z, kind='cubic', fill_value="extrapolate")
+                all_rel_pos_bias.append(
+                    torch.Tensor(f(dx)).contiguous().view(-1, 1).to(rel_pos.device))
+            rel_pos_resized = torch.cat(all_rel_pos_bias, dim=-1)
+        else:
+            raise NotImplementedError()
     else:
         rel_pos_resized = rel_pos
 
@@ -113,7 +129,7 @@ def get_rel_pos(q_size, k_size, rel_pos):
     return rel_pos_resized[relative_coords.long()]
 
 
-def add_decomposed_rel_pos(attn, q, rel_pos_h, rel_pos_w, q_size, k_size):
+def add_decomposed_rel_pos(attn, q, rel_pos_h, rel_pos_w, q_size, k_size, interp_type):
     """
     Calculate decomposed Relative Positional Embeddings from :paper:`mvitv2`.
     https://github.com/facebookresearch/mvit/blob/19786631e330df9f3622e5402b4a419a263a2c80/mvit/models/attention.py   # noqa B950
@@ -130,8 +146,8 @@ def add_decomposed_rel_pos(attn, q, rel_pos_h, rel_pos_w, q_size, k_size):
     """
     q_h, q_w = q_size
     k_h, k_w = k_size
-    Rh = get_rel_pos(q_h, k_h, rel_pos_h)
-    Rw = get_rel_pos(q_w, k_w, rel_pos_w)
+    Rh = get_rel_pos(q_h, k_h, rel_pos_h, interp_type)
+    Rw = get_rel_pos(q_w, k_w, rel_pos_w, interp_type)
 
     B, _, dim = q.shape
     r_q = q.reshape(B, q_h, q_w, dim)
