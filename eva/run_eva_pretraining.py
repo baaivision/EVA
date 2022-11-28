@@ -156,9 +156,9 @@ def get_args():
                         type=str, help='ImageNet dataset path')
     parser.add_argument('--crop_pct', type=float, default=None)
 
-    parser.add_argument('--val_data_path', default='/sharefs/xinlongwang/datasets/ImageNet', type=str,
+    parser.add_argument('--data_path', default='/path/to/merge4pt', type=str,
                         help='dataset path')
-    parser.add_argument('--data_path', default='/sharefs/baaivision/datasets/merge4pt', type=str,
+    parser.add_argument('--val_data_path', default='/path/to/ImageNet-1K', type=str,
                         help='dataset path')
 
     parser.add_argument('--imagenet_default_mean_and_std', default=False, action='store_true')

@@ -413,6 +413,7 @@ We use 16 nodes (`total_bsz = 16*8*32 = 4096`) for pre-training.
 MODEL_NAME=eva_g_patch14
 
 DATA_PATH=/path/to/merged_30m_pt
+VAL_DATA_PATH=/path/to/ImageNet-1K
 
 input_size=224
 num_mask_patches=105 ### 224*224/14/14 * 0.4 ###
@@ -448,6 +449,7 @@ OUTPUT_DIR=/path/to/output/${epochs}/${EXP_NAME}
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
 --master_addr=$MASTER_ADDR --master_port=12355 --use_env run_eva_pretraining.py \
         --data_path ${DATA_PATH} \
+        --val_data_path ${VAL_DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
         --log_dir ${OUTPUT_DIR}/tb_log \
         --model ${MODEL} \
