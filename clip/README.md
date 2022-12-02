@@ -54,19 +54,22 @@ The top-1 accuracy of ImageNet-1K variants and ObjectNet.
 
 ### Zero-shot Video Action Recognition Evaluation
 
-
-The top-1 accuracy of video action recognition benchmarks.
+The performance of video action recognition benchmarks.
 
 <div align="center">
 
 | model | UCF-101 | Kinetics-400 | Kinetics-600 | Kinetics-700 |
 |-------|:-----:|:-----:|:----:| :----:|
-| OpenAI CLIP-L | 76.39 | 52.88 | 52.41 | 45.73 | 
-| Open CLIP-H   | **78.16** | 51.63 | 52.25 | 44.64 | 
-| Open CLIP-g   | 77.73 | 50.35 | 50.79 | 43.60 | 
-| EVA CLIP-g    | 76.05 | **54.04** | **52.76** | **46.65** |
+| OpenAI CLIP-L | 76.39 | 64.47 | 64.21 | 57.68 |
+| Open CLIP-H   | **78.16** | 63.06 | 63.58 | 56.09 |
+| Open CLIP-g   | 77.73 | 61.69 | 62.16 | 54.99 |
+| EVA CLIP-g    | 76.05 | **65.23** | **64.38** | **58.4** |
 
 </div>
+
+> $\color{lightyellow}{\text{We report the top-1 accuracy for UCF-101 and the mean of top-1 and top-5 accuracy for Kinetics-400/600/700}}$
+
+> For video action recognition, we sample only a single center frame each video, turning it into an image classification task.
 
 ### Zero-shot Retrieval Evaluation
 
