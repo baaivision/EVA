@@ -67,7 +67,7 @@ The performance of video action recognition benchmarks.
 
 </div>
 
-> $\color{lightyellow}{\text{We report the top-1 accuracy for UCF-101 and the mean of top-1 and top-5 accuracy for Kinetics-400/600/700}}$
+> $\color{red}{\text{We report the top-1 accuracy for UCF-101 and the mean of top-1 and top-5 accuracy for Kinetics-400/600/700}}$
 
 > For video action recognition, we sample only a single center frame each video, turning it into an image classification task.
 
