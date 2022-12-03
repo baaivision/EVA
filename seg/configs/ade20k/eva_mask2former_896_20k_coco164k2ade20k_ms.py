@@ -1,8 +1,8 @@
-# Copyright (c) Shanghai AI Lab. All rights reserved.
+# Copyright (c) BAAI. All rights reserved.
 
 # EVA: Exploring the Limits of Masked Visual Representation Learning at Scale (https://arxiv.org/abs/2211.07636)
 # Github source: https://github.com/baaivision/EVA
-# Modified by Yuxin Fang
+# Modified from https://github.com/czczup/ViT-Adapter by Yuxin Fang 
 
 _base_ = [
     '../_base_/models/mask2former_beit.py',
@@ -12,7 +12,7 @@ _base_ = [
 ]
 crop_size = (896, 896)
 crop_size = (896, 896)
-pretrained = '/path/to/eva_psz14.pt'
+pretrained = '/path/to/eva_psz14to16.pt'
 load_from = '/path/to/eva_sem_seg_mask2former_cocostuff_53p4.pth'
 model = dict(
     type='EncoderDecoderMask2FormerAug',

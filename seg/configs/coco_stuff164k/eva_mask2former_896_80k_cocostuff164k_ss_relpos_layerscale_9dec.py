@@ -8,7 +8,7 @@ _base_ = [
     '../_base_/models/mask2former_beit_cocostuff.py',
     '../_base_/datasets/coco-stuff164k.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_60k.py'
+    '../_base_/schedules/schedule_80k.py'
 ]
 crop_size = (896, 896)
 pretrained = '/path/to/eva_psz14to16.pt'
@@ -25,8 +25,8 @@ model = dict(
         mlp_ratio=6144 / 1408,
         qkv_bias=True,
         use_abs_pos_emb=True,
-        use_rel_pos_bias=False,
-        init_values=None,
+        use_rel_pos_bias=True,
+        init_values=1.0,
         drop_path_rate=0.5,
         conv_inplane=64,
         n_points=4,
@@ -80,7 +80,7 @@ model = dict(
         transformer_decoder=dict(
             type='DetrTransformerDecoder',
             return_intermediate=True,
-            num_layers=8,
+            num_layers=9,
             transformerlayers=dict(
                 type='DetrTransformerDecoderLayer',
                 attn_cfgs=dict(
@@ -138,7 +138,7 @@ test_pipeline = [
             dict(type='Collect', keys=['img']),
         ])
 ]
-optimizer = dict(_delete_=True, type='AdamW', lr=1.5e-5, betas=(0.9, 0.999), weight_decay=0.05,
+optimizer = dict(_delete_=True, type='AdamW', lr=1e-5, betas=(0.9, 0.999), weight_decay=0.05,
                  constructor='LayerDecayOptimizerConstructor',
                  paramwise_cfg=dict(num_layers=40, layer_decay_rate=0.95))
 lr_config = dict(_delete_=True,
@@ -147,7 +147,7 @@ lr_config = dict(_delete_=True,
                  warmup_iters=1500,
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
-data = dict(samples_per_gpu=1,  # we use a total bsz of 32
+data = dict(samples_per_gpu=2,
             train=dict(pipeline=train_pipeline),
             val=dict(pipeline=test_pipeline),
             test=dict(pipeline=test_pipeline))
