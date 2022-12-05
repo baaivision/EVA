@@ -39,7 +39,8 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
                     device: torch.device, epoch: int, loss_scaler, max_norm: float = 0,
                     model_ema: Optional[ModelEma] = None, mixup_fn: Optional[Mixup] = None, log_writer=None,
                     start_steps=None, lr_schedule_values=None, wd_schedule_values=None,
-                    num_training_steps_per_epoch=None, update_freq=None):
+                    num_training_steps_per_epoch=None, update_freq=None,
+                    args=None):
     model.train(True)
     metric_logger = utils.MetricLogger(delimiter="  ")
     metric_logger.add_meter('lr', utils.SmoothedValue(window_size=1, fmt='{value:.6f}'))
@@ -61,10 +62,14 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
         # Update LR & WD for the first acc
         if lr_schedule_values is not None or wd_schedule_values is not None and data_iter_step % update_freq == 0:
             for i, param_group in enumerate(optimizer.param_groups):
-                if lr_schedule_values is not None:
-                    param_group["lr"] = lr_schedule_values[it] * param_group["lr_scale"]
-                if wd_schedule_values is not None and param_group["weight_decay"] > 0:
-                    param_group["weight_decay"] = wd_schedule_values[it]
+                if args.linear_probe:
+                    if lr_schedule_values is not None:
+                        param_group["lr"] = lr_schedule_values[it]
+                else:
+                    if lr_schedule_values is not None:
+                        param_group["lr"] = lr_schedule_values[it] * param_group["lr_scale"]
+                    if wd_schedule_values is not None and param_group["weight_decay"] > 0:
+                        param_group["weight_decay"] = wd_schedule_values[it]
 
         samples = samples.to(device, non_blocking=True)
         targets = targets.to(device, non_blocking=True)

@@ -29,11 +29,13 @@ from timm.data.mixup import Mixup
 from timm.models import create_model
 from timm.loss import LabelSmoothingCrossEntropy, SoftTargetCrossEntropy
 from timm.utils import ModelEma
+from timm.models.layers import trunc_normal_
 from optim_factory import create_optimizer, get_parameter_groups, LayerDecayValueAssigner
 
 from datasets import build_dataset
 from engine_for_finetuning import train_one_epoch, evaluate, evaluate_real
 from utils import NativeScalerWithGradNormCount as NativeScaler
+from utils import LARS
 import utils
 from scipy import interpolate
 import modeling_finetune
@@ -159,6 +161,9 @@ def get_args():
     parser.set_defaults(use_mean_pooling=True)
     parser.add_argument('--use_cls', action='store_false', dest='use_mean_pooling')
     parser.add_argument('--disable_weight_decay_on_rel_pos_bias', action='store_true', default=False)
+
+    # Linear probe
+    parser.add_argument('--linear_probe', action='store_true')
 
     # Dataset parameters
     parser.add_argument('--data_path', default='/sharefs/xinlongwang/datasets/ImageNet/', type=str,
@@ -296,7 +301,7 @@ def main(args, ds_init):
     if dataset_val is not None:
         data_loader_val = torch.utils.data.DataLoader(
             dataset_val, sampler=sampler_val,
-            batch_size=int(1.5 * args.batch_size),
+            batch_size=int(args.batch_size) if args.linear_probe else int(1.5 * args.batch_size),
             num_workers=args.num_workers,
             pin_memory=args.pin_mem,
             drop_last=False
@@ -530,9 +535,6 @@ def main(args, ds_init):
 
         utils.load_state_dict(model, checkpoint_model, prefix=args.model_prefix)
 
-
-    model.to(device)
-
     model_ema = None
     if args.model_ema:
         # Important to create EMA model after cuda(), DP wrapper, and AMP but before SyncBN and DDP wrapper
@@ -543,13 +545,18 @@ def main(args, ds_init):
             resume='')
         print("Using EMA with decay = %.8f" % args.model_ema_decay)
 
-    if args.freeze_backbone:
+    if args.linear_probe:
+        trunc_normal_(model.head.weight, std=0.01)
+        model.head = torch.nn.Sequential(torch.nn.BatchNorm1d(model.head.in_features, affine=False, eps=1e-6), model.head)
+
+    if args.freeze_backbone or args.linear_probe:
         for _, p in model.named_parameters():
             p.requires_grad = False
         for _, p in model.head.named_parameters():
             p.requires_grad = True
-        for _, p in model.fc_norm.named_parameters():
-            p.requires_grad = True
+        if args.freeze_backbone:
+            for _, p in model.fc_norm.named_parameters():
+                p.requires_grad = True
 
     if args.partial_freeze > 0:
         for n, p in model.named_parameters():
@@ -569,6 +576,7 @@ def main(args, ds_init):
     for n, p in model.named_parameters():
         print(n, 'requires_grad = ', p.requires_grad)
 
+    model.to(device)
     model_without_ddp = model
     n_parameters = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
@@ -581,7 +589,7 @@ def main(args, ds_init):
     print("Batch size = %d" % total_batch_size)
     print("Update frequent = %d" % args.update_freq)
     print("Number of training examples = %d" % len(dataset_train))
-    print("Number of training training per epoch = %d" % num_training_steps_per_epoch)
+    print("Number of training steps per epoch = %d" % num_training_steps_per_epoch)
 
     num_layers = model_without_ddp.get_num_layers()
     if args.layer_decay < 1.0:
@@ -614,10 +622,13 @@ def main(args, ds_init):
             model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[args.gpu])
             model_without_ddp = model.module
 
-        optimizer = create_optimizer(
-            args, model_without_ddp, skip_list=skip_weight_decay_list,
-            get_num_layer=assigner.get_layer_id if assigner is not None else None, 
-            get_layer_scale=assigner.get_scale if assigner is not None else None)
+        if args.linear_probe:
+            optimizer = LARS(model_without_ddp.head.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+        else:
+            optimizer = create_optimizer(
+                args, model_without_ddp, skip_list=skip_weight_decay_list,
+                get_num_layer=assigner.get_layer_id if assigner is not None else None, 
+                get_layer_scale=assigner.get_scale if assigner is not None else None)
         loss_scaler = NativeScaler()
 
     print("Use step level LR scheduler!")
@@ -684,6 +695,7 @@ def main(args, ds_init):
             wd_schedule_values=wd_schedule_values,
             num_training_steps_per_epoch=num_training_steps_per_epoch, 
             update_freq=args.update_freq,
+            args=args,
         )
         if args.output_dir and args.save_ckpt:
             if (epoch + 1) % args.save_ckpt_freq == 0 or epoch + 1 == args.epochs:
@@ -720,14 +732,19 @@ def main(args, ds_init):
                     log_writer.update(ema_test_acc1=ema_test_stats['acc1'], head="perf", step=epoch)
                     log_writer.update(ema_test_acc5=ema_test_stats['acc5'], head="perf", step=epoch)
 
-            log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
-                         **{f'test_{k}': v for k, v in test_stats.items()},
-                         **{f'ema_test_{k}': v for k, v in ema_test_stats.items()},
-                         'epoch': epoch,
-                         'n_parameters': n_parameters}
+            if args.model_ema and args.model_ema_eval:
+                log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
+                            **{f'test_{k}': v for k, v in test_stats.items()},
+                            **{f'ema_test_{k}': v for k, v in ema_test_stats.items()},
+                            'epoch': epoch,
+                            'n_parameters': n_parameters}
+            else:
+                log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
+                            **{f'test_{k}': v for k, v in test_stats.items()},
+                            'epoch': epoch,
+                            'n_parameters': n_parameters}
         else:
             log_stats = {**{f'train_{k}': v for k, v in train_stats.items()},
-                         # **{f'test_{k}': v for k, v in test_stats.items()},
                          'epoch': epoch,
                          'n_parameters': n_parameters}
 

@@ -177,7 +177,7 @@ class RandomResizedCrop(transforms.RandomResizedCrop):
     """
     @staticmethod
     def get_params(img, scale, ratio):
-        width, height = F._get_image_size(img)
+        width, height = F.get_image_size(img)
         area = height * width
 
         target_area = area * torch.empty(1).uniform_(scale[0], scale[1]).item()
@@ -205,6 +205,13 @@ def build_transform(is_train, args):
     std = (0.26862954, 0.26130258, 0.27577711) if not imagenet_default_mean_and_std else IMAGENET_DEFAULT_STD
 
     if is_train:
+        if args.linear_probe:
+            return transforms.Compose([
+                RandomResizedCrop(args.input_size, interpolation=3),
+                transforms.RandomHorizontalFlip(),
+                transforms.ToTensor(),
+                transforms.Normalize(mean=mean, std=std)],
+            )
         # this should always dispatch to transforms_imagenet_train
         transform = create_transform(
             no_aug=args.no_aug,
