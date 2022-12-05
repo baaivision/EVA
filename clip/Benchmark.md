@@ -30,7 +30,7 @@
       <td>76.66 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>78.53 </td>
       <td>95.51 </td>
       <td>78.51 </td>
@@ -55,7 +55,7 @@
       <td>56.55 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>73.59 </td>
       <td>90.93 </td>
       <td>69.97 </td>
@@ -80,7 +80,7 @@
       <td>87.51 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>92.5 </td>
       <td>98.24 </td>
       <td>91.19 </td>
@@ -105,7 +105,7 @@
       <td>65.21 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>67.31 </td>
       <td>89.07 </td>
       <td>67.31 </td>
@@ -130,7 +130,7 @@
       <td>69.61 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>71.52 </td>
       <td>92.11 </td>
       <td>71.56 </td>
@@ -155,7 +155,7 @@
       <td>66.56 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>72.33 </td>
       <td>89.37 </td>
       <td>70.88 </td>
@@ -180,7 +180,7 @@
       <td>75.28 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>74.15 </td>
       <td>95.52 </td>
       <td>73.27 </td>
@@ -205,7 +205,7 @@
       <td>85.75 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>83.23 </td>
       <td>96.94 </td>
       <td>88.7 </td>
@@ -230,7 +230,7 @@
       <td>48.61 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>50 </td>
       <td>70.97 </td>
       <td>50.07 </td>
@@ -255,7 +255,7 @@
       <td>94.13 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>87.72 </td>
       <td>95.68 </td>
       <td>94.81 </td>
@@ -280,7 +280,7 @@
       <td>93.45 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>91.71 </td>
       <td>99.76 </td>
       <td>91.66 </td>
@@ -305,7 +305,7 @@
       <td>97.06 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>98.31 </td>
       <td>99.96 </td>
       <td>98.29 </td>
@@ -330,7 +330,7 @@
       <td>83.92 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>88.66 </td>
       <td>88.71 </td>
       <td>88.65 </td>
@@ -355,7 +355,7 @@
       <td>28.82 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>28.63 </td>
       <td>55.37 </td>
       <td>28.64 </td>
@@ -380,7 +380,7 @@
       <td>68.09 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>61.33 </td>
       <td>87.5 </td>
       <td>61.38 </td>
@@ -405,7 +405,7 @@
       <td>63.71 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>73.57 </td>
       <td>98.75 </td>
       <td>74.39 </td>
@@ -430,7 +430,7 @@
       <td>48.44 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>52.17 </td>
       <td>94.79 </td>
       <td>48.57 </td>
@@ -455,7 +455,7 @@
       <td>37.61 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>32.37 </td>
       <td>73.75 </td>
       <td>32.29 </td>
@@ -480,13 +480,13 @@
       <td>77.92 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>74.47 </td>
       <td>90.65 </td>
       <td>74.29 </td>
    </tr>
    <tr align="center">
-      <td rowspan=4>Food101</td>
+      <td rowspan=5>Food101</td>
       <td>OpenAI CLIP-L</td>
       <td>93.05 </td>
       <td>99.3 </td>
@@ -505,7 +505,13 @@
       <td>91.55 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td>FLIP-L</td>
+      <td> 89.3 </td>
+      <td> - </td>
+      <td> - </td>
+   </tr>
+   <tr align="center">
+      <td><b>EVA CLIP-g</b></td>
       <td>93.46 </td>
       <td>99.32 </td>
       <td>93.46 </td>
@@ -530,7 +536,7 @@
       <td>46.77 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>49.12 </td>
       <td>84.56 </td>
       <td>47.08 </td>
@@ -555,7 +561,7 @@
       <td>68.97 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>62.34 </td>
       <td>90.81 </td>
       <td>62.35 </td>
@@ -580,7 +586,7 @@
       <td>94.35 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>94.22 </td>
       <td>99.86 </td>
       <td>94.2 </td>
@@ -605,7 +611,7 @@
       <td>98.68 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>98.89 </td>
       <td>100 </td>
       <td>98.89 </td>
@@ -630,7 +636,7 @@
       <td>72.54 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>70.3 </td>
       <td>94.66 </td>
       <td>70.3 </td>
@@ -655,7 +661,7 @@
       <td>56.11 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>49.88 </td>
       <td>- </td>
       <td>49.86 </td>
@@ -680,7 +686,7 @@
       <td>64.16 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>58.38 </td>
       <td>- </td>
       <td>58.41 </td>
@@ -722,7 +728,7 @@
       <td>86.36 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>76.05 </td>
       <td>93.64 </td>
       <td>84.84 </td>
@@ -747,7 +753,7 @@
       <td>61.69 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>54.04 </td>
       <td>76.42</td>
       <td>65.23 </td>
@@ -772,7 +778,7 @@
       <td>62.16 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>52.76 </td>
       <td>75.99</td>
       <td>64.38 </td>
@@ -797,7 +803,7 @@
       <td>54.99 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>46.65 </td>
       <td>70.16 </td>
       <td>58.4 </td>
@@ -855,7 +861,7 @@
       <td>99.8 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>72.64 </td>
       <td>91.6 </td>
       <td>95.12 </td>
@@ -892,7 +898,7 @@
       <td>91.46 </td>
    </tr>
    <tr align="center">
-      <td>EVA CLIP-g</td>
+      <td><b>EVA CLIP-g</b></td>
       <td>44.07 </td>
       <td>68.5 </td>
       <td>77.33 </td>
