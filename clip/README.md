@@ -5,6 +5,7 @@
 - [Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)](#contrastive-language-image-pre-training-with-eva-eva-clip)
   - [Model Card](#model-card)
   - [EVA-CLIP Zero-shot Evaluation Results](#eva-clip-zero-shot-evaluation-results)
+    - [**All 33 Benchmark Results in Details**](#all-33-benchmark-results-in-details)
     - [Zero-shot Image Classification Evaluation](#zero-shot-image-classification-evaluation)
     - [Zero-shot Video Action Recognition Evaluation](#zero-shot-video-action-recognition-evaluation)
     - [Zero-shot Retrieval Evaluation](#zero-shot-retrieval-evaluation)
@@ -35,7 +36,13 @@ We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal lea
 ## EVA-CLIP Zero-shot Evaluation Results
 
 
-[**All 33 Benchmark Results**](./Benchmark.md) 
+<div align="center">
+
+### [**All 33 Benchmark Results in Details**](./Benchmark.md) 
+
+</div>
+
+
 
 ### Zero-shot Image Classification Evaluation
 
@@ -67,9 +74,9 @@ The performance of video action recognition benchmarks.
 
 </div>
 
-> $\color{red}{\text{We report the top-1 accuracy for UCF-101 and the mean of top-1 and top-5 accuracy for Kinetics-400/600/700}}$
 
 > For video action recognition, we sample only a single center frame each video, turning it into an image classification task.
+> Following the conventional settings, we report the top-1 accuracy for UCF-101 and the mean of top-1 and top-5 accuracy for Kinetics-400/600/700.
 
 ### Zero-shot Retrieval Evaluation
 

@@ -1,10 +1,44 @@
-## EVA-CLIP Zero-shot Evaluation Results
-### Zero-shot Image Classification Evaluation
+# EVA-CLIP Zero-shot Evaluation Results
+
+We provide a thorough evaluation of EVA-CLIP on 35 popular zero-shot benchmarks (27 image classification benchmarks + 4 video classification benchmarks + 2x2 retrieval benchmarks). The evaluation testbed is heavily based on [CLIP Benchmark](https://github.com/LAION-AI/CLIP_benchmark). Thanks for their awesome work.
+
+
+**Table of Contents**
+
+- [EVA-CLIP Zero-shot Evaluation Results](#eva-clip-zero-shot-evaluation-results)
+  - [Zero-shot Image Classification Evaluation](#zero-shot-image-classification-evaluation)
+    - [Averaged performance on all the 27 benchmarks.](#averaged-performance-on-all-the-27-benchmarks)
+    - [Detailed results](#detailed-results)
+  - [Zero-shot Video Action Recognition Evaluation](#zero-shot-video-action-recognition-evaluation)
+  - [Zero-shot Retrieval Evaluation](#zero-shot-retrieval-evaluation)
+
+## Zero-shot Image Classification Evaluation
+
+### Averaged performance on all the 27 benchmarks.
+
+
+
+<div align="center">
+
+| model | model size| precision | training data | samples seen |  avg. acc. |
+|-------|:-----:|:-----:|:----:|:----:|:----:|
+| OpenAI CLIP-L | 430M | `fp16`| WIT-400M | 12 | 69.18 |  
+| Open CLIP-H | 1.0B | `pytorch amp bf16` | LAION-2B | 32B | 72.39 | 
+| Open CLIP-g | 1.3B | `pytorch amp bf16` | LAION-2B | 12B | 70.74 | 
+| EVA CLIP-g | 1.1B | `deepspeed fp16` | LAION-400M | 11B | 71.43 |
+ 
+</div>
+
+EVA-CLIP shows very promising sample-efficiency, and we believe sufficient data scaling can further boost the performance. 
+
+
+### Detailed results
+
 
 <div align="center">
 <table style="text-align:center">
    <tr align="center">
-      <td rowspan=1>Dataset</td>
+      <td rowspan=1>Dataset (27 in total)</td>
       <td rowspan=1 >Model</td>
       <td rowspan=1>acc@1</td>
       <td rowspan=1>acc@5</td>
@@ -695,11 +729,10 @@
 
 </div>
 
-### Zero-shot Video Action Recognition Evaluation
+## Zero-shot Video Action Recognition Evaluation
+
 
 <div align="center">
-
-
 <table style="text-align:center">
    <tr align="center">
       <td rowspan=1>Dataset</td>
@@ -813,7 +846,7 @@
 </div>
 
 
-### Zero-shot Retrieval Evaluation
+## Zero-shot Retrieval Evaluation
 
 <div align="center">
 
@@ -909,3 +942,10 @@
 </table>
 </div>
 
+
+
+The zero-shot retrieval performance of EVA-CLIP is relatively inferior to the Open CLIP-H / -g counterpart. We speculate there are two main reasons: 
+- The size / capacity of the language tower in EVA-CLIP is much smaller / weaker than Open CLIP-H and Open CLIP-g, *i.e.*, `124M` *v.s.* `354M`. Meanwhile, retrieval tasks depend more on the capacity of the language branch compared with classification tasks.
+- Retrieval tasks seem benefit more from the training dataset size (LAION-2B used by Open CLIP), while we only leverage LAION-400M for EVA-CLIP training. 
+
+Nevertheless, it is hard to make a head-to-head comparison between different CLIP models. In the future, we will further scale up the language encoder & training data to improve the retrieval performance.
