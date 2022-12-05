@@ -39,17 +39,17 @@ if __name__ == '__main__':
     checkpoint = torch.load(args.input, map_location=torch.device("cpu"))
     
     # interpolate patch_embed
-    patch_embed = checkpoint['patch_embed.proj.weight']
+    patch_embed = checkpoint["model"]['patch_embed.proj.weight']
     C_o, C_in, H, W = patch_embed.shape
     patch_embed = torch.nn.functional.interpolate(
         patch_embed.float(), size=(16, 16), mode='bicubic', align_corners=False)
-    checkpoint['patch_embed.proj.weight'] = patch_embed
+    checkpoint["model"]['patch_embed.proj.weight'] = patch_embed
 
     # interpolate pos_embed too
-    interpolate_pos_embed(checkpoint, new_size=16)
+    interpolate_pos_embed(checkpoint["model"], new_size=16)
 
     print('======== new state_dict ========')
-    for k, v in list(checkpoint.items()):
+    for k, v in list(checkpoint["model"].items()):
         print(k, '        ', v.shape)
 
     torch.save(checkpoint, args.output)
