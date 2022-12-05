@@ -4,6 +4,7 @@
 
 - [Contrastive Language-Image Pre-Training with EVA (EVA-CLIP)](#contrastive-language-image-pre-training-with-eva-eva-clip)
   - [Model Card](#model-card)
+  - [Performance of EVA-CLIP Vision Encoder on ImageNet-1K](#performance-of-eva-clip-vision-encoder-on-imagenet-1k)
   - [EVA-CLIP Zero-shot Evaluation Results](#eva-clip-zero-shot-evaluation-results)
     - [**All 33 Benchmark Results in Details**](#all-33-benchmark-results-in-details)
     - [Zero-shot Image Classification Evaluation](#zero-shot-image-classification-evaluation)
@@ -23,15 +24,29 @@
 
 </div>
 
-> The ImageNet-1K zero-shot classification performance is higher than our paper (`78.5` *v.s.* `78.2`) because of longer training.
 
 We choose to train a 1.1B CLIP model, not because it is easy, but because it is hard. Please refer to [this note](https://docs.google.com/document/d/1FXosAZ3wMrzThgnWR6KSkXIz4IMItq3umDGos38pJps/edit) for a glance at the challenges in training very large CLIP.
 
-To our knowledge, EVA-CLIP is **the largest performant open-sourced CLIP model** evaluated via zero-shot classification performance.
-We will update the results in our paper soon.
+To our knowledge, EVA-CLIP is **the largest performant open-sourced CLIP model** evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants. 
 For more details about EVA-CLIP, please refer to Section 2.3.5 of [our paper](https://arxiv.org/pdf/2211.07636.pdf).
 
-We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal learning, representation learning, AIGC, *etc*.
+We hope open-sourcing EVA-CLIP can facilitate future research in multi-modal learning, representation learning, AIGC, *etc*, and we hope our solution for scaling up CLIPs can provide insight for practitioners studying large foundation models.
+
+
+
+## Performance of EVA-CLIP Vision Encoder on ImageNet-1K
+
+<div align="center">
+
+| model | zero-shot @ 224px | linear probing @ 224px | linear probing @ 336px | fine-tuning @ 224px | fine-tuning @ 336px |
+|:-----:|:------:|:------:|:------:|:------:|:------:| 
+| EVA-CLIP | **78.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt) \| [log](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy)) | **86.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_lincls_86p5.pth) \| [log](../logs/cls/linear_eva_clip_vision_enc_1k_cls_sz224_86p5.txt)） | **86.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_lincls_86p5.pth) \| [log](../logs/cls/linear_eva_clip_vision_enc_1k_cls_sz336_86p5.txt)) | **89.1** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_ftcls_89p1.pt) \| [log](../logs/cls/ft_eva_clip_vision_enc_1k_cls_sz224_89p1.txt)) | **89.4** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_ftcls_89p4.pt) \| [log](../logs/cls/ft_eva_clip_vision_enc_1k_cls_sz336_89p4.txt)) |
+
+</div>
+
+EVA-CLIP achieves the state-of-the-art top-1 accuracy on ImageNet-1K among all self-supervised learning approaches.
+We will provide instructions for re-producing these results soon.
+
 
 ## EVA-CLIP Zero-shot Evaluation Results
 

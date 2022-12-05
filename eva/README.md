@@ -5,6 +5,8 @@
 - [EVA: Pre-training and Image Classification](#eva-pre-training-and-image-classification)
   - [Model Card](#model-card)
   - [Summary of EVA's image classification performance](#summary-of-evas-image-classification-performance)
+    - [Performance of MIM pre-trained EVA encoder](#performance-of-mim-pre-trained-eva-encoder)
+    - [Performance of EVA-CLIP vision encoder on ImageNet-1K](#performance-of-eva-clip-vision-encoder-on-imagenet-1k)
   - [Setup](#setup)
   - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
   - [Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)](#evaluation-on-imagenet-1k-variants-in-v2-in-real-in-adv-in-ren-in-ske-objectnet)
@@ -34,6 +36,8 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 
 ## Summary of EVA's image classification performance
 
+### Performance of MIM pre-trained EVA encoder
+
 <div align="center">
 
 | model | [IN-1K](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet.csv) | [IN-V2](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenetv2-matched-frequency.csv) | [IN-ReaL](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-real.csv) | [IN-Adv.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-a.csv) | [IN-Ren.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv) | [IN-Ske.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv) | ObjectNet |
@@ -48,8 +52,18 @@ For reference, [timm](https://github.com/rwightman/pytorch-image-models) collect
 
 Compared with other open-sourced models, EVA achieves the state-of-the-art performance in all the classification benchmarks we evaluated. 
 
-For zero-shot classification performance of EVA-CLIP, please refer to [`clip`](clip) and [wandb logs](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy).
+### Performance of [EVA-CLIP](../clip/README.md) vision encoder on ImageNet-1K
 
+<div align="center">
+
+| model | zero-shot @ 224px | linear probing @ 224px | linear probing @ 336px | fine-tuning @ 224px | fine-tuning @ 336px |
+|:-----:|:------:|:------:|:------:|:------:|:------:| 
+| [EVA-CLIP](../clip/README.md) | **78.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt) \| [log](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy)) | **86.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_lincls_86p5.pth) \| [log](../logs/cls/linear_eva_clip_vision_enc_1k_cls_sz224_86p5.txt)） | **86.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_lincls_86p5.pth) \| [log](../logs/cls/linear_eva_clip_vision_enc_1k_cls_sz336_86p5.txt)) | **89.1** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_ftcls_89p1.pt) \| [log](../logs/cls/ft_eva_clip_vision_enc_1k_cls_sz224_89p1.txt)) | **89.4** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_ftcls_89p4.pt) \| [log](../logs/cls/ft_eva_clip_vision_enc_1k_cls_sz336_89p4.txt)) |
+
+</div>
+
+EVA-CLIP achieves the state-of-the-art top-1 accuracy on ImageNet-1K among all self-supervised learning approaches.
+We will provide instructions for re-producing these results soon.
 
 ## Setup
 
