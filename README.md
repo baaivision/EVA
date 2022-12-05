@@ -99,6 +99,16 @@ If you find our work helpful, please **star🌟** this repo and **cite📑** our
 }
 ```
 
+
+```
+@misc{EVA_code_models,
+  author={Fang, Yuxin and Wang, Wen and Xie, Binhui and Sun, Quan and Wu, Ledell and Wang, Xinggang and Huang, Tiejun and Wang, Xinlong and Cao, Yue},
+  title={Code and Models of EVA: Exploring the Limits of Masked Visual Representation Learning at Scale},
+  year={2022},
+  howpublished = {\url{https://github.com/baaivision/EVA}}
+}
+```
+
 ## License
 
 The content of this project itself is licensed under [LICENSE](LICENSE).
