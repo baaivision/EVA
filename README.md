@@ -32,7 +32,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 <div align="center">
 
-### $\color{red}{\text{All the code and 16x state-of-the-art billion-scale models are open-sourced!}}$
+### $\color{red}{\text{All the code and dozens of state-of-the-art billion-scale models are open-sourced!}}$
 
 </div>
 
@@ -62,13 +62,13 @@ All EVA model checkpoints (16 in total) are now available at [🤗 Hugging Face 
 **image & video classification**
 <table border="1" width="100%">
 	<tr align="center">
-        <th> </th><th> </th><th colspan="3">image classification</th><th colspan="3">video classification</th>
+        <th colspan="2"> </th><th colspan="4">image classification</th><th colspan="3">video classification</th>
     </tr>
     <tr align="center">
-        <th>model</th><th>#param.</th><th>IN-1K</th><th>IN-1K, zero-shot</th><th>12 avg. zero-shot</th><th>K400</th><th>K600</th><th>K700</th>
+        <th>model</th><th>#param.</th><th>IN-1K, e2e ft</th><th>IN-1K, linear</th><th>IN-1K, zero-shot</th><th>12 avg. zero-shot</th><th>K400</th><th>K600</th><th>K700</th>
     </tr>
     <tr align="center">
-        <th>EVA</th><th>1.0B</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/cls/ft_1k_cls_sz560_89p7.txt">89.7</a></th><th><a href="https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy">78.5</a></th><th>72.5+</th><th>89.7</th><th>89.8</th><th>82.9</th>
+        <th>EVA or EVA-CLIP</th><th>1.0B</th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/cls/ft_1k_cls_sz560_89p7.txt">89.7</a></th><th><a href="https://github.com/baaivision/EVA/blob/master/logs/cls/linear_eva_clip_vision_enc_1k_cls_sz336_86p5.txt">86.5</a></th><th><a href="https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy">78.5</a></th><th>75.7</th><th>89.7</th><th>89.8</th><th>82.9</th>
     </tr>
 </table>
 <br>
