@@ -99,6 +99,7 @@ If you find our work helpful, please **star🌟** this repo and **cite📑** our
 }
 ```
 
+If you also find our open-sourced code & models helpful to your research, please consider **cite📑** this repo.
 
 ```
 @misc{EVA_code_models,
