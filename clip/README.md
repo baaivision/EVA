@@ -191,7 +191,7 @@ The performance of video action recognition benchmarks.
 </div>
 
 > The zero-shot retrieval performance of EVA-CLIP is relatively inferior to the Open CLIP-H / -g counterpart. We speculate there are two main reasons: 
-> - The size / capacity of the language tower in EVA-CLIP is much smaller / weaker than Open CLIP-H and Open CLIP-g, *i.e.*, `124M` *v.s.* `354M`. Meanwhile, retrieval tasks depend more on the capacity of the language branch compared with classification tasks.
+> - The size / capacity of the language tower in EVA-CLIP is much smaller / weaker than Open CLIP-H and Open CLIP-g, *i.e.*, `124M` *v.s.* `354M`, and is only `~1/8` of the vision tower. Meanwhile, retrieval tasks depend more on the capacity of the language branch compared with classification tasks.
 > - Retrieval tasks seem benefit more from the training dataset size (LAION-2B used by Open CLIP), while we only leverage LAION-400M for EVA-CLIP training. 
 > Nevertheless, it is hard to make a head-to-head comparison between different CLIP models. In the future, we will further scale up the language encoder & training data to improve the retrieval performance.
 
