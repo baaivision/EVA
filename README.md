@@ -46,7 +46,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 ## Catalog
 
-All EVA model checkpoints are now available at [🤗 Hugging Face Models](https://huggingface.co/BAAI/EVA/tree/main). Try them out!
+All EVA model checkpoints are now available at [🤗 Hugging Face Models](https://huggingface.co/BAAI/EVA/tree/main) and [BAAI ModelHub](https://model.baai.ac.cn/models) ([EVA](https://model.baai.ac.cn/model-detail/100081) & [EVA-CLIP](https://model.baai.ac.cn/model-detail/100080)). Try them out!
 
 - [x] [Pre-training](eva)
 - [x] [Image Classification](eva)
