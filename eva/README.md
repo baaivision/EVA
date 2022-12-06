@@ -10,6 +10,9 @@
   - [Setup](#setup)
   - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
   - [Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)](#evaluation-on-imagenet-1k-variants-in-v2-in-real-in-adv-in-ren-in-ske-objectnet)
+  - [Evaluate EVA-CLIP on ImageNet-1K](#evaluate-eva-clip-on-imagenet-1k)
+    - [linear probing](#linear-probing)
+    - [fine-tuning](#fine-tuning)
   - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
   - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
   - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
@@ -55,6 +58,10 @@ Compared with other open-sourced models, EVA achieves the state-of-the-art perfo
 ### Performance of [EVA-CLIP](../clip/README.md) vision encoder on ImageNet-1K
 
 <div align="center">
+
+\
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-on-1)](https://paperswithcode.com/sota/self-supervised-image-classification-on-1?p=eva-exploring-the-limits-of-masked-visual) \
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-on)](https://paperswithcode.com/sota/self-supervised-image-classification-on?p=eva-exploring-the-limits-of-masked-visual) 
 
 | model | zero-shot @ 224px | linear probing @ 224px | linear probing @ 336px | fine-tuning @ 224px | fine-tuning @ 336px |
 |:-----:|:------:|:------:|:------:|:------:|:------:| 
@@ -165,7 +172,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 Expected results:
 ```
-* * Acc@1 89.712 Acc@5 98.958 loss 0.881
+* Acc@1 89.712 Acc@5 98.958 loss 0.881
 ```
 
 </details>
@@ -412,11 +419,181 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 Expected results:
 ```
-* * Acc@1 60.907 Acc@5 82.768 loss 2.305
+* Acc@1 60.907 Acc@5 82.768 loss 2.305
 ```
 
 </details>
 
+
+## Evaluate EVA-CLIP on ImageNet-1K
+
+
+### linear probing 
+
+
+<details>
+<summary>Evaluate the linear probing performance of EVA-CLIP vision encoder (<code>224px, patch_size=14</code>) on <b>ImageNet-1K val</b> with a single node (click to expand).</summary>
+
+```bash    
+MODEL_NAME=eva_g_patch14
+
+sz=224
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_clip_vis_enc_sz224_lincls_86p5.pth # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_lincls_86p5.pth
+
+DATA_PATH=/path/to/ImageNet-1K/
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --linear_probe \
+        --use_cls \
+        --dist_eval \
+        --eval
+```
+
+Expected results:
+```
+* Acc@1 86.462 Acc@5 98.034 loss 0.479
+```
+
+</details>
+
+
+<details>
+<summary>Evaluate the linear probing performance of EVA-CLIP vision encoder (<code>336px, patch_size=14</code>) on <b>ImageNet-1K val</b> with a single node (click to expand).</summary>
+
+```bash    
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_clip_vis_enc_sz336_lincls_86p5.pth # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_lincls_86p5.pth
+
+DATA_PATH=/path/to/ImageNet-1K/
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --linear_probe \
+        --use_cls \
+        --dist_eval \
+        --eval
+```
+
+Expected results:
+```
+* Acc@1 86.498 Acc@5 98.026 loss 0.479
+```
+
+</details>
+
+### fine-tuning
+
+
+<details>
+<summary>Evaluate the linear probing performance of EVA-CLIP vision encoder (<code>224px, patch_size=14</code>) on <b>ImageNet-1K val</b> with a single node (click to expand).</summary>
+
+```bash    
+MODEL_NAME=eva_g_patch14
+
+sz=224
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_clip_vis_enc_sz224_ftcls_89p1.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_ftcls_89p1.pt
+
+DATA_PATH=/path/to/ImageNet-1K/
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --dist_eval \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 89.074 Acc@5 98.710 loss 0.726
+```
+
+</details>
+
+
+
+<details>
+<summary>Evaluate the linear probing performance of EVA-CLIP vision encoder (<code>336px, patch_size=14</code>) on <b>ImageNet-1K val</b> with a single node (click to expand).</summary>
+
+```bash    
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+crop_pct=1.0
+
+EVAL_CKPT=/path/to/eva_clip_vis_enc_sz336_ftcls_89p4.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_ftcls_89p4.pt
+
+DATA_PATH=/path/to/ImageNet-1K/
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --model ${MODEL_NAME} \
+        --finetune ${EVAL_CKPT} \
+        --input_size ${sz} \
+        --batch_size ${batch_size} \
+        --crop_pct ${crop_pct} \
+        --no_auto_resume \
+        --linear_probe \
+        --eval \
+        --enable_deepspeed
+```
+
+Expected results:
+```
+* Acc@1 89.378 Acc@5 98.792 loss 0.691
+```
+
+</details>
 
 ## Pre-train EVA on the merged-30M image dataset
 

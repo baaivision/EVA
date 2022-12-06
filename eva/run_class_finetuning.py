@@ -336,6 +336,10 @@ def main(args, ds_init):
     args.window_size = (args.input_size // patch_size[0], args.input_size // patch_size[1])
     args.patch_size = patch_size
 
+    if args.linear_probe:
+        trunc_normal_(model.head.weight, std=0.01)
+        model.head = torch.nn.Sequential(torch.nn.BatchNorm1d(model.head.in_features, affine=False, eps=1e-6), model.head)
+        
     if args.finetune:
         if args.finetune.startswith('https'):
             checkpoint = torch.hub.load_state_dict_from_url(
@@ -544,10 +548,6 @@ def main(args, ds_init):
             device='cpu' if args.model_ema_force_cpu else '',
             resume='')
         print("Using EMA with decay = %.8f" % args.model_ema_decay)
-
-    if args.linear_probe:
-        trunc_normal_(model.head.weight, std=0.01)
-        model.head = torch.nn.Sequential(torch.nn.BatchNorm1d(model.head.in_features, affine=False, eps=1e-6), model.head)
 
     if args.freeze_backbone or args.linear_probe:
         for _, p in model.named_parameters():
