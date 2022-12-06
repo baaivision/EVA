@@ -6,7 +6,7 @@
   - [Model Card](#model-card)
   - [Performance of EVA-CLIP Vision Encoder on ImageNet-1K](#performance-of-eva-clip-vision-encoder-on-imagenet-1k)
   - [EVA-CLIP Zero-shot Evaluation Results](#eva-clip-zero-shot-evaluation-results)
-    - [**All 33 Benchmark Results in Details**](#all-33-benchmark-results-in-details)
+    - [**All 35 Benchmark Results in Details**](#all-35-benchmark-results-in-details)
     - [Zero-shot Image Classification Evaluation](#zero-shot-image-classification-evaluation)
     - [Zero-shot Video Action Recognition Evaluation](#zero-shot-video-action-recognition-evaluation)
     - [Zero-shot Retrieval Evaluation](#zero-shot-retrieval-evaluation)
@@ -53,7 +53,7 @@ We will provide instructions for re-producing these results soon.
 
 <div align="center">
 
-### [**All 33 Benchmark Results in Details**](./Benchmark.md) 
+### [**All 35 Benchmark Results in Details**](./benchmark.md) 
 
 </div>
 

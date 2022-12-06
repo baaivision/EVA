@@ -36,7 +36,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 </div>
 
-- `Nov 25, 2022`: release EVA-CLIP zero-shot [evaluation results](https://github.com/baaivision/EVA/tree/master/clip#eva-clip-zero-shot-evaluation-results) on 33 benchmarks.
+- `Nov 25, 2022`: release EVA-CLIP zero-shot [evaluation results](https://github.com/baaivision/EVA/tree/master/clip#eva-clip-zero-shot-evaluation-results) on 35 benchmarks.
 - `Nov 22, 2022`: release code & model of [object detection and instance segmentation](det/README.md).
 - `Nov 21, 2022`: release code & model of [video classification](video/README.md), [semantic segmentation](seg/README.md), [EVA-CLIP](clip/README.md).
 - `Nov 20, 2022`: release code & model of [pre-training and image classification](eva/README.md).
