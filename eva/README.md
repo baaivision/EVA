@@ -91,9 +91,11 @@ Download it from http://image-net.org.
 Then, move and extract the training and validation images to labeled subfolders, using the [shell script](https://github.com/pytorch/examples/blob/main/imagenet/extract_ILSVRC.sh).
 
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-1K val** with a single node:
-```bash    
 
+<details>
+  <summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-1K val</b> with a single node (click to expand).</summary>
+
+```bash    
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -127,9 +129,12 @@ Expected results:
 * Acc@1 89.622 Acc@5 98.930 loss 0.948
 ```
 
-Evaluate the fine-tuned EVA (`560px, patch_size=14`) on **ImageNet-1K val** with a single node:
-```bash     
+</details>
 
+<details>
+ <summary>Evaluate the fine-tuned EVA (<code>560px, patch_size=14</code>) on <b>ImageNet-1K val</b> with a single node (click to expand).</summary>
+ 
+```bash     
 MODEL_NAME=eva_g_patch14
 
 sz=560
@@ -163,12 +168,15 @@ Expected results:
 * * Acc@1 89.712 Acc@5 98.958 loss 0.881
 ```
 
+</details>
+
+
 ## Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)
 
+<details>
+ <summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-V2</b> with a single node (click to expand).</summary>
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-V2** with a single node:
 ```bash     
-
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -203,11 +211,13 @@ Expected results:
 * Acc@1 81.570 Acc@5 96.230 loss 1.274
 ```
 
+</details>
 
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-ReaL** with a single GPU on a single node:
+<details>
+<summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-ReaL</b> with a single GPU on a single node (click to expand).</summary>
+
 ```bash     
-
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -242,11 +252,14 @@ Expected results:
 * Acc@1 90.828 Acc@5 98.683 loss 0.947
 ```
 
+</details>
 
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Adversarial** with a single node:
+<details>
+
+<summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-Adversarial</b> with a single node (click to expand).</summary>
+
 ```bash     
-
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -280,12 +293,13 @@ Expected results:
 * Acc@1 86.154 Acc@5 96.509 loss 0.979
 ```
 
+</details>
 
 
+<details>
+<summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-Rendition</b> with a single node (click to expand).</summary>
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Rendition** with a single node:
 ```bash     
-
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -320,11 +334,13 @@ Expected results:
 * Acc@1 88.283 Acc@5 95.830 loss 0.965
 ```
 
+</details>
 
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ImageNet-Sketch** with a single node:
+<details>
+<summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-Sketch</b> with a single node (click to expand).</summary>
+
 ```bash     
-
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -358,11 +374,13 @@ Expected results:
 * Acc@1 67.724 Acc@5 87.964 loss 1.955
 ```
 
+</details>
 
 
-Evaluate the fine-tuned EVA (`336px, patch_size=14`) on **ObjectNet** with a single node:
+<details>
+<summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ObjectNet</b> with a single node (click to expand).</summary>
+
 ```bash     
-
 MODEL_NAME=eva_g_patch14
 
 sz=336
@@ -397,13 +415,15 @@ Expected results:
 * * Acc@1 60.907 Acc@5 82.768 loss 2.305
 ```
 
+</details>
+
 
 ## Pre-train EVA on the merged-30M image dataset
 
-Structure of our merged-30M image dataset:
+<details>
+<summary>Structure of our merged-30M image dataset (click to expand)</summary>
 
 ```bash
-
 merged_30m_pt
 ├── 21k
 │   └── imagnet21k -> /path/to/ImageNet-21K
@@ -420,10 +440,12 @@ merged_30m_pt
 
 ```
 
-We use 16 nodes (`total_bsz = 16*8*32 = 4096`) for pre-training.
+</details>
+
+<details>
+<summary>We use 16 nodes (<code>total_bsz = 16*8*32 = 4096</code>) for pre-training (click to expand).</summary>
 
 ```bash
-
 MODEL_NAME=eva_g_patch14
 
 DATA_PATH=/path/to/merged_30m_pt
@@ -492,10 +514,13 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 ```
 
+</details>
+
 
 ## Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K
 
-We use 8 nodes (`total_bsz = 8*8*64 = 4096`) for intermediate fine-tuning.
+<details>
+<summary>We use 8 nodes (<code>total_bsz = 8*8*64 = 4096</code>) for intermediate fine-tuning (click to expand).</summary>
 
 ```bash
 
@@ -561,14 +586,16 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 ```
 
+</details>
+
+
 
 ## Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint
 
-
-We use 4 nodes (`total_bsz = 4*8*16 = 512`) for fine-tuning.
+<details>
+<summary>We use 4 nodes (<code>total_bsz = 4*8*16 = 512</code>) for fine-tuning (click to expand).</summary>
 
 ```bash   
-
 MODEL_NAME=eva_g_patch14
 
 sz=336  # or 560
@@ -646,8 +673,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
         --enable_deepspeed
 ```
 
-
-
+</details>
 
 ## Acknowledgement
 
