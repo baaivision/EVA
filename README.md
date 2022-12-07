@@ -131,3 +131,10 @@ If you are interested in working with us on **foundation model, self-supervised 
 
 ### &#8627; Forkers
 [![Forkers repo roster for @baaivision/EVA](https://reporoster.com/forks/baaivision/EVA)](https://github.com/baaivision/EVA/network/members)
+
+### &#8627; Star History
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=baaivision/EVA&type=Date)](https://star-history.com/#baaivision/EVA&Date)
+
+</div>
