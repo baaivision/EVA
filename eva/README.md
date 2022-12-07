@@ -3,25 +3,27 @@
 **Table of Contents**
 
 - [EVA: Pre-training and Image Classification](#eva-pre-training-and-image-classification)
-  - [Model Card](#model-card)
-  - [Summary of EVA's image classification performance](#summary-of-evas-image-classification-performance)
-    - [Performance of MIM pre-trained EVA encoder](#performance-of-mim-pre-trained-eva-encoder)
-    - [Performance of EVA-CLIP vision encoder on ImageNet-1K](#performance-of-eva-clip-vision-encoder-on-imagenet-1k)
+  - [EVA Model Card](#eva-model-card)
+  - [Performance of **MIM** pre-trained EVA encoder on ImageNet-1K](#performance-of-mim-pre-trained-eva-encoder-on-imagenet-1k)
+  - [Performance of **EVA-CLIP** vision encoder on ImageNet-1K](#performance-of-eva-clip-vision-encoder-on-imagenet-1k)
+  - [**EVA-L**: Learning better MIM representations from EVA-CLIP](#eva-l-learning-better-mim-representations-from-eva-clip)
+    - [Performance of **EVA-L** on ImageNet-1K](#performance-of-eva-l-on-imagenet-1k)
+    - [Comparisons with other large-sized models on ImageNet-1K](#comparisons-with-other-large-sized-models-on-imagenet-1k)
   - [Setup](#setup)
-  - [Evaluate EVA on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
-  - [Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)](#evaluation-on-imagenet-1k-variants-in-v2-in-real-in-adv-in-ren-in-ske-objectnet)
-  - [Evaluate EVA-CLIP on ImageNet-1K](#evaluate-eva-clip-on-imagenet-1k)
+  - [Evaluate **EVA** on ImageNet-1K](#evaluate-eva-on-imagenet-1k)
+  - [Evaluate **EVA** on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)](#evaluate-eva-on-imagenet-1k-variants-in-v2-in-real-in-adv-in-ren-in-ske-objectnet)
+  - [Evaluate **EVA-CLIP** on ImageNet-1K](#evaluate-eva-clip-on-imagenet-1k)
     - [linear probing](#linear-probing)
     - [fine-tuning](#fine-tuning)
-  - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
-  - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
-  - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
-  - [Transferring EVA-CLIP vision encoder to ImageNet-1K](#transferring-eva-clip-vision-encoder-to-imagenet-1k)
+  - [Pre-train **EVA** on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
+  - [Intermediate Fine-tune MIM pre-trained **EVA** on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
+  - [Fine-tuning **EVA** on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
+  - [Transferring **EVA-CLIP** vision encoder to ImageNet-1K](#transferring-eva-clip-vision-encoder-to-imagenet-1k)
     - [linear probing](#linear-probing-1)
     - [fine-tuning](#fine-tuning-1)
   - [Acknowledgement](#acknowledgement)
 
-## Model Card
+## EVA Model Card
 
 We provide **all pre-trained & fine-tuned** EVAs for the community. 
 The following table summarizes the basic statistics of MIM pre-trained EVA and image classification EVA.
@@ -39,14 +41,12 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 </div>
 
 - `eva_psz14to16` model interpolates the kernel size of `patch_embed` from `14x14` to `16x16`. This is useful for object detection, instance segmentation & semantic segmentation, *etc*. See [`interpolate_patch_14to16.py`](interpolate_patch_14to16.py) for implementation details.
-- For MIM pre-trained EVA and EVA-CLIP, we use `deepspeed` `fp16` format. IN-1K fine-tuned EVA weights are larger (`4GB` *v.s.* `2GB`) because ema updates models with `fp32` format. The weights of other downstream tasks are also with `fp32` format.
+- For MIM pre-trained EVA and EVA-CLIP, we use `deepspeed` `fp16` format. IN-1K fine-tuned EVA weights are larger (`4GB` *v.s.* `2GB`) because ema updates models with `fp32` format. The weights of other downstream tasks are also with `fp32` format. 
 
 
+<!-- ## Summary of EVA's image classification performance -->
 
-
-## Summary of EVA's image classification performance
-
-### Performance of MIM pre-trained EVA encoder
+## Performance of **MIM** pre-trained EVA encoder on ImageNet-1K
 
 <div align="center">
 
@@ -56,13 +56,11 @@ The following table summarizes the basic statistics of MIM pre-trained EVA and i
 
 </div>
 
-> The top-1 accuracy of ImageNet-1K variants are better than the results we reported in our paper for we fix a bug. We will update the new results in the revision soon. 
-
 For reference, [timm](https://github.com/rwightman/pytorch-image-models) collects some open-sourced state-of-the-art models' image classification results [here](https://github.com/rwightman/pytorch-image-models/tree/main/results) ([IN-1K](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet.csv), [IN-V2](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenetv2-matched-frequency.csv), [IN-ReaL](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-real.csv), [IN-Adv.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-a.csv), [IN-Ren.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv), [IN-Ske.](https://github.com/rwightman/pytorch-image-models/blob/main/results/results-imagenet-r.csv)).
 
-Compared with other open-sourced models, EVA achieves the state-of-the-art performance in all the classification benchmarks we evaluated. 
+Compared with other open-sourced models, EVA achieves **state-of-the-art** performance in all the classification benchmarks. 
 
-### Performance of [EVA-CLIP](../clip/README.md) vision encoder on ImageNet-1K
+## Performance of [**EVA-CLIP**](../clip/README.md) vision encoder on ImageNet-1K
 
 <div align="center">
 
@@ -77,6 +75,57 @@ Compared with other open-sourced models, EVA achieves the state-of-the-art perfo
 </div>
 
 We also evaluate the transfer learning ability of [EVA-CLIP]((../clip/README.md)), which achieves the **state-of-the-art** top-1 accuracy on ImageNet-1K among all self-supervised learning approaches.
+
+
+## **EVA-L**: Learning better MIM representations from EVA-CLIP
+
+We show EVA-CLIP is not only performant in zero-shot recognition, but also can improve the representation quality of MIM pre-training.
+
+EVA-L is a vanilla ViT-Large encoder (`#layer=24; dim=1024; patch_size=14x14; #param: 303M`) pre-trained via MIM with the vision feature from EVA-CLIP as the prediction target. Therefore, during pre-training EVA-L learns MIM pre-text task while distills knowledge from a stronger teacher.  
+
+We use the MAE-style MIM pre-training ([`modeling_mae_pretrain.py`](./modeling_mae_pretrain.py)), and we provide the MIM-only pre-trained checkpoint (`dataset / schedule: IN-21K / 150 epochs`) as well as MIM pre-trained & supervised intermediate fine-tuned checkpoint (`dataset / schedule: IN-21K / 90 epochs`) for the community.
+
+> For MAE-style ViTs, `q,k,v` all have bias term, which is different from the BEiT-style ViTs that only `q&v` have bias. 
+
+<div align="center">
+
+| model name | enc #param. | IN-21K pt ep | IN-21K ft ep | weight | pt log |
+|:-----|:------:|:------:|:------:|:------:| :------: | 
+| `eva_l_psz14` | 303M | 150 | - | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14.pt) | [link](../logs/pt/eva-l_mim_pt_eva-clip-target_21k_150ep_log.txt) |
+| `eva_l_psz14_21k_ft` | 303M | 150 | 90  | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_21k_ft.pt) | [link](../logs/cls/eva-l_intermed_ft_21k_90ep_sz224.txt) |
+
+</div>
+
+> 
+
+### Performance of **EVA-L** on ImageNet-1K
+
+<div align="center">
+
+| model | init. ckpt | resolution | #param. | top-1 | weight | ft log |
+|:-----:|:------:|:------:|:------:|:------:|:------:| :------: | 
+| EVA-L | `eva_l_psz14` | 196 | 304M | 88.0 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_196px_1k_ft_88p0.pt) | [log](../logs/cls/eva-l_ft_1k_cls_sz196_50ep_88p0.txt) |
+| EVA-L | `eva_l_psz14` | 336 | 304M | 88.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_336px_1k_ft_88p65.pt) | [log](../logs/cls/eva-l_ft_1k_cls_sz336_50ep_88p65.txt) |
+| EVA-L | `eva_l_psz14_21k_ft` | 196 | 304M | 88.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_196px_21k_to_1k_ft_88p6.pt) | [log](../logs/cls/eva-l_ft_21k_to_1k_cls_sz196_20ep_88p6.txt) |
+| EVA-L | `eva_l_psz14_21k_ft` | 336 | 304M | **89.2** | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_336px_21k_to_1k_ft_89p2.pt) | [log](../logs/cls/eva-l_ft_21k_to_1k_cls_sz336_20ep_89p2.txt) |
+
+</div>
+
+
+### Comparisons with other large-sized models on ImageNet-1K
+
+<div align="center">
+
+| model | resolution | #param. | top-1 | 
+|:-----|:------:|:------:|:------:|
+| [InternImage-XL](https://github.com/OpenGVLab/InternImage#main-results-on-imagenet-with-pretrained-models) | 384px | 335M | 88.0 | 
+| [BEiTv2-L/16](https://github.com/microsoft/unilm/blob/master/beit2/get_started_for_image_classification.md#model-zoo) (prev. best) | 384px | 304M | 89.0 |
+| **EVA-L/14** | 336px | 304M | **89.2** | 
+
+</div>
+
+**EVA-L** can reach up to **89.2** top-1 accuracy on ImageNet-1K. To our knowledge, EVA-L is the best open-sourced large-sized model to date.
+
 
 ## Setup
 
@@ -97,7 +146,7 @@ The core packages including: [Pytorch](https://pytorch.org/) version 1.12.0, [to
 
 
 
-## Evaluate EVA on ImageNet-1K
+## Evaluate **EVA** on ImageNet-1K
 
 We use the standard ImageNet-1K dataset. 
 Download it from http://image-net.org.
@@ -184,7 +233,7 @@ Expected results:
 </details>
 
 
-## Evaluation on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)
+## Evaluate **EVA** on ImageNet-1K variants (IN-V2, IN-ReaL, IN-Adv., IN-Ren., IN-Ske., ObjectNet)
 
 <details>
  <summary>Evaluate the fine-tuned EVA (<code>336px, patch_size=14</code>) on <b>ImageNet-V2</b> with a single node (click to expand).</summary>
@@ -431,7 +480,7 @@ Expected results:
 </details>
 
 
-## Evaluate EVA-CLIP on ImageNet-1K
+## Evaluate **EVA-CLIP** on ImageNet-1K
 
 
 ### linear probing 
@@ -601,7 +650,7 @@ Expected results:
 
 </details>
 
-## Pre-train EVA on the merged-30M image dataset
+## Pre-train **EVA** on the merged-30M image dataset
 
 <details>
 <summary>Structure of our merged-30M image dataset (click to expand)</summary>
@@ -700,7 +749,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 </details>
 
 
-## Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K
+## Intermediate Fine-tune MIM pre-trained **EVA** on ImageNet-21K
 
 <details>
 <summary>We use 8 nodes (<code>total_bsz = 8*8*64 = 4096</code>) for intermediate fine-tuning (click to expand).</summary>
@@ -773,7 +822,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 
 
-## Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint
+## Fine-tuning **EVA** on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint
 
 <details>
 <summary>We use 4 nodes (<code>total_bsz = 4*8*16 = 512</code>) for fine-tuning (click to expand).</summary>
@@ -859,7 +908,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 </details>
 
 
-## Transferring EVA-CLIP vision encoder to ImageNet-1K 
+## Transferring **EVA-CLIP** vision encoder to ImageNet-1K 
 
 ### linear probing 
 
@@ -1121,7 +1170,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 
 
 <details>
-<summary>We use 4 nodes (<code>total_bsz = 4*8*32 = 1024</code>) for fine-tuning EVA-CLIP vision encoder w/ <code>336px</code> inputs (click to expand).</summary>
+<summary>We use 4 nodes (<code>total_bsz = 4*8*16 = 512</code>) for fine-tuning EVA-CLIP vision encoder w/ <code>336px</code> inputs (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva_g_patch14
