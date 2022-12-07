@@ -36,7 +36,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 </div>
 
-- `Dec 07, 2022`: launch **EVA-L**, the **best** ViT-L (304M) to date that can reach up to **89.2** top-1 acc on IN-1K ([weights & logs](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip)) by leveraging vision features from [EVA-CLIP](clip/README.md).
+- `Dec 07, 2022`: launch [**EVA-L**](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip), the **best** ViT-L (304M) to date that can reach up to **89.2** top-1 acc on IN-1K ([weights & logs](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip)) by leveraging vision features from [EVA-CLIP](clip/README.md).
 - `Nov 25, 2022`: release EVA-CLIP zero-shot [evaluation results](https://github.com/baaivision/EVA/tree/master/clip#eva-clip-zero-shot-evaluation-results) on 35 benchmarks.
 - `Nov 22, 2022`: release code & model of [object detection and instance segmentation](det/README.md).
 - `Nov 21, 2022`: release code & model of [video classification](video/README.md), [semantic segmentation](seg/README.md), [EVA-CLIP](clip/README.md).
