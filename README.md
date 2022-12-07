@@ -125,7 +125,7 @@ Let's build a better & stronger EVA together :)
 If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
 
 
-
+## Misc
 ### &#8627; Stargazers
 [![Stargazers repo roster for @baaivision/EVA](https://reporoster.com/stars/baaivision/EVA)](https://github.com/baaivision/EVA/stargazers)
 
