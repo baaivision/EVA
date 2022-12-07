@@ -125,7 +125,7 @@ encoder-decoder architecture ([`modeling_mae_pretrain.py`](./modeling_mae_pretra
 
 </div>
 
-**EVA-L** can reach up to **89.2** top-1 accuracy on ImageNet-1K. To our knowledge, EVA-L is the best open-sourced large-sized model to date.
+**EVA-L** can reach up to **89.2** top-1 accuracy on ImageNet-1K. To our knowledge, EVA-L is the best open-sourced large-sized vision encoder to date.
 
 
 ## Setup
