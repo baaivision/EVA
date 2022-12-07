@@ -79,13 +79,13 @@ We also evaluate the transfer learning ability of [EVA-CLIP]((../clip/README.md)
 
 ## **EVA-L**: Learning better MIM representations from EVA-CLIP
 
-We show EVA-CLIP is not only performant in zero-shot recognition, but also can improve the representation quality of MIM pre-training.
+We show EVA-CLIP is not only performant in [zero-shot recognition](../clip/README.md), but also can improve the representation quality of MIM pre-training.
 
-EVA-L is a vanilla ViT-Large encoder (`#layer=24; dim=1024; patch_size=14x14; #param: 303M`) pre-trained via MIM with the vision feature from EVA-CLIP as the prediction target. Therefore, during pre-training EVA-L learns MIM pre-text task while distills knowledge from a stronger teacher.  
+EVA-L is a vanilla ViT-Large encoder (`#layer=24; dim=1024; patch_size=14x14; #param: 303M`) pre-trained via MIM with vision features from EVA-CLIP as prediction targets. Therefore, during pre-training EVA-L learns MIM pre-text task while distills knowledge from a stronger teacher.  
 
-We use the MAE-style MIM pre-training ([`modeling_mae_pretrain.py`](./modeling_mae_pretrain.py)), and we provide the MIM-only pre-trained checkpoint (`dataset / schedule: IN-21K / 150 epochs`) as well as MIM pre-trained & supervised intermediate fine-tuned checkpoint (`dataset / schedule: IN-21K / 90 epochs`) for the community.
+We adopt the MAE-style MIM pre-training with an asymmetric
+encoder-decoder architecture ([`modeling_mae_pretrain.py`](./modeling_mae_pretrain.py)), and we provide the MIM-only pre-trained checkpoint (`dataset / schedule: IN-21K / 150 epochs`) as well as MIM pre-trained + supervised intermediate fine-tuned checkpoint (`dataset / schedule: IN-21K / 90 epochs`) for the community.
 
-> For MAE-style ViTs, `q,k,v` all have bias term, which is different from the BEiT-style ViTs that only `q&v` have bias. 
 
 <div align="center">
 
@@ -96,7 +96,7 @@ We use the MAE-style MIM pre-training ([`modeling_mae_pretrain.py`](./modeling_m
 
 </div>
 
-> 
+> Notice that for MAE-style ViTs, `q,k,v` all have bias term, which is different from the BEiT-style ViTs that only `q&v` have bias.  
 
 ### Performance of **EVA-L** on ImageNet-1K
 
@@ -104,10 +104,10 @@ We use the MAE-style MIM pre-training ([`modeling_mae_pretrain.py`](./modeling_m
 
 | model | init. ckpt | resolution | #param. | top-1 | weight | ft log |
 |:-----:|:------:|:------:|:------:|:------:|:------:| :------: | 
-| EVA-L | `eva_l_psz14` | 196 | 304M | 88.0 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_196px_1k_ft_88p0.pt) | [log](../logs/cls/eva-l_ft_1k_cls_sz196_50ep_88p0.txt) |
-| EVA-L | `eva_l_psz14` | 336 | 304M | 88.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_336px_1k_ft_88p65.pt) | [log](../logs/cls/eva-l_ft_1k_cls_sz336_50ep_88p65.txt) |
-| EVA-L | `eva_l_psz14_21k_ft` | 196 | 304M | 88.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_196px_21k_to_1k_ft_88p6.pt) | [log](../logs/cls/eva-l_ft_21k_to_1k_cls_sz196_20ep_88p6.txt) |
-| EVA-L | `eva_l_psz14_21k_ft` | 336 | 304M | **89.2** | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_336px_21k_to_1k_ft_89p2.pt) | [log](../logs/cls/eva-l_ft_21k_to_1k_cls_sz336_20ep_89p2.txt) |
+| EVA-L | `eva_l_psz14` | `196x196` | 304M | 88.0 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_196px_1k_ft_88p0.pt) | [link](../logs/cls/eva-l_ft_1k_cls_sz196_50ep_88p0.txt) |
+| EVA-L | `eva_l_psz14` | `336x336` | 304M | 88.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_336px_1k_ft_88p65.pt) | [link](../logs/cls/eva-l_ft_1k_cls_sz336_50ep_88p65.txt) |
+| EVA-L | `eva_l_psz14_21k_ft` | `196x196` | 304M | 88.6 | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_196px_21k_to_1k_ft_88p6.pt) | [link](../logs/cls/eva-l_ft_21k_to_1k_cls_sz196_20ep_88p6.txt) |
+| EVA-L | `eva_l_psz14_21k_ft` | `336x336` | 304M | **89.2** | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_l_psz14_336px_21k_to_1k_ft_89p2.pt) | [link](../logs/cls/eva-l_ft_21k_to_1k_cls_sz336_20ep_89p2.txt) |
 
 </div>
 
@@ -118,9 +118,10 @@ We use the MAE-style MIM pre-training ([`modeling_mae_pretrain.py`](./modeling_m
 
 | model | resolution | #param. | top-1 | 
 |:-----|:------:|:------:|:------:|
-| [InternImage-XL](https://github.com/OpenGVLab/InternImage#main-results-on-imagenet-with-pretrained-models) | 384px | 335M | 88.0 | 
-| [BEiTv2-L/16](https://github.com/microsoft/unilm/blob/master/beit2/get_started_for_image_classification.md#model-zoo) (prev. best) | 384px | 304M | 89.0 |
-| **EVA-L/14** | 336px | 304M | **89.2** | 
+| [InternImage-XL](https://github.com/OpenGVLab/InternImage#main-results-on-imagenet-with-pretrained-models) | `384x384` | 335M | 88.0 | 
+| [BEiT-L/16](https://github.com/microsoft/unilm/tree/master/beit#fine-tuning-on-imagenet-1k-image-classification) | `512x512` | 306M | 88.6 |
+| [BEiTv2-L/16](https://github.com/microsoft/unilm/blob/master/beit2/get_started_for_image_classification.md#model-zoo) (prev. best) | `384x384` | 304M | 89.0 |
+| **EVA-L/14** | `336x336` | 304M | **89.2** | 
 
 </div>
 
