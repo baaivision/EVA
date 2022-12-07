@@ -16,6 +16,9 @@
   - [Pre-train EVA on the merged-30M image dataset](#pre-train-eva-on-the-merged-30m-image-dataset)
   - [Intermediate Fine-tune MIM pre-trained EVA on ImageNet-21K](#intermediate-fine-tune-mim-pre-trained-eva-on-imagenet-21k)
   - [Fine-tuning EVA on ImageNet-1K with ImageNet-21K intermediate fine-tuned checkpoint](#fine-tuning-eva-on-imagenet-1k-with-imagenet-21k-intermediate-fine-tuned-checkpoint)
+  - [Transferring EVA-CLIP vision encoder to ImageNet-1K](#transferring-eva-clip-vision-encoder-to-imagenet-1k)
+    - [linear probing](#linear-probing-1)
+    - [fine-tuning](#fine-tuning-1)
   - [Acknowledgement](#acknowledgement)
 
 ## Model Card
@@ -63,7 +66,7 @@ Compared with other open-sourced models, EVA achieves the state-of-the-art perfo
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-on-1)](https://paperswithcode.com/sota/self-supervised-image-classification-on-1?p=eva-exploring-the-limits-of-masked-visual) \
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-on)](https://paperswithcode.com/sota/self-supervised-image-classification-on?p=eva-exploring-the-limits-of-masked-visual) 
 
-| model | zero-shot @ 224px | linear probing @ 224px | linear probing @ 336px | fine-tuning @ 224px | fine-tuning @ 336px |
+| model | zero-shot (`224px`) | linear probing (`224px`) | linear probing (`336px`) | fine-tuning (`224px`) | fine-tuning (`336px`) |
 |:-----:|:------:|:------:|:------:|:------:|:------:| 
 | [EVA-CLIP](../clip/README.md) | **78.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt) \| [log](https://wandb.ai/baaivision/eva-clip/reports/ViT-g-14--VmlldzoyOTkwMDYy)) | **86.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_lincls_86p5.pth) \| [log](../logs/cls/linear_eva_clip_vision_enc_1k_cls_sz224_86p5.txt)） | **86.5** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_lincls_86p5.pth) \| [log](../logs/cls/linear_eva_clip_vision_enc_1k_cls_sz336_86p5.txt)) | **89.1** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz224_ftcls_89p1.pt) \| [log](../logs/cls/ft_eva_clip_vision_enc_1k_cls_sz224_89p1.txt)) | **89.4** ([weight](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_vis_enc_sz336_ftcls_89p4.pt) \| [log](../logs/cls/ft_eva_clip_vision_enc_1k_cls_sz336_89p4.txt)) |
 
@@ -851,6 +854,352 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_ra
 ```
 
 </details>
+
+
+## Transferring EVA-CLIP vision encoder to ImageNet-1K 
+
+### linear probing 
+
+
+<details>
+<summary>We use 5 nodes (<code>total_bsz = 5*8*400 = 16000</code>) for linear probing EVA-CLIP vision encoder w/ <code>224px</code> inputs (click to expand).</summary>
+
+```bash   
+MODEL_NAME=eva_g_patch14
+
+sz=224 
+batch_size=400
+update_freq=1
+
+lr=1.0      
+lrd=1.0        
+
+warmup_lr=0.0
+min_lr=0.0
+weight_decay=0.0
+
+partial_freeze=0
+ep=90
+wmep=10
+dpr=0.0
+
+reprob=0.0
+mixup=0.0
+cutmix=0.0
+
+zero_stage=0
+
+scale_low=0.08
+crop_pct=1.0
+smoothing=0.0
+aa=None
+
+
+EXP_NAME=sz${sz}_cropscalelow${scale_low}_bsz4x8x${update_freq}x${batch_size}_lr${lr}_wmuplr${warmup_lr}_minlr${min_lr}_wd${weight_decay}_lrd${lrd}_partial_frz${partial_freeze}_ep${ep}_wmep${wmep}_reprob${reprob}_dpr${dpr}_mixup${mixup}_cutmix${cutmix}_aa${aa}_crop_pct${crop_pct}_sm${smoothing}
+
+
+# path to EVA-CLIP vision encoder ckpt
+PRETRAIN_CHKPT=/path/to/eva_clip_psz14_vision_enc.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14_vision_enc.pt
+
+OUTPUT_DIR=/path/to/output/{EXP_NAME}
+
+DATA_PATH=/path/to/ImageNet-1K
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --output_dir ${OUTPUT_DIR} \
+        --log_dir ${OUTPUT_DIR}/tb_log \
+        --model ${MODEL_NAME} \
+        --finetune ${PRETRAIN_CHKPT} \
+        --input_size ${sz} \
+        --scale ${scale_low} 1.0 \
+        --lr ${lr} \
+        --warmup_lr ${warmup_lr} \
+        --min_lr ${min_lr} \
+        --layer_decay ${lrd} \
+        --epochs ${ep} \
+        --warmup_epochs ${wmep} \
+        --drop_path ${dpr} \
+        --reprob ${reprob} \
+        --mixup ${mixup} \
+        --cutmix ${cutmix} \
+        --batch_size ${batch_size} \
+        --update_freq ${update_freq} \
+        --crop_pct ${crop_pct} \
+        --zero_stage ${zero_stage} \
+        --partial_freeze ${partial_freeze} \
+        --smoothing ${smoothing} \
+        --weight_decay ${weight_decay} \
+        --aa ${aa} \
+        --dist_eval \
+        --linear_probe \
+        --use_cls
+```
+
+</details>
+
+
+
+<details>
+<summary>We use 5 nodes (<code>total_bsz = 5*8*400 = 16000</code>) for linear probing EVA-CLIP vision encoder w/ <code>336px</code> inputs (click to expand).</summary>
+
+```bash   
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=400
+update_freq=1
+
+lr=0.6      
+lrd=1.0        
+
+warmup_lr=0.0
+min_lr=0.0
+weight_decay=0.0
+
+partial_freeze=0
+ep=90
+wmep=10
+dpr=0.0
+
+reprob=0.0
+mixup=0.0
+cutmix=0.0
+
+zero_stage=0
+
+scale_low=0.08
+crop_pct=1.0
+smoothing=0.0
+aa=None
+
+
+EXP_NAME=sz${sz}_cropscalelow${scale_low}_bsz4x8x${update_freq}x${batch_size}_lr${lr}_wmuplr${warmup_lr}_minlr${min_lr}_wd${weight_decay}_lrd${lrd}_partial_frz${partial_freeze}_ep${ep}_wmep${wmep}_reprob${reprob}_dpr${dpr}_mixup${mixup}_cutmix${cutmix}_aa${aa}_crop_pct${crop_pct}_sm${smoothing}
+
+
+# path to EVA-CLIP vision encoder ckpt
+PRETRAIN_CHKPT=/path/to/eva_clip_psz14_vision_enc.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14_vision_enc.pt
+
+OUTPUT_DIR=/path/to/output/{EXP_NAME}
+
+DATA_PATH=/path/to/ImageNet-1K
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --output_dir ${OUTPUT_DIR} \
+        --log_dir ${OUTPUT_DIR}/tb_log \
+        --model ${MODEL_NAME} \
+        --finetune ${PRETRAIN_CHKPT} \
+        --input_size ${sz} \
+        --scale ${scale_low} 1.0 \
+        --lr ${lr} \
+        --warmup_lr ${warmup_lr} \
+        --min_lr ${min_lr} \
+        --layer_decay ${lrd} \
+        --epochs ${ep} \
+        --warmup_epochs ${wmep} \
+        --drop_path ${dpr} \
+        --reprob ${reprob} \
+        --mixup ${mixup} \
+        --cutmix ${cutmix} \
+        --batch_size ${batch_size} \
+        --update_freq ${update_freq} \
+        --crop_pct ${crop_pct} \
+        --zero_stage ${zero_stage} \
+        --partial_freeze ${partial_freeze} \
+        --smoothing ${smoothing} \
+        --weight_decay ${weight_decay} \
+        --aa ${aa} \
+        --dist_eval \
+        --linear_probe \
+        --use_cls
+```
+
+</details>
+
+
+### fine-tuning 
+
+
+<details>
+<summary>We use 4 nodes (<code>total_bsz = 4*8*32 = 1024</code>) for fine-tuning EVA-CLIP vision encoder w/ <code>224px</code> inputs (click to expand).</summary>
+
+```bash   
+MODEL_NAME=eva_g_patch14
+
+sz=224 
+batch_size=32
+update_freq=1
+
+lr=3e-5      
+lrd=0.9        
+
+warmup_lr=0.0
+min_lr=0.0
+weight_decay=0.05
+
+partial_freeze=0
+ep=20
+wmep=2
+dpr=0.4
+
+reprob=0.0
+mixup=0.0
+cutmix=0.0
+
+zero_stage=1
+scale_low=0.08
+crop_pct=1.0
+smoothing=0.3
+aa=rand-m9-mstd0.5-inc1
+
+
+EXP_NAME=sz${sz}_cropscalelow${scale_low}_bsz4x8x${update_freq}x${batch_size}_lr${lr}_wmuplr${warmup_lr}_minlr${min_lr}_wd${weight_decay}_lrd${lrd}_partial_frz${partial_freeze}_ep${ep}_wmep${wmep}_reprob${reprob}_dpr${dpr}_mixup${mixup}_cutmix${cutmix}_aa${aa}_crop_pct${crop_pct}_sm${smoothing}
+
+
+# path to EVA-CLIP vision encoder ckpt
+PRETRAIN_CHKPT=/path/to/eva_clip_psz14_vision_enc.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14_vision_enc.pt
+
+OUTPUT_DIR=/path/to/output/{EXP_NAME}
+
+DATA_PATH=/path/to/ImageNet-1K
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --output_dir ${OUTPUT_DIR} \
+        --log_dir ${OUTPUT_DIR}/tb_log \
+        --model ${MODEL_NAME} \
+        --finetune ${PRETRAIN_CHKPT} \
+        --input_size ${sz} \
+        --scale ${scale_low} 1.0 \
+        --lr ${lr} \
+        --warmup_lr ${warmup_lr} \
+        --min_lr ${min_lr} \
+        --layer_decay ${lrd} \
+        --epochs ${ep} \
+        --warmup_epochs ${wmep} \
+        --drop_path ${dpr} \
+        --reprob ${reprob} \
+        --mixup ${mixup} \
+        --cutmix ${cutmix} \
+        --batch_size ${batch_size} \
+        --update_freq ${update_freq} \
+        --crop_pct ${crop_pct} \
+        --zero_stage ${zero_stage} \
+        --partial_freeze ${partial_freeze} \
+        --smoothing ${smoothing} \
+        --weight_decay ${weight_decay} \
+        --aa ${aa} \
+        --dist_eval \
+        --use_checkpoint \
+        --model_ema \
+        --model_ema_eval \
+        --enable_deepspeed
+```
+
+</details>
+
+
+
+
+<details>
+<summary>We use 4 nodes (<code>total_bsz = 4*8*32 = 1024</code>) for fine-tuning EVA-CLIP vision encoder w/ <code>336px</code> inputs (click to expand).</summary>
+
+```bash   
+MODEL_NAME=eva_g_patch14
+
+sz=336
+batch_size=16
+update_freq=1
+
+lr=3e-5      
+lrd=0.9        
+
+warmup_lr=0.0
+min_lr=0.0
+weight_decay=0.05
+
+partial_freeze=0
+ep=20
+wmep=2
+dpr=0.4
+
+reprob=0.0
+mixup=0.0
+cutmix=0.0
+
+zero_stage=1
+scale_low=0.08
+crop_pct=1.0
+smoothing=0.3
+aa=rand-m9-mstd0.5-inc1
+
+
+EXP_NAME=sz${sz}_cropscalelow${scale_low}_bsz4x8x${update_freq}x${batch_size}_lr${lr}_wmuplr${warmup_lr}_minlr${min_lr}_wd${weight_decay}_lrd${lrd}_partial_frz${partial_freeze}_ep${ep}_wmep${wmep}_reprob${reprob}_dpr${dpr}_mixup${mixup}_cutmix${cutmix}_aa${aa}_crop_pct${crop_pct}_sm${smoothing}
+
+
+# path to EVA-CLIP vision encoder ckpt
+PRETRAIN_CHKPT=/path/to/eva_clip_psz14_vision_enc.pt # https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14_vision_enc.pt
+
+OUTPUT_DIR=/path/to/output/{EXP_NAME}
+
+DATA_PATH=/path/to/ImageNet-1K
+
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$NNODES --node_rank=$NODE_RANK \
+--master_addr=$MASTER_ADDR --master_port=12355 --use_env run_class_finetuning.py \
+        --data_path ${DATA_PATH}/train \
+        --eval_data_path ${DATA_PATH}/val \
+        --nb_classes 1000 \
+        --data_set image_folder \
+        --output_dir ${OUTPUT_DIR} \
+        --log_dir ${OUTPUT_DIR}/tb_log \
+        --model ${MODEL_NAME} \
+        --finetune ${PRETRAIN_CHKPT} \
+        --input_size ${sz} \
+        --scale ${scale_low} 1.0 \
+        --lr ${lr} \
+        --warmup_lr ${warmup_lr} \
+        --min_lr ${min_lr} \
+        --layer_decay ${lrd} \
+        --epochs ${ep} \
+        --warmup_epochs ${wmep} \
+        --drop_path ${dpr} \
+        --reprob ${reprob} \
+        --mixup ${mixup} \
+        --cutmix ${cutmix} \
+        --batch_size ${batch_size} \
+        --update_freq ${update_freq} \
+        --crop_pct ${crop_pct} \
+        --zero_stage ${zero_stage} \
+        --partial_freeze ${partial_freeze} \
+        --smoothing ${smoothing} \
+        --weight_decay ${weight_decay} \
+        --aa ${aa} \
+        --dist_eval \
+        --use_checkpoint \
+        --model_ema \
+        --model_ema_eval \
+        --enable_deepspeed
+```
+
+</details>
+
 
 ## Acknowledgement
 
