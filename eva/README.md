@@ -26,7 +26,7 @@
 We provide **all pre-trained & fine-tuned** EVAs for the community. 
 The following table summarizes the basic statistics of MIM pre-trained EVA and image classification EVA.
 
-| model name | #param. | MIM pt epochs | IN-21K ft epochs | IN-1K ft epochs | IN-1K top-1 acc. |weight |
+| model name | #param. | MIM pt ep | IN-21K ft ep | IN-1K ft ep | IN-1K top-1 |weight |
 |------------|:------:|:------------------:|:------:|:------:|:------:|:------:|
 | `eva_psz14` | 1.0B | 150 | - | - | - | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14.pt) (`2GB`) |
 | `eva_psz14to16` | 1.0B | 150 | - | - | - | [🤗 HF link](https://huggingface.co/BAAI/EVA/blob/main/eva_psz14to16.pt) (`2GB`) | 
