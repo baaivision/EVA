@@ -128,10 +128,10 @@ If you are interested in working with us on **foundation model, self-supervised 
 
 
 ## Misc
-### &#8627; Stargazers
+### &#8627; Stargazers, thank you for your support!
 [![Stargazers repo roster for @baaivision/EVA](https://reporoster.com/stars/baaivision/EVA)](https://github.com/baaivision/EVA/stargazers)
 
-### &#8627; Forkers
+### &#8627; Forkers, thank you for your support!
 [![Forkers repo roster for @baaivision/EVA](https://reporoster.com/forks/baaivision/EVA)](https://github.com/baaivision/EVA/network/members)
 
 ### &#8627; Star History
