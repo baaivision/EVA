@@ -9,3 +9,7 @@ einops
 tensorboardX
 deepspeed==0.7.5
 scipy
+sh
+wandb
+ftfy
+regex
