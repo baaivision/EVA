@@ -683,7 +683,7 @@ merged_30m_pt
 MODEL_NAME=eva_g_patch14
 
 DATA_PATH=/path/to/merged_30m_pt
-VAL_DATA_PATH=/path/to/ImageNet-1K
+VAL_DATA_PATH=/path/to/ImageNet-1K # monitoring val loss 
 
 input_size=224
 num_mask_patches=105 ### 224*224/14/14 * 0.4 ###
