@@ -65,6 +65,8 @@ The top-1 accuracy of ImageNet-1K variants and ObjectNet.
 
 <div align="center">
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-with)](https://paperswithcode.com/sota/self-supervised-image-classification-with?p=eva-exploring-the-limits-of-masked-visual) 
+
 | model | IN-1K | IN-V2 |  IN-Adv. | IN-Ren. |IN-Ske. | ObjectNet |
 |-------|:-----:|:-----:|:----:| :------:|:-------:|:---------:|
 | OpenAI CLIP-L | 75.55 | 69.86 | 70.76 | 87.83 | 59.58 | 68.98 |
