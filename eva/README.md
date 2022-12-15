@@ -65,8 +65,9 @@ Compared with other open-sourced models, EVA achieves **state-of-the-art** perfo
 <div align="center">
 
 \
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-on-1)](https://paperswithcode.com/sota/self-supervised-image-classification-on-1?p=eva-exploring-the-limits-of-masked-visual) \
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-on)](https://paperswithcode.com/sota/self-supervised-image-classification-on?p=eva-exploring-the-limits-of-masked-visual) 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-with-2)](https://paperswithcode.com/sota/self-supervised-image-classification-with-2?p=eva-exploring-the-limits-of-masked-visual) \
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-with-3)](https://paperswithcode.com/sota/self-supervised-image-classification-with-3?p=eva-exploring-the-limits-of-masked-visual) \
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/eva-exploring-the-limits-of-masked-visual/self-supervised-image-classification-with)](https://paperswithcode.com/sota/self-supervised-image-classification-with?p=eva-exploring-the-limits-of-masked-visual) 
 
 | model | zero-shot (`224px`) | linear probing (`224px`) | linear probing (`336px`) | fine-tuning (`224px`) | fine-tuning (`336px`) |
 |:-----:|:------:|:------:|:------:|:------:|:------:| 
