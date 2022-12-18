@@ -7,7 +7,7 @@ pytest
 requests
 einops
 tensorboardX
-deepspeed==0.7.5
+deepspeed==0.6.5
 scipy
 sh
 wandb
