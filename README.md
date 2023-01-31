@@ -38,6 +38,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 </div>
 
+- `Jan 31, 2023`: By leveraging [EVA-CLIP](clip/README.md), BLIP-2 ([paper](https://arxiv.org/abs/2301.12597), [code](https://github.com/salesforce/LAVIS/tree/main/projects/blip2)) achieves SoTA performance on various VL tasks!
 - `Dec 12, 2022`: [EVA](https://github.com/rwightman/pytorch-image-models#dec-6-2022) and [EVA-L](https://github.com/rwightman/pytorch-image-models#dec-8-2022) model weights are added to the awesome [`timm`](https://github.com/rwightman/pytorch-image-models) library, thanks @[rwightman](https://github.com/rwightman)!
 - `Dec 07, 2022`: launch [**EVA-L**](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip), the **best** ViT-L (304M) to date that can reach up to **89.2** top-1 acc on IN-1K ([weights & logs](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip)) by leveraging vision features from [EVA-CLIP](clip/README.md).
 - `Nov 25, 2022`: release EVA-CLIP zero-shot [evaluation results](https://github.com/baaivision/EVA/tree/master/clip#eva-clip-zero-shot-evaluation-results) on 35 benchmarks.
