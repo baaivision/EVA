@@ -949,3 +949,5 @@ The zero-shot retrieval performance of EVA-CLIP is relatively inferior to the Op
 - Retrieval tasks seem benefit more from the training dataset size (LAION-2B used by Open CLIP), while we only leverage LAION-400M for EVA-CLIP training. 
 
 Nevertheless, it is hard to make a head-to-head comparison between different CLIP models. In the future, we will further scale up the language encoder & training data to improve the retrieval performance.
+
+- **Updates (Feb, 2023)**: We are training an improved version of EVA-CLIP+ (WIP), now achieving ~79.5 zero-shot top-1 accuracy on IN-1K, and outperforming the prev. best CLIP by ~0.5\% in zero-shot retrieval. We will update the details soon and release all suites of EVA-CLIP+ in the future. Please stay tuned.
