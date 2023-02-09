@@ -3,7 +3,7 @@ DATA:
     TRAIN_FILE: 'data/k600_train.txt'
     VAL_FILE: 'data/k600_val.txt'
     DATASET: kinetics600
-    NUM_FRAMES: 8
+    NUM_FRAMES: 16
     TUBELET_SIZE: 1
     NUM_CLASSES: 600
     LABEL_LIST: 'labels/kinetics600_labels.csv'
