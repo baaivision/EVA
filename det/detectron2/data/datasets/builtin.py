@@ -146,6 +146,7 @@ _PREDEFINED_SPLITS_LVIS = {
     "lvis_v1": {
         "lvis_v1_train": ("coco/", "lvis/lvis_v1_train.json"),
         "lvis_v1_val": ("coco/", "lvis/lvis_v1_val.json"),
+        "lvis_v1_val_5k": ("coco/", "lvis/lvis_v1_val_5k.json"),
         "lvis_v1_test_dev": ("coco/", "lvis/lvis_v1_image_info_test_dev.json"),
         "lvis_v1_test_challenge": ("coco/", "lvis/lvis_v1_image_info_test_challenge.json"),
     },
@@ -159,7 +160,11 @@ _PREDEFINED_SPLITS_LVIS = {
         "lvis_v0.5_train_cocofied": ("coco/", "lvis/lvis_v0.5_train_cocofied.json"),
         "lvis_v0.5_val_cocofied": ("coco/", "lvis/lvis_v0.5_val_cocofied.json"),
     },
+    "lvis_v1_cocofied": {
+        "lvis_v1_val_cocofied": ("coco/", "lvis/lvis_v1_val_5k_cocofied.json"),
+    },
 }
+
 
 
 def register_all_lvis(root):
