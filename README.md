@@ -1,6 +1,6 @@
 <div align="center">
 <h1>EVA: An Open Billion-Scale Vision Foundation Model </h1>
-<h3><a href="https://arxiv.org/abs/2211.07636">EVA: Exploring the Limits of Masked Visual Representation Learning at Scale</a></h3>
+<h3>[CVPR 2023] <a href="https://arxiv.org/abs/2211.07636">EVA: Exploring the Limits of Masked Visual Representation Learning at Scale</a></h3>
 
 [Yuxin Fang](https://bit.ly/YuxinFang_GoogleScholar)<sup>2,1</sup>, [Wen Wang](https://scholar.google.com/citations?user=1ks0R04AAAAJ&hl)<sup>3,1</sup>, [Binhui Xie](https://binhuixie.github.io/)<sup>4,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Ledell Wu](https://scholar.google.com/citations?user=-eJHVt8AAAAJ&hl=en)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
  
@@ -38,6 +38,7 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 </div>
 
+- **`Feb 28, 2023`: EVA is accepted to CVPR 2023!**
 - `Jan 31, 2023`: Strong visual representations also enable powerful VL foundation models. By leveraging [EVA-CLIP](clip/README.md), BLIP-2 ([paper](https://arxiv.org/abs/2301.12597), [code](https://github.com/salesforce/LAVIS/tree/main/projects/blip2)) achieves SoTA performance on various VL tasks!
 - `Dec 12, 2022`: [EVA](https://github.com/rwightman/pytorch-image-models#dec-6-2022) and [EVA-L](https://github.com/rwightman/pytorch-image-models#dec-8-2022) model weights are added to the awesome [`timm`](https://github.com/rwightman/pytorch-image-models) library, thanks @[rwightman](https://github.com/rwightman)!
 - `Dec 07, 2022`: launch [**EVA-L**](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip), the **best** ViT-L (304M) to date that can reach up to **89.2** top-1 acc on IN-1K ([weights & logs](https://github.com/baaivision/EVA/tree/master/eva#eva-l-learning-better-mim-representations-from-eva-clip)) by leveraging vision features from [EVA-CLIP](clip/README.md).
