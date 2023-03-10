@@ -36,8 +36,6 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 <div align="center">
 
-### $\color{red}{\text{All the code and dozens of state-of-the-art billion-scale models are open-sourced!}}$
-
 </div>
 
 - **`Feb 28, 2023`: EVA is accepted to CVPR 2023!**
