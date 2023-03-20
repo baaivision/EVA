@@ -1,0 +1,713 @@
+2023-03-18 17:33:13,655 - mmseg - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.8.15 (default, Nov 24 2022, 15:19:38) [GCC 11.2.0]
+CUDA available: True
+GPU 0,1,2,3: NVIDIA A100-SXM4-40GB
+CUDA_HOME: /usr/local/cuda
+NVCC: Cuda compilation tools, release 11.2, V11.2.67
+GCC: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+PyTorch: 1.12.1
+PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.6.0 (Git Hash 52b5f107dd9cf10910aaa19cb47f3abf9b349815)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.6
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.3.2  (built against CUDA 11.5)
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.6, CUDNN_VERSION=8.3.2, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.12.1, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+TorchVision: 0.13.1
+OpenCV: 4.7.0
+MMCV: 1.7.1
+MMCV Compiler: GCC 9.3
+MMCV CUDA Compiler: 11.6
+MMSegmentation: 0.29.1+8288dd0
+------------------------------------------------------------
+
+2023-03-18 17:33:13,655 - mmseg - INFO - Distributed training: True
+2023-03-18 17:33:13,970 - mmseg - INFO - Config:
+norm_cfg = dict(type='SyncBN', requires_grad=True)
+model = dict(
+    type='EncoderDecoder',
+    pretrained=None,
+    backbone=dict(
+        type='EVA2',
+        patch_size=16,
+        embed_dim=768,
+        depth=12,
+        num_heads=12,
+        mlp_ratio=2.6666666666666665,
+        qkv_bias=True,
+        use_abs_pos_emb=True,
+        use_rel_pos_bias=False,
+        img_size=512,
+        in_chans=3,
+        out_indices=[3, 5, 7, 11],
+        drop_path_rate=0.15,
+        init_values=None,
+        use_checkpoint=False,
+        use_shared_rel_pos_bias=False,
+        rope=True,
+        pt_hw_seq_len=16,
+        intp_freq=True,
+        subln=True,
+        xattn=True,
+        naiveswiglu=True,
+        pretrained=
+        '/share/project/yxf/open/eva02/pt/eva02_B_pt_in21k_p14to16.pt'),
+    decode_head=dict(
+        type='UPerHead',
+        in_channels=[768, 768, 768, 768],
+        in_index=[0, 1, 2, 3],
+        pool_scales=(1, 2, 3, 6),
+        channels=768,
+        dropout_ratio=0.1,
+        num_classes=150,
+        norm_cfg=dict(type='SyncBN', requires_grad=True),
+        align_corners=False,
+        loss_decode=dict(
+            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0)),
+    auxiliary_head=dict(
+        type='FCNHead',
+        in_channels=768,
+        in_index=2,
+        channels=256,
+        num_convs=1,
+        concat_input=False,
+        dropout_ratio=0.1,
+        num_classes=150,
+        norm_cfg=dict(type='SyncBN', requires_grad=True),
+        align_corners=False,
+        loss_decode=dict(
+            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
+    train_cfg=dict(),
+    test_cfg=dict(mode='slide', crop_size=(512, 512), stride=(341, 341)))
+find_unused_parameters = True
+dataset_type = 'ADE20KDataset'
+data_root = '/share/project/yxf/data/ade20k/ADEChallengeData2016'
+img_norm_cfg = dict(
+    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+crop_size = (512, 512)
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations', reduce_zero_label=True),
+    dict(type='Resize', img_scale=(2048, 512), ratio_range=(0.5, 2.0)),
+    dict(type='RandomCrop', crop_size=(512, 512), cat_max_ratio=0.75),
+    dict(type='RandomFlip', prob=0.5),
+    dict(type='PhotoMetricDistortion'),
+    dict(
+        type='Normalize',
+        mean=[123.675, 116.28, 103.53],
+        std=[58.395, 57.12, 57.375],
+        to_rgb=True),
+    dict(type='Pad', size=(512, 512), pad_val=0, seg_pad_val=255),
+    dict(type='DefaultFormatBundle'),
+    dict(type='Collect', keys=['img', 'gt_semantic_seg'])
+]
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(2048, 512),
+        flip=False,
+        transforms=[
+            dict(type='Resize', keep_ratio=True),
+            dict(type='RandomFlip'),
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img'])
+        ])
+]
+data = dict(
+    samples_per_gpu=8,
+    workers_per_gpu=4,
+    train=dict(
+        type='ADE20KDataset',
+        data_root='/share/project/yxf/data/ade20k/ADEChallengeData2016',
+        img_dir='images/training',
+        ann_dir='annotations/training',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations', reduce_zero_label=True),
+            dict(type='Resize', img_scale=(2048, 512), ratio_range=(0.5, 2.0)),
+            dict(type='RandomCrop', crop_size=(512, 512), cat_max_ratio=0.75),
+            dict(type='RandomFlip', prob=0.5),
+            dict(type='PhotoMetricDistortion'),
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad', size=(512, 512), pad_val=0, seg_pad_val=255),
+            dict(type='DefaultFormatBundle'),
+            dict(type='Collect', keys=['img', 'gt_semantic_seg'])
+        ]),
+    val=dict(
+        type='ADE20KDataset',
+        data_root='/share/project/yxf/data/ade20k/ADEChallengeData2016',
+        img_dir='images/validation',
+        ann_dir='annotations/validation',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(2048, 512),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[123.675, 116.28, 103.53],
+                        std=[58.395, 57.12, 57.375],
+                        to_rgb=True),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img'])
+                ])
+        ]),
+    test=dict(
+        type='ADE20KDataset',
+        data_root='/share/project/yxf/data/ade20k/ADEChallengeData2016',
+        img_dir='images/validation',
+        ann_dir='annotations/validation',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(2048, 512),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[123.675, 116.28, 103.53],
+                        std=[58.395, 57.12, 57.375],
+                        to_rgb=True),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img'])
+                ])
+        ]))
+log_config = dict(
+    interval=50, hooks=[dict(type='TextLoggerHook', by_epoch=False)])
+dist_params = dict(backend='nccl')
+log_level = 'INFO'
+load_from = None
+resume_from = None
+workflow = [('train', 1)]
+cudnn_benchmark = True
+optimizer = dict(
+    type='AdamW',
+    lr=6e-05,
+    betas=(0.9, 0.999),
+    weight_decay=0.05,
+    constructor='LayerDecayOptimizerConstructor',
+    paramwise_cfg=dict(num_layers=12, layer_decay_rate=0.85))
+optimizer_config = dict(
+    type='DistOptimizerHook',
+    update_interval=1,
+    grad_clip=None,
+    coalesce=True,
+    bucket_size_mb=-1,
+    use_fp16=True)
+lr_config = dict(
+    policy='poly',
+    warmup='linear',
+    warmup_iters=1500,
+    warmup_ratio=1e-06,
+    power=1.0,
+    min_lr=0.0,
+    by_epoch=False)
+runner = dict(type='IterBasedRunnerAmp', max_iters=60000)
+checkpoint_config = dict(by_epoch=False, interval=1000, max_keep_ckpts=4)
+evaluation = dict(interval=1000, metric='mIoU', save_best='mIoU')
+fp16 = None
+work_dir = './work_dirs/upernet_eva02_base_12_512_slide_60k'
+gpu_ids = range(0, 1)
+
+2023-03-18 17:33:13,970 - mmseg - INFO - Set random seed to 0, deterministic: True
+2023-03-18 17:33:17,469 - mmseg - WARNING - The model and loaded state dict do not match exactly
+
+size mismatch for rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.0.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.0.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.1.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.1.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.2.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.2.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.3.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.3.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.4.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.4.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.5.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.5.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.6.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.6.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.7.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.7.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.8.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.8.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.9.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.9.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.10.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.10.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.11.attn.rope.freqs_cos: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+size mismatch for blocks.11.attn.rope.freqs_sin: copying a param with shape torch.Size([16, 16, 64]) from checkpoint, the shape in current model is torch.Size([1024, 64]).
+unexpected key in source state_dict: mask_token, norm.weight, norm.bias, lm_head.weight, lm_head.bias
+
+missing keys in source state_dict: fpn1.0.weight, fpn1.0.bias, fpn1.1.weight, fpn1.1.bias, fpn1.1.running_mean, fpn1.1.running_var, fpn1.3.weight, fpn1.3.bias, fpn2.0.weight, fpn2.0.bias
+
+2023-03-18 17:33:18,274 - mmseg - INFO - EncoderDecoder(
+  (backbone): EVA2(
+    (patch_embed): PatchEmbed(
+      (proj): Conv2d(3, 768, kernel_size=(16, 16), stride=(16, 16))
+    )
+    (pos_drop): Dropout(p=0.0, inplace=False)
+    (rope): VisionRotaryEmbeddingFast()
+    (blocks): ModuleList(
+      (0): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): Identity()
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (1): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.013636364601552486)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (2): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.027272729203104973)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (3): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.040909092873334885)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (4): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.054545458406209946)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (5): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.06818182021379471)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (6): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.08181818574666977)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (7): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.09545454382896423)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (8): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.1090909093618393)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (9): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.12272727489471436)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (10): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.13636364042758942)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+      (11): Block(
+        (norm1): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (attn): Attention(
+          (q_proj): Linear(in_features=768, out_features=768, bias=False)
+          (k_proj): Linear(in_features=768, out_features=768, bias=False)
+          (v_proj): Linear(in_features=768, out_features=768, bias=False)
+          (attn_drop): Dropout(p=0.0, inplace=False)
+          (proj): Linear(in_features=768, out_features=768, bias=True)
+          (proj_drop): Dropout(p=0.0, inplace=False)
+          (rope): VisionRotaryEmbeddingFast()
+        )
+        (drop_path): DropPath(p=0.15000000596046448)
+        (norm2): FusedLayerNorm(torch.Size([768]), eps=1e-06, elementwise_affine=True)
+        (mlp): SwiGLU(
+          (w1): Linear(in_features=768, out_features=2048, bias=True)
+          (w2): Linear(in_features=768, out_features=2048, bias=True)
+          (act): SiLU()
+          (ffn_ln): FusedLayerNorm(torch.Size([2048]), eps=1e-06, elementwise_affine=True)
+          (w3): Linear(in_features=2048, out_features=768, bias=True)
+          (drop): Dropout(p=0.0, inplace=False)
+        )
+      )
+    )
+    (fpn1): Sequential(
+      (0): ConvTranspose2d(768, 768, kernel_size=(2, 2), stride=(2, 2))
+      (1): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): GELU(approximate=none)
+      (3): ConvTranspose2d(768, 768, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (fpn2): Sequential(
+      (0): ConvTranspose2d(768, 768, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (fpn3): Identity()
+    (fpn4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (decode_head): UPerHead(
+    input_transform=multiple_select, ignore_index=255, align_corners=False
+    (loss_decode): CrossEntropyLoss(avg_non_ignore=False)
+    (conv_seg): Conv2d(768, 150, kernel_size=(1, 1), stride=(1, 1))
+    (dropout): Dropout2d(p=0.1, inplace=False)
+    (psp_modules): PPM(
+      (0): Sequential(
+        (0): AdaptiveAvgPool2d(output_size=1)
+        (1): ConvModule(
+          (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activate): ReLU(inplace=True)
+        )
+      )
+      (1): Sequential(
+        (0): AdaptiveAvgPool2d(output_size=2)
+        (1): ConvModule(
+          (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activate): ReLU(inplace=True)
+        )
+      )
+      (2): Sequential(
+        (0): AdaptiveAvgPool2d(output_size=3)
+        (1): ConvModule(
+          (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activate): ReLU(inplace=True)
+        )
+      )
+      (3): Sequential(
+        (0): AdaptiveAvgPool2d(output_size=6)
+        (1): ConvModule(
+          (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (activate): ReLU(inplace=True)
+        )
+      )
+    )
+    (bottleneck): ConvModule(
+      (conv): Conv2d(3840, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (activate): ReLU(inplace=True)
+    )
+    (lateral_convs): ModuleList(
+      (0): ConvModule(
+        (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU()
+      )
+      (1): ConvModule(
+        (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU()
+      )
+      (2): ConvModule(
+        (conv): Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU()
+      )
+    )
+    (fpn_convs): ModuleList(
+      (0): ConvModule(
+        (conv): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU()
+      )
+      (1): ConvModule(
+        (conv): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU()
+      )
+      (2): ConvModule(
+        (conv): Conv2d(768, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU()
+      )
+    )
+    (fpn_bottleneck): ConvModule(
+      (conv): Conv2d(3072, 768, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): SyncBatchNorm(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (activate): ReLU(inplace=True)
+    )
+  )
+  init_cfg={'type': 'Normal', 'std': 0.01, 'override': {'name': 'conv_seg'}}
+  (auxiliary_head): FCNHead(
+    input_transform=None, ignore_index=255, align_corners=False
+    (loss_decode): CrossEntropyLoss(avg_non_ignore=False)
+    (conv_seg): Conv2d(256, 150, kernel_size=(1, 1), stride=(1, 1))
+    (dropout): Dropout2d(p=0.1, inplace=False)
+    (convs): Sequential(
+      (0): ConvModule(
+        (conv): Conv2d(768, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activate): ReLU(inplace=True)
+      )
+    )
+  )
+  init_cfg={'type': 'Normal', 'std': 0.01, 'override': {'name': 'conv_seg'}}
+)
+2023-03-18 17:33:18,784 - mmseg - INFO - Loaded 20210 images
+2023-03-18 17:33:24,740 - mmseg - INFO - Loaded 2000 images
+2023-03-18 17:33:24,741 - mmseg - INFO - Start running, host: root@job-cbed4a53-69df-4038-b59e-886792a33eef-master-0, work_dir: /share/project/yxf/project/EVA_dev/src/semantic_segmentation/work_dirs/upernet_eva02_base_12_512_slide_60k
+2023-03-18 17:33:24,741 - mmseg - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) PolyLrUpdaterHook                  
+(ABOVE_NORMAL) DistOptimizerHook                  
+(NORMAL      ) CheckpointHook                     
+(LOW         ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) PolyLrUpdaterHook                  
+(LOW         ) IterTimerHook                      
+(LOW         ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) PolyLrUpdaterHook                  
+(LOW         ) IterTimerHook                      
+(LOW         ) DistEvalHook                       
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) DistOptimizerHook                  
+(NORMAL      ) CheckpointHook                     
+(LOW         ) IterTimerHook                      
+(LOW         ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(LOW         ) DistEvalHook                       
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_epoch:
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+2023-03-18 17:33:24,741 - mmseg - INFO - workflow: [('train', 1)], max: 60000 iters
+2023-03-18 17:33:24,741 - mmseg - INFO - Checkpoints will be saved to /share/project/yxf/project/EVA_dev/src/semantic_segmentation/work_dirs/upernet_eva02_base_12_512_slide_60k by HardDiskBackend.
+2023-03-18 17:34:39,946 - mmseg - INFO - Iter [50/60000]	lr: 2.368e-07, eta: 10:59:11, time: 0.660, data_time: 0.019, memory: 15035, decode.loss_ce: 4.0880, decode.acc_seg: 1.5881, aux.loss_ce: 1.6704, aux.acc_seg: 0.3958, loss: 5.7584
+2023-03-18 17:35:06,605 - mmseg - INFO - Iter [100/60000]	lr: 4.780e-07, eta: 9:55:28, time: 0.533, data_time: 0.007, memory: 15035, decode.loss_ce: 3.8431, decode.acc_seg: 9.6583, aux.loss_ce: 1.6333, aux.acc_seg: 0.5524, loss: 5.4765
+2023-03-18 17:35:33,072 - mmseg - INFO - Iter [150/60000]	lr: 7.188e-07, eta: 9:32:37, time: 0.529, data_time: 0.007, memory: 15035, decode.loss_ce: 3.4319, decode.acc_seg: 30.5320, aux.loss_ce: 1.6425, aux.acc_seg: 1.5918, loss: 5.0744
+2023-03-18 17:35:59,426 - mmseg - INFO - Iter [200/60000]	lr: 9.592e-07, eta: 9:20:27, time: 0.527, data_time: 0.007, memory: 15035, decode.loss_ce: 2.6162, decode.acc_seg: 45.0005, aux.loss_ce: 1.5420, aux.acc_seg: 10.6263, loss: 4.1582
+2023-03-18 17:36:25,679 - mmseg - INFO - Iter [250/60000]	lr: 1.199e-06, eta: 9:12:33, time: 0.525, data_time: 0.007, memory: 15035, decode.loss_ce: 2.1293, decode.acc_seg: 52.3862, aux.loss_ce: 1.4083, aux.acc_seg: 27.6296, loss: 3.5376

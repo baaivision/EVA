@@ -1,0 +1,20 @@
+*.swp
+**/__pycache__/**
+.dumbo.json
+checkpoints/
+.idea/*
+
+OUTPUT/*
+OUTPUT
+
+wandb/
+
+# open_clip/
+**/stdout/**
+**/stdout_pt/**
+**/stdout_ft/**
+**/stdout_test/**
+**/stdout_lin/**
+
+**/work_dirs/**
+deepspeed_config.json

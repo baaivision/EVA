@@ -1,0 +1,55 @@
+<div align="center">
+
+<h3><a href="https://arxiv.org/abs/2211.07636">EVA-02: A Visual Representation for Neon Genesis</a></h3>
+
+[Yuxin Fang](https://github.com/Yuxin-CV)<sup>2,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
+ 
+<sup>1</sup>[BAAI](https://www.baai.ac.cn/english.html), <sup>2</sup>[HUST](http://english.hust.edu.cn/)
+
+</div>
+
+
+We launch EVA-02, a next-generation Transformer-based visual representation pre-trained to reconstruct strong and robust **language-aligned vision features** via masked image modeling. 
+
+With an updated plain Transformer architecture as well as extensive pre-training from an open & accessible giant CLIP vision encoder, EVA-02 demonstrates superior performance compared to prior state-of-the-art approaches across various representative vision tasks, while utilizing significantly fewer parameters and compute budgets. 
+
+Notably, using exclusively publicly accessible training data, EVA-02 with only **304M** parameters achieves a phenomenal **90.0** fine-tuning top-1 accuracy on ImageNet-1K val set. 
+Additionally, EVA-02-CLIP can reach up to **80.4** zero-shot top-1 on ImageNet-1K, outperforming the previous largest & best open-sourced CLIP with only ~1/6 parameters and ~1/6 image-text training data. 
+
+We offer four EVA-02 variants in various model sizes, ranging **from 6M to 304M** parameters, all with impressive performance.
+
+We hope our efforts enable a broader range of the research community to advance the field in a more **efficient, affordable and equitable** manner.
+
+
+## Summary of EVA-02 performance
+
+![summary_tab](assets/summary_tab.png)
+
+
+## Catalog
+- [x] [Pre-training](asuka)
+- [x] [Image Classification](asuka)
+- [x] [Object Detection & Instance Segmentation](det)
+- [x] [Semantic Segmentation](seg)
+- [x] [CLIP](../EVA-CLIP)
+
+
+
+## BibTeX & Citation
+If you find our work helpful, please **star🌟** this repo and **cite📑** our paper. Thanks for your support!
+
+```
+```
+
+
+## License
+
+The content of this project itself is licensed under [LICENSE](LICENSE).
+
+## Contact
+
+- For help and issues associated with EVA-02, or reporting a bug, please open a [GitHub Issue with label EVA-02](https://github.com/baaivision/EVA/labels/EVA-02). 
+Let's build a better & stronger EVA-02 together :)
+
+- **We are hiring** at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
+If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
