@@ -1,6 +1,6 @@
 <div align="center">
 
-<h3>EVA: Vision Foundation Model Fanatics from BAAI</h3>
+<h2>EVA: Vision Foundation Model Fanatics from BAAI</h2>
 
 </div>
 
@@ -10,4 +10,9 @@
 > [**EVA-02**](EVA-02) (Arxiv 2023): A Visual Representation for Neon Genesis
 
 > [**EVA-CLIP**](EVA-CLIP) (Arxiv 2023): Improved Techniques for CLIP at Scale
+
+
+## Contact
+- **We are hiring** at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
+If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
 
