@@ -9,7 +9,7 @@
 
 > [**EVA-02**](EVA-02) (Arxiv 2023): A Visual Representation for Neon Genesis
 
-> [**EVA-CLIP**](EVA-CLIP) (Arxiv 2023): Improved Techniques for CLIP at Scale
+> [**EVA-CLIP**](EVA-CLIP) (Arxiv 2023): Improved Training Techniques for CLIP at Scale
 
 
 ## Contact
