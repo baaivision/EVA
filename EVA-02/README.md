@@ -34,6 +34,9 @@ We hope our efforts enable a broader range of the research community to advance 
 - [x] [CLIP](../EVA-CLIP)
 
 
+## Best Practice
+If you would like to use / fine-tune EVA-02 in your project, please try a shorter schedule & smaller learning rate (compared with the baseline setting) first.
+
 
 ## BibTeX & Citation
 If you find our work helpful, please **star🌟** this repo and **cite📑** our paper. Thanks for your support!
