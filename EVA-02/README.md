@@ -26,7 +26,7 @@ We hope our efforts enable a broader range of the research community to advance 
 ![summary_tab](assets/summary_tab.png)
 
 
-## Catalog
+## Get Started
 - [x] [Pre-training](asuka)
 - [x] [Image Classification](asuka)
 - [x] [Object Detection & Instance Segmentation](det)
@@ -39,7 +39,6 @@ If you would like to use / fine-tune EVA-02 in your project, please try a shorte
 
 
 ## BibTeX & Citation
-If you find our work helpful, please **star🌟** this repo and **cite📑** our paper. Thanks for your support!
 
 ```
 ```
@@ -48,6 +47,7 @@ If you find our work helpful, please **star🌟** this repo and **cite📑** our
 ## License
 
 The content of this project itself is licensed under [LICENSE](LICENSE).
+
 
 ## Contact
 
