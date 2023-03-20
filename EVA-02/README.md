@@ -1,6 +1,6 @@
 <div align="center">
 
-<h3><a href="https://github.com/baaivision/EVA/blob/master/EVA-02/EVA_02.pdf">EVA-02: A Visual Representation for Neon Genesis</a></h3>
+<h2><a href="https://github.com/baaivision/EVA/blob/master/EVA-02/EVA_02.pdf">EVA-02: A Visual Representation for Neon Genesis</a></h2>
 
 [Yuxin Fang](https://github.com/Yuxin-CV)<sup>2,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
  
