@@ -36,8 +36,8 @@ We launch **EVA**, a vision-centric foundation model to **E**xplore the limits o
 
 </div>
 
-- **`Mar 21, 2023`: EVA is selected as a 🌟highlight🌟 at CVPR 2023**
-- `Mar 21, 2023`: If you like EVA, you might also like [EVA-02](../EVA-02)
+- **`Mar 21, 2023`: EVA is selected as a 🌟highlight🌟 at CVPR 2023!**
+- **`Mar 21, 2023`: If you like EVA, you might also like [EVA-02](../EVA-02), the next-gen EVA.**
 - **`Feb 28, 2023`: EVA is accepted to CVPR 2023!**
 - `Jan 31, 2023`: Strong visual representations also enable powerful VL foundation models. By leveraging [EVA-CLIP](clip/README.md), BLIP-2 ([paper](https://arxiv.org/abs/2301.12597), [code](https://github.com/salesforce/LAVIS/tree/main/projects/blip2)) achieves SoTA performance on various VL tasks!
 - `Dec 12, 2022`: [EVA](https://github.com/rwightman/pytorch-image-models#dec-6-2022) and [EVA-L](https://github.com/rwightman/pytorch-image-models#dec-8-2022) model weights are added to the awesome [`timm`](https://github.com/rwightman/pytorch-image-models) library, thanks @[rwightman](https://github.com/rwightman)!
