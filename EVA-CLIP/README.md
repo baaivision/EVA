@@ -58,7 +58,7 @@ Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples ach
 
 - To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
 
-- To our knowledge, EVA-CLIP is the most performant open-sourced CLIP model at any scale, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
+- To our knowledge, EVA-CLIP series are the most performant open-sourced CLIP models at all scales, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
 For more details about EVA-CLIP, please refer to our [paper (coming very soon)]().
 
 ## Setup
