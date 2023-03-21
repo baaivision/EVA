@@ -1,6 +1,6 @@
 <div align="center">
 
-<h2><a href="https://github.com/baaivision/EVA/blob/master/EVA-02/EVA_02.pdf">EVA-02: A Visual Representation for Neon Genesis</a></h2>
+<h2><a href="https://arxiv.org/abs/2303.11331">EVA-02: A Visual Representation for Neon Genesis</a></h2>
 
 [Yuxin Fang](https://github.com/Yuxin-CV)<sup>2,1</sup>, [Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Xinggang Wang](https://xinggangw.info/)<sup>2</sup>, [Tiejun Huang](https://scholar.google.com/citations?user=knvEK4AAAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
  
@@ -41,6 +41,12 @@ If you would like to use / fine-tune EVA-02 in your project, please start with *
 ## BibTeX & Citation
 
 ```
+@article{EVA02,
+  title={EVA-02: A Visual Representation for Neon Genesis}, 
+  author={Yuxin Fang and Quan Sun and Xinggang Wang and Tiejun Huang and Xinlong Wang and Yue Cao},
+  journal={arXiv preprint arXiv:2303.11331},
+  year={2023}
+}
 ```
 
 
