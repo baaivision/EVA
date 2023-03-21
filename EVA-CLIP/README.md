@@ -242,9 +242,10 @@ Please prepare EVA-01, EVA-02, Openai CLIP and Open CLIP models.
 | model name | total #params | training precision | download link |
 |:-----------|:------:|:------:|:------:|
 | `EVA01_g_psz14` | 1.0B | `fp16` | [🤗 HF link]() (`2.0GB`) |
-| `EVA02_B_psz16` | 149M | `fp16` | [🤗 HF link]() (`300MB`) |
+| `EVA02_B_psz14to16` | 149M | `fp16` | [🤗 HF link]() (`300MB`) |
 | `EVA02_L_psz14` | 428M | `fp16` | [🤗 HF link]() (`856MB`) |
-| `EVA02_E_psz14` | 4.4B | `fp16` | [🤗 HF link]() (`8.8GB`) |
+| `EVA02_CLIP_L_psz14_224to336` | 428M | `fp16` | [🤗 HF link]() (`856MB`) |
+| `EVA02_L_psz14` | 4.4B | `fp16` | [🤗 HF link]() (`8.8GB`) |
 | `openai/clip-vit-base-patch16`| 149M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-base-patch16/blob/main/pytorch_model.bin) (`599MB`) |
 | `openai/clip-vit-large-patch14`| 428M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin) (`1.7GB`) |
 | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K`| 1.0B | `bf16` | [🤗 HF link](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/blob/main/pytorch_model.bin) (`3.9GB`) |
@@ -318,7 +319,7 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 
 ```bash
 MODEL=EVA-ViT-B-16-X
-PRETRAINED_IMAGE=/path/to/EVA02_B_psz16.pt
+PRETRAINED_IMAGE=/path/to/EVA02_B_psz14to16.pt
 PRETRAINED_TEXT=/path/to/openai/clip-vit-base-patch16/pytorch_model.bin
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
@@ -443,11 +444,71 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 </details>
 
 <details>
+<summary>Pre-train <code>EVA02_CLIP_L_psz14_224to336</code> on <b>Merged-2B</b> with 16 nodes (click to expand).</summary>
+
+```bash
+MODEL=EVA-ViT-L-14-X-336
+PRETRAINED=/path/to/EVA02_CLIP_L_psz14_224to336.pt
+
+# Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
+MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
+# LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+VAL_DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 \
+       	--nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env \
+    training/main.py \
+        --save-frequency 1 \
+        --zeroshot-frequency 1 \
+        --report-to="wandb, tensorboard" \
+        --wandb-project-name="eva-clip" \
+        --wandb-notes="eva02_clip_L_14_336" \
+        --train-num-samples 40000000 \
+        --dataset-resampled \
+        --train-data-list=${MERGE_2B_DATA_PATH} \
+        --dataset-type-list="webdataset;webdataset" \
+        --imagenet-val=${VAL_DATA_PATH} \
+        --warmup 2000 \
+        --batch-size=480 \
+        --epochs=50 \
+        --lr=5e-4 \
+        --visual-lr=4e-4 \
+        --text-lr=4e-5 \
+        --wd=0.05 \
+        --visual-wd=0.05 \
+        --text-wd=0.05 \
+        --ld=1.0 \
+        --visual-ld=0.75 \
+        --text-ld=0.65 \
+        --grad-clip-norm=5.0 \
+        --smoothing=0. \
+        --workers=8 \
+        --model EVA-ViT-L-14-X-336 \
+        --name='eva-vit-l-14-x-336-lamb-16nodes-b61k-stage1-laion2b-coyo-round-robin' \
+        --pretrained=${PRETRAINED} \
+        --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
+        --seed 4096 \
+        --gather-with-grad \
+        --grad-checkpointing \
+        --local-loss \
+        --force-custom-clip \
+        --force-patch-dropout=0 \
+        --optimizer="lamb" \
+        --zero-stage=1 \
+        --enable-deepspeed
+```
+
+</details>
+
+<details>
 <summary>Pre-train <code>EVA02_CLIP_E_psz14_s4B</code> on <b>LAION-2B</b> with 18 nodes (click to expand).</summary>
 
 ```bash
 MODEL=EVA-ViT-4b-14-text-H-X
-PRETRAINED_IMAGE=/path/to/EVA02_E_psz14.pt
+PRETRAINED_IMAGE=/path/to/EVA02_CLIP_L_psz14_224to336.pt
 PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/pytorch_model.bin
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
