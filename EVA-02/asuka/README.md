@@ -806,7 +806,7 @@ Please prepare IN-21K dataset and EVA-CLIP (`eva_clip_psz14.pt`, [download link]
 
 
 <details>
-<summary>Pre-train <code>eva02_Ti_pt_in21k_p14</code> on <b>IN-21K</b> with 5 nodes (click to expand).</summary>
+<summary>Pre-train <code>eva02_Ti_pt_in21k_p14</code> on <b>IN-21K</b> using 5 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL=eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit
@@ -888,7 +888,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Pre-train <code>eva02_S_pt_in21k_p14</code> on <b>IN-21K</b> with 5 nodes (click to expand).</summary>
+<summary>Pre-train <code>eva02_S_pt_in21k_p14</code> on <b>IN-21K</b> using 5 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL=eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit
@@ -969,7 +969,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Pre-train <code>eva02_B_pt_in21k_p14</code> on <b>IN-21K</b> with 4 nodes (click to expand).</summary>
+<summary>Pre-train <code>eva02_B_pt_in21k_p14</code> on <b>IN-21K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL=eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit
@@ -1046,7 +1046,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Pre-train <code>eva02_L_pt_in21k_p14</code> on <b>IN-21K</b> with 8 nodes (click to expand).</summary>
+<summary>Pre-train <code>eva02_L_pt_in21k_p14</code> on <b>IN-21K</b> using 8 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit
@@ -1122,7 +1122,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Pre-train <code>eva02_L_pt_m38m_p14</code> on <b>Merged-38M</b> with 8 nodes (click to expand).</summary>
+<summary>Pre-train <code>eva02_L_pt_m38m_p14</code> on <b>Merged-38M</b> using 8 nodes x 8 gpus per node (click to expand).</summary>
 
 Prepare Merged-38M unlabeled image dataset:
 ```bash
@@ -1224,7 +1224,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_Ti_pt_in21k_p14</code> on <b>IN-1K</b> with 1 node (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_Ti_pt_in21k_p14</code> on <b>IN-1K</b> using 1 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE
@@ -1309,7 +1309,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_S_pt_in21k_p14</code> on <b>IN-1K</b> with 1 node (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_S_pt_in21k_p14</code> on <b>IN-1K</b> using 1 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE
@@ -1393,7 +1393,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_B_pt_in21k_p14</code> on <b>IN-1K</b> with 4 nodes (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_B_pt_in21k_p14</code> on <b>IN-1K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1478,7 +1478,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_in21k_p14</code> on <b>IN-1K</b> with 4 nodes (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_in21k_p14</code> on <b>IN-1K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1563,7 +1563,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_m38m_p14</code> on <b>IN-1K</b> with 4 nodes (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_m38m_p14</code> on <b>IN-1K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1658,7 +1658,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 ### Intermediate Fine-tune MIM pre-trained EVA-02 on IN-21K
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_B_pt_in21k_p14</code> on <b>IN-21K</b> with 4 nodes (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_B_pt_in21k_p14</code> on <b>IN-21K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL_NAME=eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1738,7 +1738,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_in21k_p14</code> on <b>IN-21K</b> with 8 nodes (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_in21k_p14</code> on <b>IN-21K</b> using 8 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL_NAME=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1818,7 +1818,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_m38m_p14</code> on <b>IN-21K</b> with 8 nodes (click to expand).</summary>
+<summary>Fine-tune MIM pre-trained <code>eva02_L_pt_m38m_p14</code> on <b>IN-21K</b> using 8 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
 MODEL_NAME=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1906,7 +1906,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 ### Fine-tune EVA-02 on IN-1K with IN-21K intermediate fine-tuned checkpoint
 
 <details>
-<summary>Fine-tune IN-21K-tuned <code>eva02_B_pt_in21k_medft_in21k_p14</code> on <b>IN-1K</b> with 1 node (click to expand).</summary>
+<summary>Fine-tune IN-21K-tuned <code>eva02_B_pt_in21k_medft_in21k_p14</code> on <b>IN-1K</b> using 1 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -1991,7 +1991,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune IN-21K-tuned <code>eva02_L_pt_in21k_medft_in21k_p14</code> on <b>IN-1K</b> with 4 nodes (click to expand).</summary>
+<summary>Fine-tune IN-21K-tuned <code>eva02_L_pt_in21k_medft_in21k_p14</code> on <b>IN-1K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
@@ -2076,7 +2076,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 
 <details>
-<summary>Fine-tune IN-21K-tuned <code>eva02_L_pt_m38m_medft_in21k_p14</code> on <b>IN-1K</b> with 4 nodes (click to expand).</summary>
+<summary>Fine-tune IN-21K-tuned <code>eva02_L_pt_m38m_medft_in21k_p14</code> on <b>IN-1K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash   
 MODEL_NAME=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE
