@@ -100,7 +100,6 @@ def _build_vision_tower(
 
     if vision_cfg.eva_model_name:
         vision_heads = vision_cfg.width // vision_cfg.head_width
-        # FIXME: will be a type error(should be float but Half) if norm_layer = LayerNormFp32 while args.precision == 'fp16'
         norm_layer = LayerNorm
         
         visual = EVAVisionTransformer(
@@ -186,7 +185,7 @@ def _build_text_tower(
        )
     else:
         act_layer = QuickGELU if quick_gelu else nn.GELU
-        norm_layer = LayerNormFp32
+        norm_layer = LayerNorm
 
         text = TextTransformer(
             context_length=text_cfg.context_length,
