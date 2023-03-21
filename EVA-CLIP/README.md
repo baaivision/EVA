@@ -233,6 +233,278 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 
 We provide instruction of pre-training EVA-CLIP on LAION-2B dataset and Merged-2B dataset (coming very soon). 
 
+Please prepare [LAION-2B](https://laion.ai/blog/laion-5b/) dataset and [COYO-700M](https://github.com/kakaobrain/coyo-dataset) dataset.
+- To construct Merged-2B, merging 1.6 billion random samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion random samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
+
+Please prepare EVA-01, EVA-02, Openai CLIP and Open CLIP models.
+
+
+| model name | total #params | training precision | download link |
+|:-----------|:------:|:------:|:------:|
+| `EVA01_g_psz14` | 1.0B | `fp16` | [🤗 HF link]() (`2.0GB`) |
+| `EVA02_B_psz16` | 149M | `fp16` | [🤗 HF link]() (`300MB`) |
+| `EVA02_L_psz14` | 428M | `fp16` | [🤗 HF link]() (`856MB`) |
+| `EVA02_E_psz14` | 4.4B | `fp16` | [🤗 HF link]() (`8.8GB`) |
+| `openai/clip-vit-base-patch16`| 149M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-base-patch16/blob/main/pytorch_model.bin) (`599MB`) |
+| `openai/clip-vit-large-patch14`| 428M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin) (`1.7GB`) |
+| `laion/CLIP-ViT-H-14-laion2B-s32B-b79K`| 1.0B | `bf16` | [🤗 HF link](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/blob/main/pytorch_model.bin) (`3.9GB`) |
+
+<details>
+<summary>Pre-train <code>EVA01_CLIP_g_14_plus_psz14_s11B</code> on <b>Merged-2B</b> with 14 nodes (click to expand).</summary>
+
+```bash
+MODEL=EVA-ViT-g-14-text-H-X
+PRETRAINED_IMAGE=/path/to/EVA01_g_psz14.pt
+PRETRAINED_TEXT=/path/to/openai/clip-vit-large-patch14/pytorch_model.bin
+
+# Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
+MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
+# LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+VAL_DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 \
+       	--nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env \
+    training/main.py \
+        --save-frequency 1 \
+        --zeroshot-frequency 1 \
+        --report-to="wandb, tensorboard" \
+        --wandb-project-name="eva-clip" \
+        --wandb-notes="eva01_clip_g_plus_14" \
+        --train-num-samples 40000000 \
+        --dataset-resampled \
+        --train-data-list=${MERGE_2B_DATA_PATH} \
+        --dataset-type-list="webdataset;webdataset" \
+        --imagenet-val=${VAL_DATA_PATH} \
+        --warmup 2000 \
+        --batch-size=1024 \
+        --epochs=100 \
+        --lr=5e-4 \
+        --visual-lr=4e-4 \
+        --text-lr=4e-5 \
+        --wd=0.05 \
+        --visual-wd=0.05 \
+        --text-wd=0.05 \
+        --ld=1.0 \
+        --visual-ld=0.85 \
+        --text-ld=0.75 \
+        --grad-clip-norm=5.0 \
+        --smoothing=0. \
+        --workers=8 \
+        --model EVA-ViT-L-14-X \
+        --name='eva-vit-g-14-text-H-x-lamb-patch_drop-14nodes-b114k-stage1-laion2b-coyo-round-robin' \
+        --pretrained-image=${PRETRAINED_IMAGE} \
+        --pretrained-text=${PRETRAINED_TEXT} \
+        --pretrained-visual-source="other" \
+        --pretrained-text-source="clip" \
+        --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
+        --seed 4096 \
+        --gather-with-grad \
+        --grad-checkpointing \
+        --local-loss \
+        --force-custom-clip \
+        --force-patch-dropout=0.5 \
+        --optimizer="lamb" \
+        --zero-stage=1 \
+        --enable-deepspeed
+```
+
+</details>
+
+<details>
+<summary>Pre-train <code>EVA02_CLIP_B_psz16_s8B</code> on <b>Merged-2B</b> with 8 nodes (click to expand).</summary>
+
+```bash
+MODEL=EVA-ViT-B-16-X
+PRETRAINED_IMAGE=/path/to/EVA02_B_psz16.pt
+PRETRAINED_TEXT=/path/to/openai/clip-vit-base-patch16/pytorch_model.bin
+
+# Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
+
+MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
+# LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+VAL_DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 \
+       	--nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env \
+    training/main.py \
+        --save-frequency 1 \
+        --zeroshot-frequency 1 \
+        --report-to="wandb, tensorboard" \
+        --wandb-project-name="eva-clip" \
+        --wandb-notes="eva02_clip_B_16" \
+        --train-num-samples 40000000 \
+        --dataset-resampled \
+        --train-data-list=${MERGE_2B_DATA_PATH} \
+        --dataset-type-list="webdataset;webdataset" \
+        --imagenet-val=${VAL_DATA_PATH} \
+        --warmup 2000 \
+        --batch-size=2048 \
+        --epochs=200 \
+        --lr=5e-4 \
+        --visual-lr=2e-4 \
+        --text-lr=2e-5 \
+        --wd=0.05 \
+        --visual-wd=0.05 \
+        --text-wd=0.05 \
+        --ld=1.0 \
+        --visual-ld=0.75 \
+        --text-ld=0.75 \
+        --grad-clip-norm=5.0 \
+        --smoothing=0. \
+        --workers=8 \
+        --model EVA-ViT-B-16-X-X \
+        --name='eva-vit-b-16-x-lamb-8nodes-b131k-stage1-laion2b-coyo-round-robin' \
+        --pretrained-image=${PRETRAINED_IMAGE} \
+        --pretrained-text=${PRETRAINED_TEXT} \
+        --pretrained-visual-source="other" \
+        --pretrained-text-source="clip" \
+        --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
+        --seed 4096 \
+        --gather-with-grad \
+        --grad-checkpointing \
+        --local-loss \
+        --force-custom-clip \
+        --force-patch-dropout=0 \
+        --optimizer="lamb" \
+        --zero-stage=1 \
+        --enable-deepspeed
+```
+
+</details>
+
+<details>
+<summary>Pre-train <code>EVA02_CLIP_L_psz14_s4B</code> on <b>Merged-2B</b> with 16 nodes (click to expand).</summary>
+
+```bash
+MODEL=EVA-ViT-L-14-X
+PRETRAINED_IMAGE=/path/to/EVA02_L_psz14.pt
+PRETRAINED_TEXT=/path/to/openai/clip-vit-large-patch14/pytorch_model.bin
+
+# Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
+MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
+# LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+VAL_DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 \
+       	--nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env \
+    training/main.py \
+        --save-frequency 1 \
+        --zeroshot-frequency 1 \
+        --report-to="wandb, tensorboard" \
+        --wandb-project-name="eva-clip" \
+        --wandb-notes="eva02_clip_L_14" \
+        --train-num-samples 40000000 \
+        --dataset-resampled \
+        --train-data-list=${MERGE_2B_DATA_PATH} \
+        --dataset-type-list="webdataset;webdataset" \
+        --imagenet-val=${VAL_DATA_PATH} \
+        --warmup 2000 \
+        --batch-size=1024 \
+        --epochs=100 \
+        --lr=5e-4 \
+        --visual-lr=4e-4 \
+        --text-lr=4e-5 \
+        --wd=0.05 \
+        --visual-wd=0.05 \
+        --text-wd=0.05 \
+        --ld=1.0 \
+        --visual-ld=0.85 \
+        --text-ld=0.75 \
+        --grad-clip-norm=5.0 \
+        --smoothing=0. \
+        --workers=8 \
+        --model EVA-ViT-L-14-X \
+        --name='eva-vit-l-14-x-lamb-16nodes-b131k-stage1-laion2b-coyo-round-robin' \
+        --pretrained-image=${PRETRAINED_IMAGE} \
+        --pretrained-text=${PRETRAINED_TEXT} \
+        --pretrained-visual-source="other" \
+        --pretrained-text-source="clip" \
+        --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
+        --seed 4096 \
+        --gather-with-grad \
+        --grad-checkpointing \
+        --local-loss \
+        --force-custom-clip \
+        --force-patch-dropout=0 \
+        --optimizer="lamb" \
+        --zero-stage=1 \
+        --enable-deepspeed
+```
+
+</details>
+
+<details>
+<summary>Pre-train <code>EVA02_CLIP_E_psz14_s4B</code> on <b>LAION-2B</b> with 18 nodes (click to expand).</summary>
+
+```bash
+MODEL=EVA-ViT-4b-14-text-H-X
+PRETRAINED_IMAGE=/path/to/EVA02_E_psz14.pt
+PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/pytorch_model.bin
+
+# Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
+# MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
+LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+VAL_DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 \
+       	--nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env \
+    training/main.py \
+        --save-frequency 1 \
+        --zeroshot-frequency 1 \
+        --report-to="wandb, tensorboard" \
+        --wandb-project-name="eva-clip" \
+        --wandb-notes="eva02_clip_E_14" \
+        --train-num-samples 40000000 \
+        --dataset-resampled \
+        --train-data=${LAION_2B_DATA_PATH} \
+        --dataset-type="webdataset" \
+        --imagenet-val=${VAL_DATA_PATH} \
+        --warmup 2000 \
+        --batch-size=1000 \
+        --epochs=100 \
+        --lr=5e-4 \
+        --visual-lr=4e-4 \
+        --text-lr=4e-5 \
+        --wd=0.05 \
+        --visual-wd=0.05 \
+        --text-wd=0.05 \
+        --ld=1.0 \
+        --visual-ld=0.9 \
+        --text-ld=0.75 \
+        --grad-clip-norm=5.0 \
+        --smoothing=0. \
+        --workers=8 \
+        --model ${model} \
+        --name='eva-vit-4b-14-text-H-x-lamb-patch_drop-18nodes-b144k-laion2b' \
+        --pretrained-image=${PRETRAINED_IMAGE} \
+        --pretrained-text=${PRETRAINED_TEXT} \
+        --pretrained-visual-source="other" \
+        --pretrained-text-source="clip" \
+        --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
+        --seed 4096 \
+        --gather-with-grad \
+        --grad-checkpointing \
+        --local-loss \
+        --force-custom-clip \
+        --force-patch-dropout=0.5 \
+        --optimizer="lamb" \
+        --zero-stage=1 \
+        --enable-deepspeed
+```
+
+</details>
 
 
 
