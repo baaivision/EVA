@@ -19,6 +19,8 @@ Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples ach
 
 - [Summary of EVA-CLIP performance](#summary-of-eva-clip-performance)
 - [Model Card](#model-card)
+  - [EVA-01-CLIP Series (MIM teacher: OpenAI CLIP-Large)](#eva-01-clip-series-mim-teacher-openai-clip-large)
+  - [EVA-02-CLIP Series (MIM teacher: ``EVA01_CLIP_g_14_psz14_s11B``)](#eva-02-clip-series-mim-teacher-eva01_clip_g_14_psz14_s11b)
 - [Setup](#setup)
 - [Evaluation of Zero-shot Image Classification Performance](#evaluation-of-zero-shot-image-classification-performance)
   - [Evaluate EVA-CLIP on IN-1K](#evaluate-eva-clip-on-in-1k)
@@ -33,12 +35,20 @@ Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples ach
 
 ## Model Card
 
+### EVA-01-CLIP Series (MIM teacher: [OpenAI CLIP-Large](https://github.com/openai/CLIP))
 <div align="center">
 
 | model name | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
 |:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | `EVA01_CLIP_g_14_psz14_s11B` | 1.1B | `fp16` | [LAION-400M](https://laion.ai/blog/laion-400-open-dataset/) | 41K | 256 A100(40GB) | 78.5 | 68.5 | [🤗 HF link]() (`2.2GB`) |
 | `EVA01_CLIP_g_14_plus_psz14_s11B` | 1.3B | `fp16` | Merged-2B | 114K | 112 A100(40GB) | 79.3 | 74.0 | [🤗 HF link]() (`2.6GB`) |
+</div>
+
+### EVA-02-CLIP Series (MIM teacher: ``EVA01_CLIP_g_14_psz14_s11B``)
+<div align="center">
+
+| model name | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
+|:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | `EVA02_CLIP_B_psz16_s8B` | 149M | `fp16` | Merged-2B | 131K | 64 A100(40GB) | 74.7 | 66.9 | [🤗 HF link]() (`286MB`) |
 | `EVA02_CLIP_L_psz14_s4B` | 428M | `fp16` | Merged-2B | 131K | 128 A100(40GB) | 79.8 | 71.2 | [🤗 HF link]() (`817MB`) |
 | `EVA02_CLIP_L_336_psz14_s6B` | 428M | `fp16` | Merged-2B | 61K | 128 A100(40GB) | 80.4 | 71.7 | [🤗 HF link]() (`817MB`) |
@@ -46,9 +56,9 @@ Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples ach
 
 </div>
 
-To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
+- To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
 
-To our knowledge, EVA-CLIP is the most performant open-sourced CLIP model at any scale, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
+- To our knowledge, EVA-CLIP is the most performant open-sourced CLIP model at any scale, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
 For more details about EVA-CLIP, please refer to our [paper (coming very soon)]().
 
 ## Setup
@@ -56,8 +66,8 @@ For more details about EVA-CLIP, please refer to our [paper (coming very soon)](
 
 First, clone the repo and install required packages:
 ```bash
-conda create --name Rei python=3.8 -y
-conda activate Rei
+conda create --name rei python=3.8 -y
+conda activate rei
 
 git clone git@github.com:baaivision/EVA.git
 cd EVA-CLIP
