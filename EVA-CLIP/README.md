@@ -8,9 +8,11 @@
 
 > Mar, 21, 2023: The complete suit of EVA-CLIP (technical report, model weights, evaluation & training code) will be available in one week.
 
-We launch EVA-CLIP, a series of models that significantly improve the efficiency and effectiveness of CLIP training. Our approach incorporates new techniques for representation learning, optimization, and augmentation, enabling EVA-CLIP to achieve superior performance compared to previous CLIP models with the same number of parameters but significantly smaller training costs.
+We launch EVA-CLIP, a series of models that significantly improve the efficiency and effectiveness of CLIP training. 
+Our approach incorporates new techniques for representation learning, optimization, and augmentation, enabling EVA-CLIP to achieve superior performance compared to previous CLIP models with the same number of parameters but significantly smaller training costs.
 
-Notably, using exclusively publicly accessible training data, our large-sized EVA-02 CLIP-L/14 can reach up to **80.4** zero-shot top-1 on ImageNet-1K, outperforming the previous largest & best open-sourced CLIP with only ~1/6 parameters and ~1/6 image-text training data. Our largest EVA-02 CLIP-E/14 with only 4 billion seen samples achieves **81.9** zero-shot top-1 accuracy on ImageNet-1K. 
+Notably, using exclusively publicly accessible training data, our large-sized EVA-02 CLIP-L/14 can reach up to **80.4** zero-shot top-1 on ImageNet-1K, outperforming the previous largest & best open-sourced CLIP with only ~1/6 parameters and ~1/6 image-text training data. 
+Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples achieves **81.9** zero-shot top-1 accuracy on ImageNet-1K.
 
 
 **Table of Contents**
@@ -18,7 +20,7 @@ Notably, using exclusively publicly accessible training data, our large-sized EV
 - [Summary of EVA-CLIP performance](#summary-of-eva-clip-performance)
 - [Model Card](#model-card)
 - [Setup](#setup)
-- [Evaluation of Image Classification Performance](#evaluation-of-image-classification-performance)
+- [Evaluation of Zero-shot Image Classification Performance](#evaluation-of-zero-shot-image-classification-performance)
   - [Evaluate EVA-CLIP on IN-1K](#evaluate-eva-clip-on-in-1k)
 - [Pre-training](#pre-training)
   - [Pre-train EVA-CLIP on LAION-2B dataset](#pre-train-eva-clip-on-laion-2b-dataset)
@@ -33,8 +35,8 @@ Notably, using exclusively publicly accessible training data, our large-sized EV
 
 <div align="center">
 
-| model name | total #param. | precision | data  |  batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 |weight |
-|:-----------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| model name | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
+|:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
 | `EVA01_CLIP_g_14_psz14_s11B` | 1.1B | `fp16` | [LAION-400M](https://laion.ai/blog/laion-400-open-dataset/) | 41K | 256 A100(40GB) | 78.5 | 68.5 | [🤗 HF link]() (`2.2GB`) |
 | `EVA01_CLIP_g_14_plus_psz14_s11B` | 1.3B | `fp16` | Merged-2B | 114K | 112 A100(40GB) | 79.3 | 74.0 | [🤗 HF link]() (`2.6GB`) |
 | `EVA02_CLIP_B_psz16_s8B` | 149M | `fp16` | Merged-2B | 131K | 64 A100(40GB) | 74.7 | 66.9 | [🤗 HF link]() (`286MB`) |
@@ -46,8 +48,8 @@ Notably, using exclusively publicly accessible training data, our large-sized EV
 
 To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
 
-To our knowledge, EVA-CLIP is **the largest performant open-sourced CLIP model** evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants. 
-For more details about EVA-CLIP, please refer to Section 2.3.5 of [our paper](https://arxiv.org/pdf/2211.07636.pdf).
+To our knowledge, EVA-CLIP is the most performant open-sourced CLIP model at any scale, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
+For more details about EVA-CLIP, please refer to our [paper (coming very soon)]().
 
 ## Setup
 
@@ -74,7 +76,7 @@ Core packages:
 - [Apex](https://github.com/NVIDIA/apex) (fused layer norm)
 - [xFormer](https://github.com/facebookresearch/xformers) (fast and memory efficient MHSA)
 
-## Evaluation of Image Classification Performance
+## Evaluation of Zero-shot Image Classification Performance
 ### Evaluate EVA-CLIP on IN-1K
 We use the standard IN-1K dataset (1.2M images). 
 Download it from http://image-net.org.
@@ -219,7 +221,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 
 ### Pre-train EVA-CLIP on LAION-2B dataset
 
-We provide instruction of pre-training EVA-CLIP on LAION-2B dataset and Merged-2B dataset. 
+We provide instruction of pre-training EVA-CLIP on LAION-2B dataset and Merged-2B dataset (coming very soon). 
 
 
 
