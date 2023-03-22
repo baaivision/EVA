@@ -47,7 +47,7 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
                  xattn=False,
                  swiglu=False,
                  naiveswiglu=False,
-                 jax_init=False,
+                 xavier_normal_init=False,
                  **kwargs):
         super().__init__()
         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
@@ -118,8 +118,8 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
         trunc_normal_(self.mask_token, std=self.init_std)
         trunc_normal_(self.lm_head.weight, std=self.init_std)
 
-        if jax_init:
-            self.apply(self._jax_init)
+        if xavier_normal_init:
+            self.apply(self._xavier_normal_init)
             w = self.patch_embed.proj.weight.data
             nn.init.xavier_uniform_(w.view([w.shape[0], -1]))
         else:    # ori BEiT init
@@ -187,9 +187,8 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
             if m.bias is not None:
                 nn.init.constant_(m.bias, 0)
 
-    def _jax_init(self, m):
+    def _xavier_normal_init(self, m):
         if isinstance(m, nn.Linear):
-            # see https://github.com/baaivision/EVA/issues/44
             nn.init.xavier_normal_(m.weight)
             if isinstance(m, nn.Linear) and m.bias is not None:
                 nn.init.constant_(m.bias, 0)
@@ -252,14 +251,14 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
 
 
 @register_model
-def eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit(pretrained=False, **kwargs):
+def eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
     # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=192, depth=12, num_heads=3, mlp_ratio=4*2/3, qkv_bias=True,
         norm_layer=partial(FusedLayerNorm, eps=1e-6),
         xattn=True,
         swiglu=True,
-        jax_init=True,
+        xavier_normal_init=True,
         rope=True,
         **kwargs)
     model.default_cfg = _cfg()
@@ -273,14 +272,14 @@ def eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit(pretrained=False,
 
 
 @register_model
-def eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit(pretrained=False, **kwargs):
+def eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
     # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4*2/3, qkv_bias=True,
         norm_layer=partial(FusedLayerNorm, eps=1e-6),
         xattn=True,
         swiglu=True,
-        jax_init=True,
+        xavier_normal_init=True,
         rope=True,
         **kwargs)
     model.default_cfg = _cfg()
@@ -294,7 +293,7 @@ def eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit(pretrained=False
 
 
 @register_model
-def eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit(pretrained=False, **kwargs):
+def eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
     # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4*2/3, qkv_bias=True,
@@ -302,7 +301,7 @@ def eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit(pretrained=F
         xattn=True,
         naiveswiglu=True,
         subln=True,
-        jax_init=True,
+        xavier_normal_init=True,
         rope=True,
         **kwargs)
     model.default_cfg = _cfg()
@@ -316,7 +315,7 @@ def eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit(pretrained=F
 
 
 @register_model
-def eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit(pretrained=False, **kwargs):
+def eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
     # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=1024, depth=24, num_heads=16, mlp_ratio=4*2/3, qkv_bias=True,
@@ -324,7 +323,7 @@ def eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit(pretrained=
         xattn=True,
         naiveswiglu=True,
         subln=True,
-        jax_init=True,
+        xavier_normal_init=True,
         rope=True,
         **kwargs)
     model.default_cfg = _cfg()

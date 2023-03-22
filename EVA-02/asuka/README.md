@@ -809,7 +809,7 @@ Please prepare IN-21K dataset and EVA-CLIP (`eva_clip_psz14.pt`, [download link]
 <summary>Pre-train <code>eva02_Ti_pt_in21k_p14</code> on <b>IN-21K</b> using 5 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
-MODEL=eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit
+MODEL=eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init
 
 DATA_PATH=/path/to/IN-21K
 VAL_DATA_PATH=/path/to/IN-1K # monitoring val loss 
@@ -891,7 +891,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 <summary>Pre-train <code>eva02_S_pt_in21k_p14</code> on <b>IN-21K</b> using 5 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
-MODEL=eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_jaxinit
+MODEL=eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init
 
 DATA_PATH=/path/to/IN-21K
 VAL_DATA_PATH=/path/to/IN-1K # monitoring val loss 
@@ -972,7 +972,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 <summary>Pre-train <code>eva02_B_pt_in21k_p14</code> on <b>IN-21K</b> using 4 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
-MODEL=eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit
+MODEL=eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init
 
 DATA_PATH=/path/to/IN-21K
 VAL_DATA_PATH=/path/to/IN-1K # monitoring val loss 
@@ -1049,7 +1049,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 <summary>Pre-train <code>eva02_L_pt_in21k_p14</code> on <b>IN-21K</b> using 8 nodes x 8 gpus per node (click to expand).</summary>
 
 ```bash
-MODEL=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit
+MODEL=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init
 
 DATA_PATH=/path/to/IN-21K
 VAL_DATA_PATH=/path/to/IN-1K # monitoring val loss 
@@ -1146,7 +1146,7 @@ Merged-38M
 
 Pre-training on Merged-38M unlabeled image dataset:
 ```bash
-MODEL=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_jaxinit
+MODEL=eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init
 
 DATA_PATH=/path/to/Merged-38M
 VAL_DATA_PATH=/path/to/IN-1K # monitoring val loss 
