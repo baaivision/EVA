@@ -33,6 +33,9 @@ Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples ach
 
 ![summary_tab](assets/teaser.png)
 
+Summary of CLIP models' ImageNet-1K zero-shot classification performance. 
+The diameter of each circle corresponds to forward GFLOPs x the number of training samples.
+
 ## Model Card
 
 ### EVA-01-CLIP Series (MIM teacher: [OpenAI CLIP-Large](https://github.com/openai/CLIP))
