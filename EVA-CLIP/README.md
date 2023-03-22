@@ -241,11 +241,11 @@ Please prepare EVA-01, EVA-02, Openai CLIP and Open CLIP models.
 
 | model name | total #params | training precision | download link |
 |:-----------|:------:|:------:|:------:|
-| `EVA01_g_psz14` | 1.0B | `fp16` | [🤗 HF link]() (`2.0GB`) |
-| `EVA02_B_psz14to16` | 149M | `fp16` | [🤗 HF link]() (`300MB`) |
-| `EVA02_L_psz14` | 428M | `fp16` | [🤗 HF link]() (`856MB`) |
-| `EVA02_CLIP_L_psz14_224to336` | 428M | `fp16` | [🤗 HF link]() (`856MB`) |
-| `EVA02_L_psz14` | 4.4B | `fp16` | [🤗 HF link]() (`8.8GB`) |
+| `EVA01_g_psz14` | 1.0B | `fp16` | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA01_g_psz14.pt) (`2.0GB`) |
+| `EVA02_B_psz14to16` | 149M | `fp16` | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_B_psz14to16.pt) (`176MB`) |
+| `EVA02_L_psz14` | 428M | `fp16` | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_L_psz14.pt) (`609MB`) |
+| `EVA02_CLIP_L_psz14_224to336` | 428M | `fp16` | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_psz14_224to336.pt) (`857MB`) |
+| `EVA02_E_psz14` | 4.4B | `fp16` | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_E_psz14.pt) (`8.7GB`) |
 | `openai/clip-vit-base-patch16`| 149M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-base-patch16/blob/main/pytorch_model.bin) (`599MB`) |
 | `openai/clip-vit-large-patch14`| 428M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin) (`1.7GB`) |
 | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K`| 1.0B | `bf16` | [🤗 HF link](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/blob/main/pytorch_model.bin) (`3.9GB`) |
@@ -512,7 +512,7 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 
 ```bash
 MODEL=EVA-ViT-4b-14-text-H-X
-PRETRAINED_IMAGE=/path/to/EVA02_CLIP_L_psz14_224to336.pt
+PRETRAINED_IMAGE=/path/to/EVA02_E_psz14.pt
 PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/pytorch_model.bin
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
