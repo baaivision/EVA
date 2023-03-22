@@ -31,7 +31,7 @@ Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples ach
 
 ## Summary of EVA-CLIP performance
 
-![summary_tab](assets/summary_tab.png)
+![summary_tab](assets/teaser.png)
 
 ## Model Card
 
