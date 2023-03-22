@@ -41,24 +41,25 @@ The diameter of each circle corresponds to forward GFLOPs x the number of traini
 ### EVA-01-CLIP Series (MIM teacher: [OpenAI CLIP-Large](https://github.com/openai/CLIP))
 <div align="center">
 
-| model name | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
-|:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-| `EVA01_CLIP_g_14_psz14_s11B` | 1.1B | `fp16` | [LAION-400M](https://laion.ai/blog/laion-400-open-dataset/) | 41K | 256 A100(40GB) | 78.5 | 68.5 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA01_CLIP_g_14_psz14_s11B.pt) (`2.2GB`) |
-| `EVA01_CLIP_g_14_plus_psz14_s11B` | 1.3B | `fp16` | Merged-2B | 114K | 112 A100(40GB) | 79.3 | 74.0 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA01_CLIP_g_14_plus_psz14_s11B.pt) (`2.7GB`) |
+| model name | image enc. init. ckpt | text enc. init. ckpt | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
+|:-----|:-----|:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| `EVA01_CLIP_g_14_psz14_s11B` | `EVA01_g_psz14` | `openai/clip-vit-large-patch14` | 1.1B | `fp16` | [LAION-400M](https://laion.ai/blog/laion-400-open-dataset/) | 41K | 256 A100(40GB) | 78.5 | 68.5 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA01_CLIP_g_14_psz14_s11B.pt) (`2.2GB`) |
+| `EVA01_CLIP_g_14_plus_psz14_s11B` | `EVA01_g_psz14` | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K` | 1.3B | `fp16` | Merged-2B | 114K | 112 A100(40GB) | 79.3 | 74.0 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA01_CLIP_g_14_plus_psz14_s11B.pt) (`2.7GB`) |
 </div>
 
 ### EVA-02-CLIP Series (MIM teacher: ``EVA01_CLIP_g_14_psz14_s11B``)
 <div align="center">
 
-| model name | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
-|:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-| `EVA02_CLIP_B_psz16_s8B` | 149M | `fp16` | Merged-2B | 131K | 64 A100(40GB) | 74.7 | 66.9 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_B_psz16_s8B.pt) (`300MB`) |
-| `EVA02_CLIP_L_psz14_s4B` | 428M | `fp16` | Merged-2B | 131K | 128 A100(40GB) | 79.8 | 71.2 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_psz14_s4B.pt) (`856MB`) |
-| `EVA02_CLIP_L_336_psz14_s6B` | 428M | `fp16` | Merged-2B | 61K | 128 A100(40GB) | 80.4 | 71.7 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_336_psz14_s6B.pt) (`856MB`) |
-| `EVA02_CLIP_E_psz14_s4B.pt` | 4.7B | `fp16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 144K | 144 A100(80GB) | 81.9 | 74.7 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_s4B.pt) (`9.4GB`) |
+| model name | image enc. init. ckpt | text enc. init. ckpt | total #params | training precision | training data  |  training batch size |  gpus for training | IN-1K zero-shot top-1 | MSCOCO T2I R@5 | weight |
+|:-----|:-----|:-----------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| `EVA02_CLIP_B_psz16_s8B` | `EVA02_B_psz14to16` | `openai/clip-vit-base-patch16` | 149M | `fp16` | Merged-2B | 131K | 64 A100(40GB) | 74.7 | 66.9 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_B_psz16_s8B.pt) (`300MB`) |
+| `EVA02_CLIP_L_psz14_s4B` | `EVA02_L_psz14` | `openai/clip-vit-large-patch14` | 428M | `fp16` | Merged-2B | 131K | 128 A100(40GB) | 79.8 | 71.2 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_psz14_s4B.pt) (`856MB`) |
+| `EVA02_CLIP_L_336_psz14_s6B` | `EVA02_CLIP_L_psz14_224to336` | `EVA02_CLIP_L_psz14_224to336` | 428M | `fp16` | Merged-2B | 61K | 128 A100(40GB) | 80.4 | 71.7 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_336_psz14_s6B.pt) (`856MB`) |
+| `EVA02_CLIP_E_psz14_s4B.pt` | `EVA02_E_psz14` | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K` | 4.7B | `fp16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 144K | 144 A100(80GB) | 81.9 | 74.7 | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_s4B.pt) (`9.4GB`) |
 
 </div>
 
+- The download links of `image enc. init. ckpt` and `text enc. init. ckpt` are summarized at [here](#pre-train-eva-clip-on-laion-2b-dataset)
 - To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
 
 - To our knowledge, EVA-CLIP series are the most performant open-sourced CLIP models at all scales, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
@@ -263,7 +264,7 @@ EVA02_CLIP_L_psz14_224to336 interpolates the pos_embed from 16x16 to 24x24 for t
 ```bash
 MODEL=EVA-ViT-g-14-text-H-X
 PRETRAINED_IMAGE=/path/to/EVA01_g_psz14.pt
-PRETRAINED_TEXT=/path/to/openai/clip-vit-large-patch14/pytorch_model.bin
+PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/pytorch_model.bin
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
