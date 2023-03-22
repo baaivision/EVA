@@ -189,7 +189,10 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
 
     def _jax_init(self, m):
         if isinstance(m, nn.Linear):
-            # we use xavier_uniform following official JAX ViT & MAE:
+            # we use xavier_uniform following official JAX ViT & MAE (we call this JAX init in our paper), source:
+            # JAX attn: https://github.com/google-research/big_vision/blob/47ac2fd075fcb66cadc0e39bd959c78a6080070d/big_vision/models/vit.py#L65
+            # JAX mlp: https://github.com/google-research/big_vision/blob/47ac2fd075fcb66cadc0e39bd959c78a6080070d/big_vision/models/vit.py#L89
+            # MAE: https://github.com/facebookresearch/mae/blob/efb2a8062c206524e35e47d04501ed4f544c0ae8/models_mae.py#L87-L88
             nn.init.xavier_normal_(m.weight)
             if isinstance(m, nn.Linear) and m.bias is not None:
                 nn.init.constant_(m.bias, 0)
