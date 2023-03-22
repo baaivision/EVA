@@ -288,7 +288,6 @@ class Block(nn.Module):
             rope=rope,
         )
 
-        # NOTE: drop path for stochastic depth, we shall see if this is better than dropout here
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
         self.norm2 = norm_layer(dim)
 
@@ -411,8 +410,6 @@ class RelativePositionBias(nn.Module):
 
         self.register_buffer("relative_position_index", relative_position_index)
 
-        # trunc_normal_(self.relative_position_bias_table, std=.02)
-
     def forward(self):
         relative_position_bias = \
             self.relative_position_bias_table[self.relative_position_index.view(-1)].view(
@@ -421,7 +418,7 @@ class RelativePositionBias(nn.Module):
         return relative_position_bias.permute(2, 0, 1).contiguous()  # nH, Wh*Ww, Wh*Ww
 
 
-def _maske_1d_rel_pos_index(seq_len):
+def _mask_1d_rel_pos_index(seq_len):
     index = torch.arange(seq_len)
     return index.view(1, seq_len) - index.view(seq_len, 1) + seq_len - 1
 
@@ -450,12 +447,12 @@ class DecoupledRelativePositionBias(nn.Module):
         self.relative_position_bias_for_width = nn.Parameter(torch.zeros(self.num_relative_distance[1], num_heads))
         # cls to token & token 2 cls & cls to cls
 
-        h_index = _maske_1d_rel_pos_index(window_size[0]).view(
+        h_index = _mask_1d_rel_pos_index(window_size[0]).view(
             window_size[0], 1, window_size[0], 1).expand(-1, window_size[1], -1, window_size[1])
         h_index = _add_cls_to_index_matrix(h_index, num_tokens, 2 * window_size[0] - 1)
         self.register_buffer("relative_position_high_index", h_index)
 
-        w_index = _maske_1d_rel_pos_index(window_size[1]).view(
+        w_index = _mask_1d_rel_pos_index(window_size[1]).view(
             1, window_size[1], 1, window_size[1]).expand(window_size[0], -1, window_size[0], -1)
         w_index = _add_cls_to_index_matrix(w_index, num_tokens, 2 * window_size[1] - 1)
 
@@ -602,7 +599,7 @@ class VisionTransformer(nn.Module):
         
         batch_size, seq_len, _ = x.size()
 
-        cls_tokens = self.cls_token.expand(batch_size, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
+        cls_tokens = self.cls_token.expand(batch_size, -1, -1)
         x = torch.cat((cls_tokens, x), dim=1)
         if self.pos_embed is not None:
             x = x + self.pos_embed
