@@ -802,7 +802,7 @@ Expected results:
 
 We provide instruction of pre-training EVA-02 on IN-21K dataset (14.2M images) and Merged-38M dataset. 
 
-Please prepare IN-21K dataset and EVA-CLIP (`eva_clip_psz14.pt`, [download link](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt)) first.
+Please prepare IN-21K dataset, Merged-38M dataset and EVA-CLIP (`eva_clip_psz14.pt`, [download link](https://huggingface.co/BAAI/EVA/blob/main/eva_clip_psz14.pt)) first.
 
 
 <details>

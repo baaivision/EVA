@@ -86,7 +86,7 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
         self.swiglu = swiglu
         self.naiveswiglu = naiveswiglu
 
-        dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]  # stochastic depth decay rule
+        dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]
         self.blocks = nn.ModuleList([
             Block(
                 dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias, qk_scale=qk_scale,
@@ -215,10 +215,9 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
 
         batch_size, seq_len, _ = x.size()
 
-        cls_tokens = self.cls_token.expand(batch_size, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
+        cls_tokens = self.cls_token.expand(batch_size, -1, -1)
         mask_token = self.mask_token.expand(batch_size, seq_len, -1)
 
-        # replace the masked visual tokens by mask_token
         w = bool_masked_pos.unsqueeze(-1).type_as(mask_token)
         x = x * (1 - w) + mask_token * w
 
@@ -249,10 +248,8 @@ class VisionTransformerForMaskedImageModeling(nn.Module):
 
 
 
-
 @register_model
 def eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
-    # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=192, depth=12, num_heads=3, mlp_ratio=4*2/3, qkv_bias=True,
         norm_layer=partial(FusedLayerNorm, eps=1e-6),
@@ -273,7 +270,6 @@ def eva02_tiny_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init(pretra
 
 @register_model
 def eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
-    # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4*2/3, qkv_bias=True,
         norm_layer=partial(FusedLayerNorm, eps=1e-6),
@@ -294,7 +290,6 @@ def eva02_small_patch14_xattn_fusedLN_SwiGLU_preln_RoPE_xavier_normal_init(pretr
 
 @register_model
 def eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
-    # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4*2/3, qkv_bias=True,
         norm_layer=partial(FusedLayerNorm, eps=1e-6), 
@@ -316,7 +311,6 @@ def eva02_base_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init(p
 
 @register_model
 def eva02_large_patch14_xattn_fusedLN_NaiveSwiGLU_subln_RoPE_xavier_normal_init(pretrained=False, **kwargs):
-    # _ = kwargs.pop("num_classes")
     model = VisionTransformerForMaskedImageModeling(
         patch_size=14, embed_dim=1024, depth=24, num_heads=16, mlp_ratio=4*2/3, qkv_bias=True,
         norm_layer=partial(FusedLayerNorm, eps=1e-6),
