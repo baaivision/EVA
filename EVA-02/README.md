@@ -42,7 +42,7 @@ If you would like to use / fine-tune EVA-02 in your project, please start with *
 
 ```
 @article{EVA02,
-  title={EVA-02: A Visual Representation for Neon Genesis}, 
+  title={EVA-02: A Visual Representation for Neon Genesis},
   author={Fang, Yuxin and Sun, Quan and Wang, Xinggang and Huang, Tiejun and Wang, Xinlong and Cao, Yue},
   journal={arXiv preprint arXiv:2303.11331},
   year={2023}
