@@ -117,11 +117,11 @@ class Attention(nn.Module):
         q = self.rope(q).type_as(v)
         k = self.rope(k).type_as(v)
 
-        q = q.permute(0, 2, 1, 3)   # B, num_heads, N, C -> B, N, num_heads, C
-        k = k.permute(0, 2, 1, 3)
-        v = v.permute(0, 2, 1, 3)
-
         if self.xattn:
+            q = q.permute(0, 2, 1, 3)   # B, num_heads, N, C -> B, N, num_heads, C
+            k = k.permute(0, 2, 1, 3)
+            v = v.permute(0, 2, 1, 3)
+            
             x = xops.memory_efficient_attention(q, k, v)
             x = x.reshape(B, N, -1)
         else:
