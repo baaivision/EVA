@@ -27,11 +27,11 @@ We hope our efforts enable a broader range of the research community to advance 
 
 
 ## Get Started
-- [Pre-training](asuka)
-- [Image Classification](asuka)
-- [Object Detection & Instance Segmentation](det)
-- [Semantic Segmentation](seg)
-- [CLIP](../EVA-CLIP)
+- [Pre-training](asuka/README.md)
+- [Image Classification](asuka/README.md)
+- [Object Detection & Instance Segmentation](det/README.md)
+- [Semantic Segmentation](seg/README.md)
+- [CLIP](../EVA-CLIP/README.md)
 
 
 ## Best Practice

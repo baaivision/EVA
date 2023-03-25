@@ -2156,7 +2156,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 </details>
 
 
-- Fine-tuning with `bfloat16` needs `deepspeed==0.8.1`.
+> Fine-tuning with `bfloat16` needs `deepspeed==0.8.1`.
 
 
 
