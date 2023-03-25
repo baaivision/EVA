@@ -232,6 +232,10 @@ def get_args():
     else:
         ds_init = None
 
+    if ds_init is not None and known_args.bf16 and str(deepspeed.__version__) != '0.8.1':
+        print("Please install deepspeed==0.8.1 for bf16 ft")
+        exit(0)
+
     return parser.parse_args(), ds_init
 
 
