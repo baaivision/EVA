@@ -845,7 +845,7 @@ OUTPUT_DIR=/path/to/output/${MODEL}
 
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --node_rank=${RANK} \
---master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_beit_pretraining.py \
+--master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_eva02_pretraining.py \
         --data_path ${DATA_PATH} \
         --val_data_path ${VAL_DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
@@ -927,7 +927,7 @@ OUTPUT_DIR=/path/to/output/${MODEL}
 
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --node_rank=${RANK} \
---master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_beit_pretraining.py \
+--master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_eva02_pretraining.py \
         --data_path ${DATA_PATH} \
         --val_data_path ${VAL_DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
@@ -1008,7 +1008,7 @@ OUTPUT_DIR=/path/to/output/${MODEL}
 
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --node_rank=${RANK} \
---master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_beit_pretraining.py \
+--master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_eva02_pretraining.py \
         --data_path ${DATA_PATH} \
         --val_data_path ${VAL_DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
@@ -1085,7 +1085,7 @@ OUTPUT_DIR=/path/to/output/${MODEL}
 
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --node_rank=${RANK} \
---master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_beit_pretraining.py \
+--master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_eva02_pretraining.py \
         --data_path ${DATA_PATH} \
         --val_data_path ${VAL_DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
@@ -1182,7 +1182,7 @@ OUTPUT_DIR=/path/to/output/${MODEL}
 
 
 python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --node_rank=${RANK} \
---master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_beit_pretraining.py \
+--master_addr=${MASTER_ADDR} --master_port=12345 --use_env run_eva02_pretraining.py \
         --data_path ${DATA_PATH} \
         --val_data_path ${VAL_DATA_PATH} \
         --output_dir ${OUTPUT_DIR} \
