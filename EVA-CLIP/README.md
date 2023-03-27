@@ -289,7 +289,7 @@ Please prepare EVA-01, EVA-02, Openai CLIP and Open CLIP models.
 
 - EVA02_CLIP_L_psz14_224to336 interpolates the pos_embed from 16x16 to 24x24 for training EVA02_CLIP_L_336_psz14_s6B.
 
-- laion/CLIP-ViT-bigG-14-laion2B-39B-b160k is splited into 2 parts, [part1](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00001-of-00002.bin) and [part2](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00002-of-00002.bin).
+- laion/CLIP-ViT-bigG-14-laion2B-39B-b160k consists of 2 parts of weights, [part1](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00001-of-00002.bin) and [part2](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00002-of-00002.bin).
 
 <details>
 <summary>Pre-train <code>EVA01_CLIP_g_14_plus_psz14_s11B</code> on <b>Merged-2B</b> with 14 nodes (click to expand).</summary>
