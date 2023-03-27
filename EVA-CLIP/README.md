@@ -574,7 +574,7 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --dataset-type="webdataset" \
         --imagenet-val=${VAL_DATA_PATH} \
         --warmup 2000 \
-        --batch-size=1000 \
+        --batch-size=800 \
         --epochs=100 \
         --lr=5e-4 \
         --visual-lr=4e-4 \
