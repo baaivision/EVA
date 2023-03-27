@@ -62,6 +62,7 @@ The diameter of each circle corresponds to forward GFLOPs x the number of traini
 | `EVA02_CLIP_L_psz14_s4B` | `EVA02_L_psz14` | `openai/clip-vit-large-patch14` | 428M | `fp16` | Merged-2B | 131K | 128 A100(40GB) | **79.8** | **71.2** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_psz14_s4B.pt) (`856MB`) |
 | `EVA02_CLIP_L_336_psz14_s6B` | `EVA02_CLIP_L_psz14_224to336` | `EVA02_CLIP_L_psz14_224to336` | 428M | `fp16` | Merged-2B | 61K | 128 A100(40GB) | **80.4** | **71.7** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_336_psz14_s6B.pt) (`856MB`) |
 | `EVA02_CLIP_E_psz14_s4B.pt` | `EVA02_E_psz14` | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K` | 4.7B | `fp16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 144K | 144 A100(80GB) | **81.9** | **74.7** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_s4B.pt) (`9.4GB`) |
+| `EVA02_CLIP_E_psz14_plus_s9B.pt` | `EVA02_E_psz14` | `laion/CLIP-ViT-bigG-14-laion2B-39B-b160k` | 5.0B | `bf16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 144K | 144 A100(80GB) | **82.0** | **75.0** | [🤗 HF link]() (`10.0GB`) |
 
 </div>
 
@@ -194,7 +195,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_L_336_psz14_s6B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-4b-14-text-H-X
+MODEL_NAME=EVA-ViT-L-14-X-336
 
 EVAL_CKPT=/path/to/EVA02_CLIP_L_336_psz14_s6B.pt
 
@@ -218,9 +219,31 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_E_psz14_s4B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-L-14-X-336
+MODEL_NAME=EVA-ViT-4b-14-text-H-X
 
 EVAL_CKPT=/path/to/EVA02_CLIP_E_psz14_s4B.pt
+
+DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
+        --imagenet-val ${DATA_PATH} \
+        --model ${MODEL_NAME} \
+        --pretrained ${EVAL_CKPT} \
+        --enable_deepspeed
+```
+
+</details>
+
+<details>
+  <summary>Evaluate the <code>EVA02_CLIP_E_psz14_plus_s9B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
+
+```bash    
+MODEL_NAME=EVA-ViT-4b-14-text-bigG-X
+
+EVAL_CKPT=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -259,12 +282,15 @@ Please prepare EVA-01, EVA-02, Openai CLIP and Open CLIP models.
 | `openai/clip-vit-base-patch16`| 149M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-base-patch16/blob/main/pytorch_model.bin) (`599MB`) |
 | `openai/clip-vit-large-patch14`| 428M | `fp16` | [🤗 HF link](https://huggingface.co/openai/clip-vit-large-patch14/blob/main/pytorch_model.bin) (`1.7GB`) |
 | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K`| 1.0B | `bf16` | [🤗 HF link](https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/blob/main/pytorch_model.bin) (`3.9GB`) |
+| `laion/CLIP-ViT-bigG-14-laion2B-39B-b160k`| 1.8B | `bf16` | 🤗 HF link [part1](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00001-of-00002.bin) [part2](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00002-of-00002.bin)(`9.9GB`+`169M`) |
 
 </div>
 
 - EVA02_B_psz14to16 interpolates the kernel size of patch_embed from 14x14 to 16x16, and interpolate the pos_embed from 16x16 to 14x14.
 
 - EVA02_CLIP_L_psz14_224to336 interpolates the pos_embed from 16x16 to 24x24 for training EVA02_CLIP_L_336_psz14_s6B.
+
+- laion/CLIP-ViT-bigG-14-laion2B-39B-b160k is splited into 2 parts, [part1](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00001-of-00002.bin) and [part2](https://huggingface.co/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/blob/main/pytorch_model-00002-of-00002.bin).
 
 <details>
 <summary>Pre-train <code>EVA01_CLIP_g_14_plus_psz14_s11B</code> on <b>Merged-2B</b> with 14 nodes (click to expand).</summary>
@@ -565,6 +591,70 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --workers=8 \
         --model ${model} \
         --name='eva-vit-4b-14-text-H-x-lamb-patch_drop-18nodes-b144k-laion2b' \
+        --pretrained-image=${PRETRAINED_IMAGE} \
+        --pretrained-text=${PRETRAINED_TEXT} \
+        --pretrained-visual-source="other" \
+        --pretrained-text-source="clip" \
+        --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
+        --seed 4096 \
+        --gather-with-grad \
+        --grad-checkpointing \
+        --local-loss \
+        --force-custom-clip \
+        --force-patch-dropout=0.5 \
+        --optimizer="lamb" \
+        --zero-stage=1 \
+        --enable-deepspeed
+```
+
+</details>
+
+<details>
+<summary>Pre-train <code>EVA02_CLIP_E_psz14_plus_s9B</code> on <b>LAION-2B</b> with 18 nodes (click to expand).</summary>
+
+```bash
+MODEL=EVA-ViT-4b-14-text-bigG-X
+PRETRAINED_IMAGE=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
+PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/pytorch_model.bin # ckpt is splited into 2 parts. could merge first then load.
+
+# Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
+# MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
+LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+VAL_DATA_PATH=/path/to/IN-1K/val
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 \
+       	--nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env \
+    training/main.py \
+        --save-frequency 1 \
+        --zeroshot-frequency 1 \
+        --report-to="wandb, tensorboard" \
+        --wandb-project-name="eva-clip" \
+        --wandb-notes="eva02_clip_E_14" \
+        --train-num-samples 40000000 \
+        --dataset-resampled \
+        --train-data=${LAION_2B_DATA_PATH} \
+        --dataset-type="webdataset" \
+        --imagenet-val=${VAL_DATA_PATH} \
+        --warmup 2000 \
+        --batch-size=1000 \
+        --epochs=100 \
+        --lr=5e-4 \
+        --visual-lr=4e-4 \
+        --text-lr=4e-5 \
+        --wd=0.05 \
+        --visual-wd=0.05 \
+        --text-wd=0.05 \
+        --ld=1.0 \
+        --visual-ld=0.9 \
+        --text-ld=0.75 \
+        --grad-clip-norm=5.0 \
+        --smoothing=0. \
+        --workers=8 \
+        --model ${model} \
+        --name='eva-vit-4b-14-text-bigG-x-lamb-patch_drop-18nodes-b144k-laion2b' \
         --pretrained-image=${PRETRAINED_IMAGE} \
         --pretrained-text=${PRETRAINED_TEXT} \
         --pretrained-visual-source="other" \
