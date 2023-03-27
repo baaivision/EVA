@@ -12,8 +12,7 @@ We launch EVA-CLIP, a series of models that significantly improve the efficiency
 Our approach incorporates new techniques for representation learning, optimization, and augmentation, enabling EVA-CLIP to achieve superior performance compared to previous CLIP models with the same number of parameters but significantly smaller training costs.
 
 Notably, using exclusively publicly accessible training data, our large-sized EVA-02 CLIP-L/14 can reach up to **80.4** zero-shot top-1 on ImageNet-1K, outperforming the previous largest & best open-sourced CLIP with only ~1/6 parameters and ~1/6 image-text training data. 
-Our largest 4.7B-parameter EVA-02 CLIP-E/14 with only 4 billion seen samples achieves **81.9** zero-shot top-1 accuracy on ImageNet-1K.
-
+Our largest 5.0B-parameter EVA-02 CLIP-E/14 with only 9 billion seen samples achieves **82.0** zero-shot top-1 accuracy on ImageNet-1K.
 
 **Table of Contents**
 
