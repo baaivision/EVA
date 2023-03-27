@@ -107,11 +107,6 @@ All EVA model checkpoints are now available at [🤗 Hugging Face Models](https:
 }
 ```
 
-
-## License
-
-The content of this project itself is licensed under [LICENSE](LICENSE).
-
 ## Contact
 
 - For help and issues associated with EVA, or reporting a bug, please open a [GitHub Issue with label EVA-01](https://github.com/baaivision/EVA/labels/EVA-01). 
