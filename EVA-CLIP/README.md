@@ -1,12 +1,10 @@
 
 <div align="center">
 
-<h2>EVA-CLIP: Improved Training Techniques for CLIP at Scale</h2>
+<h2><a href="http://arxiv.org/abs/2303.15389">EVA-CLIP: Improved Training Techniques for CLIP at Scale</a></h2>
 
 </div>
 
-
-> Mar, 21, 2023: The complete suit of EVA-CLIP (technical report, model weights, evaluation & training code) will be available in one week.
 
 We launch EVA-CLIP, a series of models that significantly improve the efficiency and effectiveness of CLIP training. 
 Our approach incorporates new techniques for representation learning, optimization, and augmentation, enabling EVA-CLIP to achieve superior performance compared to previous CLIP models with the same number of parameters but significantly smaller training costs.
@@ -25,6 +23,7 @@ Our largest 5.0B-parameter EVA-02 CLIP-E/14 with only 9 billion seen samples ach
   - [Evaluate EVA-CLIP on IN-1K](#evaluate-eva-clip-on-in-1k)
 - [Pre-training](#pre-training)
   - [Pre-train EVA-CLIP on LAION-2B dataset](#pre-train-eva-clip-on-laion-2b-dataset)
+- [BibTeX \& Citation](#bibtex--citation)
 - [Acknowledgement](#acknowledgement)
 
 
@@ -672,6 +671,18 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 
 </details>
 
+
+
+## BibTeX & Citation
+
+```
+@article{EVA-CLIP,
+  title={EVA-02: A Visual Representation for Neon Genesis},
+  author={Sun, Quan and Fang, Yuxin and Wu, Ledell and Wang, Xinlong and Cao, Yue},
+  journal={arXiv preprint arXiv:2303.15389},
+  year={2023}
+}
+```
 
 
 ## Acknowledgement
