@@ -1,7 +1,10 @@
-
 <div align="center">
 
 <h2><a href="http://arxiv.org/abs/2303.15389">EVA-CLIP: Improved Training Techniques for CLIP at Scale</a></h2>
+
+[Quan Sun](https://github.com/Quan-Sun)<sup>1</sup>, [Yuxin Fang](https://github.com/Yuxin-CV)<sup>2,1</sup>, [Ledell Wu](https://scholar.google.com/citations?user=-eJHVt8AAAAJ&hl=en)<sup>1</sup>, [Xinlong Wang](https://www.xloong.wang/)<sup>1</sup>, [Yue Cao](http://yue-cao.me/)<sup>1</sup>
+ 
+<sup>1</sup>[BAAI](https://www.baai.ac.cn/english.html), <sup>2</sup>[HUST](http://english.hust.edu.cn/)
 
 </div>
 
