@@ -68,7 +68,7 @@ The diameter of each circle corresponds to forward GFLOPs x the number of traini
 - The download links of `image enc. init. ckpt` and `text enc. init. ckpt` are summarized at [here](#pre-train-eva-clip-on-laion-2b-dataset).
 - To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
 - To our knowledge, EVA-CLIP series are the most performant open-sourced CLIP models at all scales, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
-For more details about EVA-CLIP, please refer to our [paper (coming very soon)]().
+For more details about EVA-CLIP, please refer to our [paper](http://arxiv.org/abs/2303.15389).
 
 ## Setup
 
