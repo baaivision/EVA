@@ -23,13 +23,13 @@ The content of this project itself is licensed under [LICENSE](LICENSE).
 
 ## Misc
 
+<div align="center">
+
 [![Stargazers repo roster for @baaivision/EVA](https://reporoster.com/stars/baaivision/EVA)](https://github.com/baaivision/EVA/stargazers)
 
 
 [![Forkers repo roster for @baaivision/EVA](https://reporoster.com/forks/baaivision/EVA)](https://github.com/baaivision/EVA/network/members)
 
-
-<div align="center">
 
 [![Star History Chart](https://api.star-history.com/svg?repos=baaivision/EVA&type=Date)](https://star-history.com/#baaivision/EVA&Date)
 
