@@ -342,8 +342,6 @@ def extract_features(model, data, args, device):
     
     img_emb_folder = args.img_emb_path
     text_emb_folder = args.text_emb_path
-    text_id_folder = args.text_id_path
-    text_folder = args.text_path
 
     save_interval = args.save_interval if args.save_interval else 100
     all_features = []
@@ -359,19 +357,11 @@ def extract_features(model, data, args, device):
         
         all_image_features = []
         all_text_features = []
-        all_text_ids = []
-        all_texts = []
         with torch.no_grad():
             for i, batch in enumerate(dataloader):
                 idx = i+1
 
-                images, texts, raw_texts = batch
-
-                if text_id_folder is not None:
-                    all_text_ids.append(texts)
-
-                if text_folder is not None:
-                    all_texts.append(raw_texts)
+                images, texts = batch
 
                 images = images.to(device=device, dtype=cast_dtype, non_blocking=True)
                 texts = texts.to(device=device, non_blocking=True)
@@ -401,35 +391,16 @@ def extract_features(model, data, args, device):
                         f"{text_emb_folder}/rank{args.rank}_text_emb_{split}.npy"
                     )
 
-                    if text_id_folder is not None:
-                        text_input_id = np.concatenate(all_text_ids)
-                        out_text_ids_file = (
-                            f"{text_id_folder}/rank{args.rank}_text_ids_{split}.npy"
-                        )
-                        save_file(text_input_id,out_text_ids_file)
-
-                    if text_folder is not None:
-                        all_texts = np.concatenate(all_texts)
-                        out_text_file = (
-                            f"{text_folder}/rank{args.rank}_text_raw_{split}.npy"
-                        )
-                        save_file(all_texts,out_text_file)
-
                     save_file(img_feat, out_img_feat_file)
                     save_file(text_feat, out_text_feat_file)
 
                     
                     all_image_features = []
                     all_text_features = []
-                    all_text_ids = []
-                    all_texts = []
 
             if len(all_image_features) > 0:
                 img_feat = np.concatenate(all_image_features)
                 text_feat = np.concatenate(all_text_features)
-
-                if text_id_folder is not None:
-                    text_input_id = np.concatenate(all_text_ids)
 
                 split = "%08d" % ((idx//save_interval)+1)
                 out_img_feat_file = (
@@ -438,19 +409,6 @@ def extract_features(model, data, args, device):
                 out_text_feat_file = (
                     f"{text_emb_folder}/rank{args.rank}_text_emb_{split}.npy"
                 )
-
-                if text_id_folder is not None:
-                    out_text_ids_file = (
-                        f"{text_id_folder}/rank{args.rank}_text_ids_{split}.npy"
-                    )
-                    save_file(text_input_id,out_text_ids_file)
-                
-                if text_folder is not None:
-                    all_texts = np.concatenate(all_texts)
-                    out_text_file = (
-                        f"{text_folder}/rank{args.rank}_text_raw_{split}.npy"
-                    )
-                    save_file(all_texts,out_text_file)
 
                 save_file(img_feat, out_img_feat_file)
                 save_file(text_feat, out_text_feat_file)
