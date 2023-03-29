@@ -137,7 +137,7 @@ Core packages:
 - [Pytorch](https://pytorch.org/) version 1.12.1 
 - [torchvision](https://pytorch.org/vision/stable/index.html) version 0.13.0
 - [timm](https://github.com/rwightman/pytorch-image-models) version 0.5.4 
-- [DeepSpeed](https://github.com/microsoft/DeepSpeed) version 0.6.5 (`fp16` training and ZeRO optimizer)
+- [DeepSpeed](https://github.com/microsoft/DeepSpeed) version 0.6.5 (`fp16` training and ZeRO optimizer), fine-tuning with `bfloat16` requires version 0.8.1
 - [Apex](https://github.com/NVIDIA/apex) (fused layer norm)
 - [xFormer](https://github.com/facebookresearch/xformers) (fast and memory efficient MHSA)
 
@@ -1219,7 +1219,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 
 ## Fine-tuning 
 
-- By default, we fine-tune EVA-02 with `deepspeed==0.6.5` & `fp16`. Fine-tuning with `bfloat16` needs `deepspeed==0.8.1`. 
+- By default, we fine-tune EVA-02 with `deepspeed==0.6.5` & `fp16`. Fine-tuning with `bfloat16` requires `deepspeed==0.8.1`. 
 - If you receive complaints on **`size mismatch of RoPE`** when loading some pre-trained EVA-02 checkpoints, just ignore them. This is because previously we used a naive implementation [`VisionRotaryEmbedding`](https://github.com/baaivision/EVA/blob/8e966a91a9dbf60a0a96e6a6a2a9aa275a676907/EVA-02/asuka/rope.py#L46) for pre-training, and later we changed to a slightly faster & neater one [`VisionRotaryEmbeddingFast`](https://github.com/baaivision/EVA/blob/8e966a91a9dbf60a0a96e6a6a2a9aa275a676907/EVA-02/asuka/rope.py#L96). The only difference is they come with different RoPE shapes. Functionally they are the same. Also see https://github.com/baaivision/EVA/issues/56 if you have trouble loading EVA-02 MIM pre-trained weights.
   
 
