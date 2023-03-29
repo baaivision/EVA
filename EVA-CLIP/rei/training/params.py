@@ -202,10 +202,10 @@ def parse_args(args):
         help="Load pretrained image model weights for image tower backbone if available.",
     )
     parser.add_argument(
-        "--pretrained-visual-source",
-        choices=["clip", "open_clip", "other"],
-        default="other",
-        help="Which is the source of pretrained model.visual from."
+        "--pretrained-visual-model",
+        # choices=["clip", "open_clip", "other"],
+        default=None,
+        help="pretrained model.visual."
     )
     parser.add_argument(
         "--pretrained-text",
@@ -214,10 +214,10 @@ def parse_args(args):
         help="Load pretrained text model weights for text tower backbone if available.",
     )
     parser.add_argument(
-        "--pretrained-text-source",
-        choices=["clip", "open_clip", "other"],
-        default="clip",
-        help="Which is the source of pretrained model.text from."
+        "--pretrained-text-model",
+        # choices=["clip", "open_clip", "other"],
+        default=None,
+        help="pretrained model.text."
     )
     parser.add_argument(
         '--skip-list', type=str, nargs='+', default=[],
