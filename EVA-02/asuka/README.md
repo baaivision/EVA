@@ -1220,7 +1220,7 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=${WORLD_SIZE} --n
 ## Fine-tuning 
 
 - By default, we fine-tune EVA-02 with `deepspeed==0.6.5` & `fp16`. Fine-tuning with `bfloat16` needs `deepspeed==0.8.1`. 
-- If you receive complaints on **`size mismatch of RoPE`** when loading some pre-trained EVA-02 checkpoints, just ignore them. This is because previously we used a naive implementation [`VisionRotaryEmbedding`](https://github.com/baaivision/EVA/blob/8e966a91a9dbf60a0a96e6a6a2a9aa275a676907/EVA-02/asuka/rope.py#L46) for pre-training, and later we changed to a slightly faster & neater one [`VisionRotaryEmbeddingFast`](https://github.com/baaivision/EVA/blob/8e966a91a9dbf60a0a96e6a6a2a9aa275a676907/EVA-02/asuka/rope.py#L96). The only difference is they come with different RoPE shapes. Functionally they are the same.
+- If you receive complaints on **`size mismatch of RoPE`** when loading some pre-trained EVA-02 checkpoints, just ignore them. This is because previously we used a naive implementation [`VisionRotaryEmbedding`](https://github.com/baaivision/EVA/blob/8e966a91a9dbf60a0a96e6a6a2a9aa275a676907/EVA-02/asuka/rope.py#L46) for pre-training, and later we changed to a slightly faster & neater one [`VisionRotaryEmbeddingFast`](https://github.com/baaivision/EVA/blob/8e966a91a9dbf60a0a96e6a6a2a9aa275a676907/EVA-02/asuka/rope.py#L96). The only difference is they come with different RoPE shapes. Functionally they are the same. Also see https://github.com/baaivision/EVA/issues/56 if you have trouble loading EVA-02 MIM pre-trained weights.
   
 
 
