@@ -680,7 +680,7 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 
 ```
 @article{EVA-CLIP,
-  title={EVA-02: A Visual Representation for Neon Genesis},
+  title={EVA-CLIP: Improved Training Techniques for CLIP at Scale},
   author={Sun, Quan and Fang, Yuxin and Wu, Ledell and Wang, Xinlong and Cao, Yue},
   journal={arXiv preprint arXiv:2303.15389},
   year={2023}
