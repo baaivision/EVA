@@ -26,6 +26,7 @@ Our largest 5.0B-parameter EVA-02 CLIP-E/14 with only 9 billion seen samples ach
   - [Evaluate EVA-CLIP on IN-1K](#evaluate-eva-clip-on-in-1k)
 - [Pre-training](#pre-training)
   - [Pre-train EVA-CLIP on LAION-2B dataset](#pre-train-eva-clip-on-laion-2b-dataset)
+- [Extracting image and text features]()
 - [BibTeX \& Citation](#bibtex--citation)
 - [Acknowledgement](#acknowledgement)
 
@@ -112,7 +113,7 @@ MODEL_NAME=EVA01-CLIP-g-14
 PRETRAINED=/path/to/EVA01_CLIP_g_14_psz14_s11B.pt
 
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -137,7 +138,7 @@ MODEL_NAME=EVA01-CLIP-g-14-plus
 PRETRAINED=/path/to/EVA01_CLIP_g_14_plus_psz14_s11B.pt
 
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -161,7 +162,7 @@ MODEL_NAME=EVA02-CLIP-B-16
 
 PRETRAINED=/path/to/EVA02_CLIP_B_psz16_s8B.pt
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -185,7 +186,7 @@ MODEL_NAME=EVA02-CLIP-L-14
 
 PRETRAINED=/path/to/EVA02_CLIP_L_psz14_s4B.pt
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -210,7 +211,7 @@ MODEL_NAME=EVA02-CLIP-L-14-336
 
 PRETRAINED=/path/to/EVA02_CLIP_L_336_psz14_s6B.pt
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -236,7 +237,7 @@ MODEL_NAME=EVA02-CLIP-bigE-14
 
 PRETRAINED=/path/to/EVA02_CLIP_E_psz14_s4B.pt
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -260,7 +261,7 @@ MODEL_NAME=EVA02-CLIP-bigE-14-plus
 
 PRETRAINED=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
 # can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
-# PRETRAINED=eva
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -731,7 +732,34 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 
 </details>
 
+## Extracting image and text features
 
+Easily extracting image and text features in distribution and saving in .npy format. Here is an example of how you can do it:
+
+```shell
+MODEL=EVA02-CLIP-B-16
+PRETRAINED=eva_clip
+LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+
+IMG_EMB_PATH="/path/to/store/output/image_embedding"
+TEXT_EMB_PATH="/path/to/store/output/text_embedding"
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
+        --val-data=${LAION_2B_DATA_PATH} \
+        --val-num-samples 2000000000 \
+        --batch-size 1024 \
+        --model ${MODEL} \
+        --pretrained ${PRETRAINED} \
+        --extract-features \
+        --img-emb-path ${IMG_EMB_PATH} \
+        --text-emb-path ${TEXT_EMB_PATH} \
+        --save-interval 10 \
+        --enable_deepspeed
+
+```
 
 ## BibTeX & Citation
 
