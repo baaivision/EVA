@@ -26,7 +26,7 @@ Our largest 5.0B-parameter EVA-02 CLIP-E/14 with only 9 billion seen samples ach
   - [Evaluate EVA-CLIP on IN-1K](#evaluate-eva-clip-on-in-1k)
 - [Pre-training](#pre-training)
   - [Pre-train EVA-CLIP on LAION-2B dataset](#pre-train-eva-clip-on-laion-2b-dataset)
-- [Extracting image and text features]()
+- [Extracting image and text features](#extracting-image-and-text-features)
 - [BibTeX \& Citation](#bibtex--citation)
 - [Acknowledgement](#acknowledgement)
 
@@ -97,6 +97,7 @@ Core packages:
 - [DeepSpeed](https://github.com/microsoft/DeepSpeed) version 0.6.5 (`fp16` training and ZeRO optimizer)
 - [Apex](https://github.com/NVIDIA/apex) (fused layer norm)
 - [xFormer](https://github.com/facebookresearch/xformers) (fast and memory efficient MHSA)
+
 
 ## Evaluation of Zero-shot Image Classification Performance
 ### Evaluate EVA-CLIP on IN-1K
@@ -729,7 +730,6 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --zero-stage=1 \
         --enable-deepspeed
 ```
-
 </details>
 
 ## Extracting image and text features
@@ -758,7 +758,6 @@ python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$WORLD_SIZE --nod
         --text-emb-path ${TEXT_EMB_PATH} \
         --save-interval 10 \
         --enable_deepspeed
-
 ```
 
 ## BibTeX & Citation
