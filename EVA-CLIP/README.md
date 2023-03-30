@@ -107,9 +107,12 @@ Then, move and extract the training and validation images to labeled subfolders,
   <summary>Evaluate the <code>EVA01_CLIP_g_14_psz14_s11B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-g-14-X
+MODEL_NAME=EVA01-CLIP-g-14
 
-EVAL_CKPT=/path/to/EVA01_CLIP_g_14_psz14_s11B.pt
+PRETRAINED=/path/to/EVA01_CLIP_g_14_psz14_s11B.pt
+
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -119,7 +122,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -129,9 +132,12 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA01_CLIP_g_14_plus_psz14_s11B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-g-14-text-H-X
+MODEL_NAME=EVA01-CLIP-g-14-plus
 
-EVAL_CKPT=/path/to/EVA01_CLIP_g_14_plus_psz14_s11B.pt
+PRETRAINED=/path/to/EVA01_CLIP_g_14_plus_psz14_s11B.pt
+
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -141,7 +147,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -151,9 +157,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_B_psz16_s8B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-B-16-X
+MODEL_NAME=EVA02-CLIP-B-16
 
-EVAL_CKPT=/path/to/EVA02_CLIP_B_psz16_s8B.pt
+PRETRAINED=/path/to/EVA02_CLIP_B_psz16_s8B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -163,7 +171,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -173,9 +181,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_L_psz14_s4B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-L-14-X
+MODEL_NAME=EVA02-CLIP-L-14
 
-EVAL_CKPT=/path/to/EVA02_CLIP_L_psz14_s4B.pt
+PRETRAINED=/path/to/EVA02_CLIP_L_psz14_s4B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -185,7 +195,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -196,9 +206,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_L_336_psz14_s6B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-L-14-X-336
+MODEL_NAME=EVA02-CLIP-L-14-336
 
-EVAL_CKPT=/path/to/EVA02_CLIP_L_336_psz14_s6B.pt
+PRETRAINED=/path/to/EVA02_CLIP_L_336_psz14_s6B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -208,7 +220,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -220,9 +232,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_E_psz14_s4B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-4b-14-text-H-X
+MODEL_NAME=EVA02-CLIP-bigE-14
 
-EVAL_CKPT=/path/to/EVA02_CLIP_E_psz14_s4B.pt
+PRETRAINED=/path/to/EVA02_CLIP_E_psz14_s4B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -232,7 +246,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -242,9 +256,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_E_psz14_plus_s9B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-4b-14-text-bigG-X
+MODEL_NAME=EVA02-CLIP-bigE-14-plus
 
-EVAL_CKPT=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
+PRETRAINED=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -254,7 +270,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
