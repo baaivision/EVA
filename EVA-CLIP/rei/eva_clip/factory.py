@@ -25,6 +25,7 @@ from .transform import image_transform
 from .tokenizer import HFTokenizer, tokenize
 from .utils import resize_clip_pos_embed, resize_evaclip_pos_embed, resize_visual_pos_embed, resize_eva_pos_embed
 
+
 _MODEL_CONFIG_PATHS = [Path(__file__).parent / f"model_configs/"]
 _MODEL_CONFIGS = {}  # directory (model_name: config) of model architecture configs
 
@@ -156,24 +157,35 @@ def load_clip_text_state_dict(checkpoint_path: str, map_location: str='cpu', is_
             del state_dict[k]
     return state_dict
 
+def get_pretrained_tag(pretrained_model):
+    pretrained_model = pretrained_model.lower()
+    if "laion" in pretrained_model or "open_clip" in pretrained_model:
+        return "open_clip"
+    elif "openai" in pretrained_model:
+        return "clip"
+    elif "eva" in pretrained_model and "clip" in pretrained_model:
+        return "eva_clip"
+    else:
+        return "other"
+
 def load_pretrained_checkpoint(
         model,
         visual_checkpoint_path,
         text_checkpoint_path,
         strict=True,
-        visual_source="other",
-        text_source="open_clip",
+        visual_model=None,
+        text_model=None,
         model_key="model|module|state_dict",
         skip_list=[]):
-    assert visual_source in ["other", "open_clip", "clip"], print(f"visual_source should be one of [other, open_clip, clip], but get {visual_source}.")
-    assert text_source in ["other", "open_clip", "clip"], print(f"text_source should be one of [other, open_clip, clip], but get {text_source}.")
+    visual_tag = get_pretrained_tag(visual_model)
+    text_tag = get_pretrained_tag(text_model)
 
     logging.info(f"num of model state_dict keys: {len(model.state_dict().keys())}")
     visual_incompatible_keys, text_incompatible_keys = None, None
     if visual_checkpoint_path:
-        if visual_source == "open_clip":
+        if visual_tag == "eva_clip" or visual_tag == "open_clip":
             visual_state_dict = load_clip_visual_state_dict(visual_checkpoint_path, is_openai=False, skip_list=skip_list)
-        elif visual_source == "clip":
+        elif visual_tag == "clip":
             visual_state_dict = load_clip_visual_state_dict(visual_checkpoint_path, is_openai=True, skip_list=skip_list)
         else:
             visual_state_dict = load_state_dict(visual_checkpoint_path, model_key=model_key, is_openai=False, skip_list=skip_list)
@@ -185,15 +197,14 @@ def load_pretrained_checkpoint(
         elif 'pos_embed' in visual_state_dict:
             resize_eva_pos_embed(visual_state_dict, model)
 
-        
         visual_incompatible_keys = model.visual.load_state_dict(visual_state_dict, strict=strict)
         logging.info(f"num of loaded visual_state_dict keys: {len(visual_state_dict.keys())}")
         logging.info(f"visual_incompatible_keys.missing_keys: {visual_incompatible_keys.missing_keys}")
 
     if text_checkpoint_path:
-        if text_source == "open_clip":
+        if text_tag == "eva_clip" or text_tag == "open_clip":
             text_state_dict = load_clip_text_state_dict(text_checkpoint_path, is_openai=False, skip_list=skip_list)
-        elif text_source == "clip":
+        elif text_tag == "clip":
             text_state_dict = load_clip_text_state_dict(text_checkpoint_path, is_openai=True, skip_list=skip_list)
         else:
             text_state_dict = load_state_dict(visual_checkpoint_path, model_key=model_key, is_openai=False, skip_list=skip_list)
@@ -217,8 +228,8 @@ def create_model(
         pretrained_image: str = '',
         pretrained_text: str = '',
         pretrained_hf: bool = True,
-        pretrained_visual_source: str = 'other',
-        pretrained_text_source: str = 'clip',
+        pretrained_visual_model: str = None,
+        pretrained_text_model: str = None,
         cache_dir: Optional[str] = None,
         skip_list: list  = [],
 ):
@@ -293,10 +304,15 @@ def create_model(
         else:
             visual_checkpoint_path = ''
             text_checkpoint_path = ''
+            
             if pretrained_image:
+                pretrained_visual_model = pretrained_visual_model.replace('/', '-')  # for callers using old naming with / in ViT names
+                pretrained_image_cfg = get_pretrained_cfg(pretrained_visual_model, pretrained_image)
                 if 'timm_model_name' in model_cfg.get('vision_cfg', {}):
                     # pretrained weight loading for timm models set via vision_cfg
                     model_cfg['vision_cfg']['timm_model_pretrained'] = True
+                elif pretrained_image_cfg:
+                    visual_checkpoint_path = download_pretrained(pretrained_image_cfg, cache_dir=cache_dir)
                 elif os.path.exists(pretrained_image):
                     visual_checkpoint_path = pretrained_image
                 else:
@@ -304,7 +320,11 @@ def create_model(
                     raise RuntimeError(f'Pretrained weights ({visual_checkpoint_path}) not found for model {model_name}.visual.')
 
             if pretrained_text:
-                if os.path.exists(pretrained_text):
+                pretrained_text_model = pretrained_text_model.replace('/', '-')  # for callers using old naming with / in ViT names
+                pretrained_text_cfg = get_pretrained_cfg(pretrained_text_model, pretrained_text)
+                if pretrained_image_cfg:
+                    text_checkpoint_path = download_pretrained(pretrained_text_cfg, cache_dir=cache_dir)
+                elif os.path.exists(pretrained_text):
                     text_checkpoint_path = pretrained_text
                 else:
                     logging.warning(f'Pretrained weights ({text_checkpoint_path}) not found for model {model_name}.text.')
@@ -321,8 +341,8 @@ def create_model(
                     visual_checkpoint_path,
                     text_checkpoint_path,
                     strict=False,
-                    visual_source=pretrained_visual_source,
-                    text_source=pretrained_text_source,
+                    visual_model=pretrained_visual_model,
+                    text_model=pretrained_text_model,
                     model_key="model|module|state_dict",
                     skip_list=skip_list
                 )
@@ -355,8 +375,8 @@ def create_model_and_transforms(
         pretrained_image: str = '',
         pretrained_text: str = '',
         pretrained_hf: bool = True,
-        pretrained_visual_source: str = 'other',
-        pretrained_text_source: str = 'clip',
+        pretrained_visual_model: str = None,
+        pretrained_text_model: str = None,
         image_mean: Optional[Tuple[float, ...]] = None,
         image_std: Optional[Tuple[float, ...]] = None,
         cache_dir: Optional[str] = None,
@@ -374,8 +394,8 @@ def create_model_and_transforms(
         pretrained_image=pretrained_image,
         pretrained_text=pretrained_text,
         pretrained_hf=pretrained_hf,
-        pretrained_visual_source=pretrained_visual_source,
-        pretrained_text_source=pretrained_text_source,
+        pretrained_visual_model=pretrained_visual_model,
+        pretrained_text_model=pretrained_text_model,
         cache_dir=cache_dir,
         skip_list=skip_list,
     )

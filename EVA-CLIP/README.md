@@ -12,7 +12,7 @@
 We launch EVA-CLIP, a series of models that significantly improve the efficiency and effectiveness of CLIP training. 
 Our approach incorporates new techniques for representation learning, optimization, and augmentation, enabling EVA-CLIP to achieve superior performance compared to previous CLIP models with the same number of parameters but significantly smaller training costs.
 
-Notably, using exclusively publicly accessible training data, our large-sized EVA-02 CLIP-L/14 can reach up to **80.4** zero-shot top-1 on ImageNet-1K, outperforming the previous largest & best open-sourced CLIP with only ~1/6 parameters and ~1/6 image-text training data. 
+Notably, using exclusively publicly accessible training data, our large-sized EVA-02 CLIP-L/14 can reach up to **80.4** zero-shot top-1 on ImageNet-1K, outperforming the previous largest & best open-modeld CLIP with only ~1/6 parameters and ~1/6 image-text training data. 
 Our largest 5.0B-parameter EVA-02 CLIP-E/14 with only 9 billion seen samples achieves **82.0** zero-shot top-1 accuracy on ImageNet-1K.
 
 **Table of Contents**
@@ -26,6 +26,7 @@ Our largest 5.0B-parameter EVA-02 CLIP-E/14 with only 9 billion seen samples ach
   - [Evaluate EVA-CLIP on IN-1K](#evaluate-eva-clip-on-in-1k)
 - [Pre-training](#pre-training)
   - [Pre-train EVA-CLIP on LAION-2B dataset](#pre-train-eva-clip-on-laion-2b-dataset)
+- [Extracting image and text features](#extracting-image-and-text-features)
 - [BibTeX \& Citation](#bibtex--citation)
 - [Acknowledgement](#acknowledgement)
 
@@ -69,7 +70,7 @@ The diameter of each circle corresponds to forward GFLOPs x the number of traini
 
 - The download links of `image enc. init. ckpt` and `text enc. init. ckpt` are summarized at [here](#pre-train-eva-clip-on-laion-2b-dataset).
 - To construct Merged-2B, we merged 1.6 billion samples from [LAION-2B](https://laion.ai/blog/laion-5b/) dataset with 0.4 billion samples from [COYO-700M](https://github.com/kakaobrain/coyo-dataset).
-- To our knowledge, EVA-CLIP series are the most performant open-sourced CLIP models at all scales, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
+- To our knowledge, EVA-CLIP series are the most performant open-modeld CLIP models at all scales, evaluated via zero-shot classification performance, especially on mainstream classification benchmarks such as ImageNet along with its variants.
 For more details about EVA-CLIP, please refer to our [paper](http://arxiv.org/abs/2303.15389).
 
 ## Setup
@@ -97,6 +98,7 @@ Core packages:
 - [Apex](https://github.com/NVIDIA/apex) (fused layer norm)
 - [xFormer](https://github.com/facebookresearch/xformers) (fast and memory efficient MHSA)
 
+
 ## Evaluation of Zero-shot Image Classification Performance
 ### Evaluate EVA-CLIP on IN-1K
 We use the standard IN-1K dataset (1.2M images). 
@@ -107,9 +109,12 @@ Then, move and extract the training and validation images to labeled subfolders,
   <summary>Evaluate the <code>EVA01_CLIP_g_14_psz14_s11B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-g-14-X
+MODEL_NAME=EVA01-CLIP-g-14
 
-EVAL_CKPT=/path/to/EVA01_CLIP_g_14_psz14_s11B.pt
+PRETRAINED=/path/to/EVA01_CLIP_g_14_psz14_s11B.pt
+
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -119,7 +124,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -129,9 +134,12 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA01_CLIP_g_14_plus_psz14_s11B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-g-14-text-H-X
+MODEL_NAME=EVA01-CLIP-g-14-plus
 
-EVAL_CKPT=/path/to/EVA01_CLIP_g_14_plus_psz14_s11B.pt
+PRETRAINED=/path/to/EVA01_CLIP_g_14_plus_psz14_s11B.pt
+
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -141,7 +149,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -151,9 +159,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_B_psz16_s8B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-B-16-X
+MODEL_NAME=EVA02-CLIP-B-16
 
-EVAL_CKPT=/path/to/EVA02_CLIP_B_psz16_s8B.pt
+PRETRAINED=/path/to/EVA02_CLIP_B_psz16_s8B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -163,7 +173,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -173,9 +183,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_L_psz14_s4B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-L-14-X
+MODEL_NAME=EVA02-CLIP-L-14
 
-EVAL_CKPT=/path/to/EVA02_CLIP_L_psz14_s4B.pt
+PRETRAINED=/path/to/EVA02_CLIP_L_psz14_s4B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -185,7 +197,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -196,9 +208,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_L_336_psz14_s6B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-L-14-X-336
+MODEL_NAME=EVA02-CLIP-L-14-336
 
-EVAL_CKPT=/path/to/EVA02_CLIP_L_336_psz14_s6B.pt
+PRETRAINED=/path/to/EVA02_CLIP_L_336_psz14_s6B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -208,7 +222,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -220,9 +234,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_E_psz14_s4B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-4b-14-text-H-X
+MODEL_NAME=EVA02-CLIP-bigE-14
 
-EVAL_CKPT=/path/to/EVA02_CLIP_E_psz14_s4B.pt
+PRETRAINED=/path/to/EVA02_CLIP_E_psz14_s4B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -232,7 +248,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -242,9 +258,11 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
   <summary>Evaluate the <code>EVA02_CLIP_E_psz14_plus_s9B</code> on <b>IN-1K val</b> using a single node with 1 gpu (click to expand).</summary>
 
 ```bash    
-MODEL_NAME=EVA-ViT-4b-14-text-bigG-X
+MODEL_NAME=EVA02-CLIP-bigE-14-plus
 
-EVAL_CKPT=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
+PRETRAINED=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
+# can set PRETRAINED=eva to automaticaly download and load weights; please check details in pretrained.py
+# PRETRAINED=eva_clip
 
 DATA_PATH=/path/to/IN-1K/val
 
@@ -254,7 +272,7 @@ python -m torch.distributed.launch --nproc_per_node=1 --nnodes=$WORLD_SIZE --nod
 	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
         --imagenet-val ${DATA_PATH} \
         --model ${MODEL_NAME} \
-        --pretrained ${EVAL_CKPT} \
+        --pretrained ${PRETRAINED} \
         --enable_deepspeed
 ```
 
@@ -297,9 +315,18 @@ Please prepare EVA-01, EVA-02, Openai CLIP and Open CLIP models.
 <summary>Pre-train <code>EVA01_CLIP_g_14_plus_psz14_s11B</code> on <b>Merged-2B</b> with 14 nodes (click to expand).</summary>
 
 ```bash
-MODEL=EVA-ViT-g-14-text-H-X
+MODEL=EVA01-CLIP-g-14-plus
 PRETRAINED_IMAGE=/path/to/EVA01_g_psz14.pt
 PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/pytorch_model.bin
+
+PRETRAINED_VISUAL_MODEL=EVA01-g-14-plus
+PRETRAINED_TEXT_MODEL=OpenCLIP-H-14
+
+# can automaticaly download and load pretrained models by follwing 4 lines; please check details in pretrained.py
+# PRETRAINED_IMAGE=eva
+# PRETRAINED_TEXT=laion2b_s32b_b79k
+# PRETRAINED_VISUAL_MODEL=EVA01-g-14-plus
+# PRETRAINED_TEXT_MODEL=OpenCLIP-H-14
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
@@ -337,12 +364,11 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --grad-clip-norm=5.0 \
         --smoothing=0. \
         --workers=8 \
-        --model EVA-ViT-L-14-X \
-        --name='eva-vit-g-14-text-H-x-lamb-patch_drop-14nodes-b114k-stage1-laion2b-coyo-round-robin' \
+        --model=${MODEL} \
         --pretrained-image=${PRETRAINED_IMAGE} \
         --pretrained-text=${PRETRAINED_TEXT} \
-        --pretrained-visual-source="other" \
-        --pretrained-text-source="clip" \
+        --pretrained-visual-model=${PRETRAINED_VISUAL_MODEL} \
+        --pretrained-text-model=${PRETRAINED_TEXT_MODEL} \
         --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
         --seed 4096 \
         --gather-with-grad \
@@ -361,9 +387,17 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 <summary>Pre-train <code>EVA02_CLIP_B_psz16_s8B</code> on <b>Merged-2B</b> with 8 nodes (click to expand).</summary>
 
 ```bash
-MODEL=EVA-ViT-B-16-X
+MODEL=EVA02-CLIP-B-16
 PRETRAINED_IMAGE=/path/to/EVA02_B_psz14to16.pt
 PRETRAINED_TEXT=/path/to/openai/clip-vit-base-patch16/pytorch_model.bin
+PRETRAINED_VISUAL_MODEL=EVA02-B-16
+PRETRAINED_TEXT_MODEL=OpenaiCLIP-B-16
+
+# can automaticaly download and load pretrained models by follwing 4 lines; please check details in pretrained.py
+# PRETRAINED_IMAGE=eva
+# PRETRAINED_TEXT=openai
+# PRETRAINED_VISUAL_MODEL=EVA02-B-16
+# PRETRAINED_TEXT_MODEL=OpenaiCLIP-B-16
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 
@@ -402,12 +436,11 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --grad-clip-norm=5.0 \
         --smoothing=0. \
         --workers=8 \
-        --model EVA-ViT-B-16-X-X \
-        --name='eva-vit-b-16-x-lamb-8nodes-b131k-stage1-laion2b-coyo-round-robin' \
+        --model=${MODEL} \
         --pretrained-image=${PRETRAINED_IMAGE} \
         --pretrained-text=${PRETRAINED_TEXT} \
-        --pretrained-visual-source="other" \
-        --pretrained-text-source="clip" \
+        --pretrained-visual-model=${PRETRAINED_VISUAL_MODEL} \
+        --pretrained-text-model=${PRETRAINED_TEXT_MODEL} \
         --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
         --seed 4096 \
         --gather-with-grad \
@@ -426,9 +459,17 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 <summary>Pre-train <code>EVA02_CLIP_L_psz14_s4B</code> on <b>Merged-2B</b> with 16 nodes (click to expand).</summary>
 
 ```bash
-MODEL=EVA-ViT-L-14-X
+MODEL=EVA02-CLIP-L-14
 PRETRAINED_IMAGE=/path/to/EVA02_L_psz14.pt
 PRETRAINED_TEXT=/path/to/openai/clip-vit-large-patch14/pytorch_model.bin
+PRETRAINED_VISUAL_MODEL=EVA02-L-14
+PRETRAINED_TEXT_MODEL=OpenaiCLIP-L-14
+
+# can automaticaly download and load pretrained models by follwing 4 lines; please check details in pretrained.py
+# PRETRAINED_IMAGE=eva
+# PRETRAINED_TEXT=openai
+# PRETRAINED_VISUAL_MODEL=EVA02-L-14
+# PRETRAINED_TEXT_MODEL=OpenaiCLIP-L-14
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
@@ -466,12 +507,11 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --grad-clip-norm=5.0 \
         --smoothing=0. \
         --workers=8 \
-        --model EVA-ViT-L-14-X \
-        --name='eva-vit-l-14-x-lamb-16nodes-b131k-stage1-laion2b-coyo-round-robin' \
+        --model=${MODEL} \
         --pretrained-image=${PRETRAINED_IMAGE} \
         --pretrained-text=${PRETRAINED_TEXT} \
-        --pretrained-visual-source="other" \
-        --pretrained-text-source="clip" \
+        --pretrained-visual-model=${PRETRAINED_VISUAL_MODEL} \
+        --pretrained-text-model=${PRETRAINED_TEXT_MODEL} \
         --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
         --seed 4096 \
         --gather-with-grad \
@@ -490,8 +530,12 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 <summary>Pre-train <code>EVA02_CLIP_L_psz14_224to336</code> on <b>Merged-2B</b> with 16 nodes (click to expand).</summary>
 
 ```bash
-MODEL=EVA-ViT-L-14-X-336
+MODEL=EVA02-CLIP-L-14-336
 PRETRAINED=/path/to/EVA02_CLIP_L_psz14_224to336.pt
+
+# can automaticaly download and load pretrained models by follwing 2 lines; please check details in pretrained.py
+# MODEL=EVA02-CLIP-L-14-336
+# PRETRAINED=eva_clip_224to336
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
@@ -529,8 +573,7 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --grad-clip-norm=5.0 \
         --smoothing=0. \
         --workers=8 \
-        --model EVA-ViT-L-14-X-336 \
-        --name='eva-vit-l-14-x-336-lamb-16nodes-b61k-stage1-laion2b-coyo-round-robin' \
+        --model=${MODEL} \
         --pretrained=${PRETRAINED} \
         --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
         --seed 4096 \
@@ -550,9 +593,17 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 <summary>Pre-train <code>EVA02_CLIP_E_psz14_s4B</code> on <b>LAION-2B</b> with 18 nodes (click to expand).</summary>
 
 ```bash
-MODEL=EVA-ViT-4b-14-text-H-X
+MODEL=EVA02-CLIP-bigE-14
 PRETRAINED_IMAGE=/path/to/EVA02_E_psz14.pt
 PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/pytorch_model.bin
+PRETRAINED_VISUAL_MODEL=EVA02-bigE-14
+PRETRAINED_TEXT_MODEL=OpenCLIP-H-14
+
+# can automaticaly download and load pretrained models by follwing 4 lines; please check details in pretrained.py
+# PRETRAINED_IMAGE=eva
+# PRETRAINED_TEXT=laion2b_s32b_b79k
+# PRETRAINED_VISUAL_MODEL=EVA02-bigE-14
+# PRETRAINED_TEXT_MODEL=OpenCLIP-H-14
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 # MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
@@ -590,12 +641,11 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --grad-clip-norm=5.0 \
         --smoothing=0. \
         --workers=8 \
-        --model ${model} \
-        --name='eva-vit-4b-14-text-H-x-lamb-patch_drop-18nodes-b144k-laion2b' \
+        --model=${MODEL} \
         --pretrained-image=${PRETRAINED_IMAGE} \
         --pretrained-text=${PRETRAINED_TEXT} \
-        --pretrained-visual-source="other" \
-        --pretrained-text-source="clip" \
+        --pretrained-visual-model=${PRETRAINED_VISUAL_MODEL} \
+        --pretrained-text-model=${PRETRAINED_TEXT_MODEL} \
         --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
         --seed 4096 \
         --gather-with-grad \
@@ -614,9 +664,18 @@ python -m torch.distributed.launch --nproc_per_node=8 \
 <summary>Pre-train <code>EVA02_CLIP_E_psz14_plus_s9B</code> on <b>LAION-2B</b> with 18 nodes (click to expand).</summary>
 
 ```bash
-MODEL=EVA-ViT-4b-14-text-bigG-X
+MODEL=EVA02-CLIP-bigE-14-plus
 PRETRAINED_IMAGE=/path/to/EVA02_CLIP_E_psz14_plus_s9B.pt
 PRETRAINED_TEXT=/path/to/laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/pytorch_model.bin # ckpt is splited into 2 parts. could merge first then load.
+PRETRAINED_VISUAL_MODEL=EVA02-bigE-14
+PRETRAINED_TEXT_MODEL=OpenCLIP-bigG-14
+
+# can automaticaly download and load pretrained models by follwing 4 lines; please check details in pretrained.py
+# PRETRAINED_IMAGE=eva
+# PRETRAINED_TEXT=laion2b_s39b_b160k
+# PRETRAINED_VISUAL_MODEL=EVA02-bigE-14
+# PRETRAINED_TEXT_MODEL=OpenCLIP-bigG-14
+
 
 # Following OpenCLIP, we preprocess data by webdataset. We concat paths of LAION-2B and COYO-700M with `;`.
 # MERGE_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar;/path/to/coyo700m_en_data/img_data/{000000..047435}.tar"
@@ -654,12 +713,12 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --grad-clip-norm=5.0 \
         --smoothing=0. \
         --workers=8 \
-        --model ${model} \
+        --model=${MODEL} \
         --name='eva-vit-4b-14-text-bigG-x-lamb-patch_drop-18nodes-b144k-laion2b' \
         --pretrained-image=${PRETRAINED_IMAGE} \
         --pretrained-text=${PRETRAINED_TEXT} \
-        --pretrained-visual-source="other" \
-        --pretrained-text-source="clip" \
+        --pretrained-visual-model=${PRETRAINED_VISUAL_MODEL} \
+        --pretrained-text-model=${PRETRAINED_TEXT_MODEL} \
         --skip-list head.weight head.bias lm_head.weight lm_head.bias mask_token text_projection logit_scale \
         --seed 4096 \
         --gather-with-grad \
@@ -671,10 +730,35 @@ python -m torch.distributed.launch --nproc_per_node=8 \
         --zero-stage=1 \
         --enable-deepspeed
 ```
-
 </details>
 
+## Extracting image and text features
 
+Easily extracting image and text features in distribution and saving in .npy format. Here is an example of how you can do it:
+
+```shell
+MODEL=EVA02-CLIP-B-16
+PRETRAINED=eva_clip
+LAION_2B_DATA_PATH="/path/to/laion2b_en_data/img_data/{000000..164090}.tar"
+
+IMG_EMB_PATH="/path/to/store/output/image_embedding"
+TEXT_EMB_PATH="/path/to/store/output/text_embedding"
+
+cd rei
+
+python -m torch.distributed.launch --nproc_per_node=8 --nnodes=$WORLD_SIZE --node_rank=$RANK \
+	--master_addr=$MASTER_ADDR --master_port=12355 --use_env training/main.py \
+        --val-data=${LAION_2B_DATA_PATH} \
+        --val-num-samples 2000000000 \
+        --batch-size 1024 \
+        --model ${MODEL} \
+        --pretrained ${PRETRAINED} \
+        --extract-features \
+        --img-emb-path ${IMG_EMB_PATH} \
+        --text-emb-path ${TEXT_EMB_PATH} \
+        --save-interval 10 \
+        --enable_deepspeed
+```
 
 ## BibTeX & Citation
 

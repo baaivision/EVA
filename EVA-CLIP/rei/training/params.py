@@ -118,7 +118,7 @@ def parse_args(args):
         help="Optional identifier for the experiment when storing logs. Otherwise use current time.",
     )
     parser.add_argument(
-        "--workers", type=int, default=1, help="Number of dataloader workers per GPU."
+        "--workers", type=int, default=4, help="Number of dataloader workers per GPU."
     )
     parser.add_argument(
         "--batch-size", type=int, default=64, help="Batch size per GPU."
@@ -202,10 +202,9 @@ def parse_args(args):
         help="Load pretrained image model weights for image tower backbone if available.",
     )
     parser.add_argument(
-        "--pretrained-visual-source",
-        choices=["clip", "open_clip", "other"],
-        default="other",
-        help="Which is the source of pretrained model.visual from."
+        "--pretrained-visual-model",
+        default=None,
+        help="pretrained model.visual."
     )
     parser.add_argument(
         "--pretrained-text",
@@ -214,10 +213,9 @@ def parse_args(args):
         help="Load pretrained text model weights for text tower backbone if available.",
     )
     parser.add_argument(
-        "--pretrained-text-source",
-        choices=["clip", "open_clip", "other"],
-        default="clip",
-        help="Which is the source of pretrained model.text from."
+        "--pretrained-text-model",
+        default=None,
+        help="pretrained model.text."
     )
     parser.add_argument(
         '--skip-list', type=str, nargs='+', default=[],

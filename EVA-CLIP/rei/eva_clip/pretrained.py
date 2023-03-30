@@ -8,70 +8,20 @@ from typing import Dict, Union
 from tqdm import tqdm
 
 try:
-    __version__ = '2.4.1'
     from huggingface_hub import hf_hub_download
-    hf_hub_download = partial(hf_hub_download, library_name="open_clip", library_version=__version__)
     _has_hf_hub = True
 except ImportError:
     hf_hub_download = None
     _has_hf_hub = False
 
 
-def _pcfg(url='', hf_hub='', mean=None, std=None):
+def _pcfg(url='', hf_hub='', filename='', mean=None, std=None):
     return dict(
         url=url,
         hf_hub=hf_hub,
         mean=mean,
         std=std,
     )
-
-
-_RN50 = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/afeb0e10f9e5a86da6080e35cf09123aca3b358a0c3e3b6c78a7b63bc04b6762/RN50.pt"),
-    yfcc15m=_pcfg(
-        "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/rn50-quickgelu-yfcc15m-455df137.pt"),
-    cc12m=_pcfg(
-        "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/rn50-quickgelu-cc12m-f000538c.pt"),
-)
-
-_RN50_quickgelu = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/afeb0e10f9e5a86da6080e35cf09123aca3b358a0c3e3b6c78a7b63bc04b6762/RN50.pt"),
-    yfcc15m=_pcfg(
-        "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/rn50-quickgelu-yfcc15m-455df137.pt"),
-    cc12m=_pcfg(
-        "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/rn50-quickgelu-cc12m-f000538c.pt"),
-)
-
-_RN101 = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/8fa8567bab74a42d41c5915025a8e4538c3bdbe8804a470a72f30b0d94fab599/RN101.pt"),
-    yfcc15m=_pcfg(
-        "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/rn101-quickgelu-yfcc15m-3e04b30e.pt"),
-)
-
-_RN101_quickgelu = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/8fa8567bab74a42d41c5915025a8e4538c3bdbe8804a470a72f30b0d94fab599/RN101.pt"),
-    yfcc15m=_pcfg(
-        "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/rn101-quickgelu-yfcc15m-3e04b30e.pt"),
-)
-
-_RN50x4 = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/7e526bd135e493cef0776de27d5f42653e6b4c8bf9e0f653bb11773263205fdd/RN50x4.pt"),
-)
-
-_RN50x16 = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/52378b407f34354e150460fe41077663dd5b39c54cd0bfd2b27167a4a06ec9aa/RN50x16.pt"),
-)
-
-_RN50x64 = dict(
-    openai=_pcfg(
-        "https://openaipublic.azureedge.net/clip/models/be1cfb55d75a9666199fb2206c106743da0f6468c9d327f3e0d0a543a9919d9c/RN50x64.pt"),
-)
 
 _VITB32 = dict(
     openai=_pcfg(
@@ -101,12 +51,14 @@ _VITB16 = dict(
         "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/vit_b_16-laion400m_e31-00efa78f.pt"),
     laion400m_e32=_pcfg(
         "https://github.com/mlfoundations/open_clip/releases/download/v0.2-weights/vit_b_16-laion400m_e32-55e67d44.pt"),
-    # laion400m_32k=_pcfg(
-    #     url="",
-    #     mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
-    # laion400m_64k=_pcfg(
-    #     url="",
-    #     mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
+    laion2b_s34b_b88k=_pcfg(hf_hub='laion/CLIP-ViT-B-16-laion2B-s34B-b88K/'),
+)
+
+_EVAB16 = dict(
+    eva=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_B_psz14to16.pt'),
+    eva02=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_B_psz14to16.pt'),
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_B_psz16_s8B.pt'),
+    eva02_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_B_psz16_s8B.pt'),
 )
 
 _VITB16_PLUS_240 = dict(
@@ -128,9 +80,23 @@ _VITL14 = dict(
         mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)),
 )
 
+_EVAL14 = dict(
+    eva=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_L_psz14.pt'),
+    eva02=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_L_psz14.pt'),
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_L_psz14_s4B.pt'),
+    eva02_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_L_psz14_s4B.pt'),
+)
+
 _VITL14_336 = dict(
     openai=_pcfg(
         "https://openaipublic.azureedge.net/clip/models/3035c92b350959924f9f00213499208652fc7ea050643e8b385c2dac08641f02/ViT-L-14-336px.pt"),
+)
+
+_EVAL14_336 = dict(
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_L_336_psz14_s6B.pt'),
+    eva02_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_L_336_psz14_s6B.pt'),
+    eva_clip_224to336=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_L_psz14_224to336.pt'),
+    eva02_clip_224to336=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_L_psz14_224to336.pt'),
 )
 
 _VITH14 = dict(
@@ -139,44 +105,92 @@ _VITH14 = dict(
 
 _VITg14 = dict(
     laion2b_s12b_b42k=_pcfg(hf_hub='laion/CLIP-ViT-g-14-laion2B-s12B-b42K/'),
+    laion2b_s34b_b88k=_pcfg(hf_hub='laion/CLIP-ViT-g-14-laion2B-s34B-b88K/'),
 )
 
-_robertaViTB32 = dict(
-    laion2b_s12b_b32k=_pcfg(hf_hub='laion/CLIP-ViT-B-32-roberta-base-laion2B-s12B-b32k/'),
+_EVAg14 = dict(
+    eva=_pcfg(hf_hub='QuanSun/EVA-CLIP/'),
+    eva01=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA01_g_psz14.pt'),
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA01_CLIP_g_14_psz14_s11B.pt'),
+    eva01_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA01_CLIP_g_14_psz14_s11B.pt'),
 )
 
-_robertaViTB32 = dict(
-    laion2b_s12b_b32k=_pcfg(hf_hub='laion/CLIP-ViT-B-32-roberta-base-laion2B-s12B-b32k/'),
+_EVAg14_PLUS = dict(
+    eva=_pcfg(hf_hub='QuanSun/EVA-CLIP/'),
+    eva01=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA01_g_psz14.pt'),
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA01_CLIP_g_14_plus_psz14_s11B.pt'),
+    eva01_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA01_CLIP_g_14_plus_psz14_s11B.pt'),
 )
 
-_xlmRobertaBaseViTB32 = dict(
-    laion5b_s13b_b90k=_pcfg(hf_hub='laion/CLIP-ViT-B-32-xlm-roberta-base-laion5B-s13B-b90k/'),
+_VITbigG14 = dict(
+    laion2b_s39b_b160k=_pcfg(hf_hub='laion/CLIP-ViT-bigG-14-laion2B-39B-b160k/'),
 )
 
-_xlmRobertaLargeFrozenViTH14 = dict(
-    frozen_laion5b_s13b_b90k=_pcfg(hf_hub='laion/CLIP-ViT-H-14-frozen-xlm-roberta-large-laion5B-s13B-b90k/'),
+_EVAbigE14 = dict(
+    eva=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_E_psz14.pt'),
+    eva02=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_E_psz14.pt'),
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_E_psz14_s4B.pt'),
+    eva02_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_E_psz14_s4B.pt'),
 )
+
+_EVAbigE14_PLUS = dict(
+    eva=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_E_psz14.pt'),
+    eva02=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_E_psz14.pt'),
+    eva_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_E_psz14_plus_s9B.pt'),
+    eva02_clip=_pcfg(hf_hub='QuanSun/EVA-CLIP/EVA02_CLIP_E_psz14_plus_s9B.pt'),
+)
+
 
 _PRETRAINED = {
-    "RN50": _RN50,
-    "RN50-quickgelu": _RN50_quickgelu,
-    "RN101": _RN101,
-    "RN101-quickgelu": _RN101_quickgelu,
-    "RN50x4": _RN50x4,
-    "RN50x16": _RN50x16,
-    "RN50x64": _RN50x64,
-    "ViT-B-32": _VITB32,
-    "ViT-B-32-quickgelu": _VITB32_quickgelu,
-    "ViT-B-16": _VITB16,
-    "ViT-B-16-plus-240": _VITB16_PLUS_240,
-    "ViT-L-14": _VITL14,
-    "ViT-L-14-336": _VITL14_336,
-    "ViT-H-14": _VITH14,
-    "ViT-g-14": _VITg14,
-    "roberta-ViT-B-32": _robertaViTB32,
-    "xlm-roberta-base-ViT-B-32": _xlmRobertaBaseViTB32,
-    "xlm-roberta-large-ViT-H-14": _xlmRobertaLargeFrozenViTH14,
+    # "ViT-B-32": _VITB32,
+    "OpenaiCLIP-B-32": _VITB32,
+    "OpenCLIP-B-32": _VITB32,
+
+    # "ViT-B-32-quickgelu": _VITB32_quickgelu,
+    "OpenaiCLIP-B-32-quickgelu": _VITB32_quickgelu,
+    "OpenCLIP-B-32-quickgelu": _VITB32_quickgelu,
+
+    # "ViT-B-16": _VITB16,
+    "OpenaiCLIP-B-16": _VITB16,
+    "OpenCLIP-B-16": _VITB16,
+
+    "EVA02-B-16": _EVAB16,
+    "EVA02-CLIP-B-16": _EVAB16,
+
+    # "ViT-B-16-plus-240": _VITB16_PLUS_240,
+    "OpenCLIP-B-16-plus-240": _VITB16_PLUS_240,
+
+    # "ViT-L-14": _VITL14,
+    "OpenaiCLIP-L-14": _VITL14,
+    "OpenCLIP-L-14": _VITL14,
+
+    "EVA02-L-14": _EVAL14,
+    "EVA02-CLIP-L-14": _EVAL14,
+
+    # "ViT-L-14-336": _VITL14_336,
+    "OpenaiCLIP-L-14-336": _VITL14_336,
+
+    "EVA02-CLIP-L-14-336": _EVAL14_336,
+
+    # "ViT-H-14": _VITH14,
+    # "ViT-g-14": _VITg14,
+    "OpenCLIP-H-14": _VITH14,
+    "OpenCLIP-g-14": _VITg14,
+
+    "EVA01-CLIP-g-14": _EVAg14,
+    "EVA01-CLIP-g-14-plus": _EVAg14_PLUS,
+
+    # "ViT-bigG-14": _VITbigG14,
+    "OpenCLIP-bigG-14": _VITbigG14,
+
+    "EVA02-CLIP-bigE-14": _EVAbigE14,
+    "EVA02-CLIP-bigE-14-plus": _EVAbigE14_PLUS,
 }
+
+
+def _clean_tag(tag: str):
+    # normalize pretrained tags
+    return tag.lower().replace('-', '_')
 
 
 def list_pretrained(as_str: bool = False):
@@ -189,6 +203,7 @@ def list_pretrained(as_str: bool = False):
 def list_pretrained_models_by_tag(tag: str):
     """ return all models having the specified pretrain tag """
     models = []
+    tag = _clean_tag(tag)
     for k in _PRETRAINED.keys():
         if tag in _PRETRAINED[k]:
             models.append(k)
@@ -206,18 +221,18 @@ def list_pretrained_tags_by_model(model: str):
 def is_pretrained_cfg(model: str, tag: str):
     if model not in _PRETRAINED:
         return False
-    return tag.lower() in _PRETRAINED[model]
+    return _clean_tag(tag) in _PRETRAINED[model]
 
 
 def get_pretrained_cfg(model: str, tag: str):
     if model not in _PRETRAINED:
         return {}
     model_pretrained = _PRETRAINED[model]
-    return model_pretrained.get(tag.lower(), {})
+    return model_pretrained.get(_clean_tag(tag), {})
 
 
 def get_pretrained_url(model: str, tag: str):
-    cfg = get_pretrained_cfg(model, tag)
+    cfg = get_pretrained_cfg(model, _clean_tag(tag))
     return cfg.get('url', '')
 
 
