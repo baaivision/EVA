@@ -113,7 +113,7 @@ image_path = "CLIP.png"
 caption = ["a diagram", "a dog", "a cat"]
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model, _, preprocess = create_model_and_transforms(model_name, pretrained, force_custom_clip=True))
+model, _, preprocess = create_model_and_transforms(model_name, pretrained, force_custom_clip=True)
 tokenizer = get_tokenizer(model_name)
 model = model.to(device)
 
