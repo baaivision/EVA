@@ -23,8 +23,9 @@ We hope our efforts enable a broader range of the research community to advance 
 
 ## Summary of EVA-02 performance
 
-![summary_tab](assets/summary_tab.png)
+![summary_tab](assets/radar.png)
 
+![summary_tab](assets/summary_tab.png)
 
 ## Get Started
 - [Pre-training](asuka)
