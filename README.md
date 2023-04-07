@@ -1,6 +1,6 @@
 <div align="center">
 
-<h2>EVA: Visual Representation Fanatics from BAAI</h2>
+<h2>EVA: Visual Representation Fantasies from BAAI</h2>
 
 </div>
 
