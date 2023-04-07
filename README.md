@@ -13,6 +13,8 @@
 - [**EVA-02**](EVA-02) (Arxiv 2023) - A Visual Representation for Neon Genesis
 
 - [**EVA-CLIP**](EVA-CLIP) (Arxiv 2023) - Improved Training Techniques for CLIP at Scale
+  
+- [**EVA @ Hugging Face 🤗 & `timm`**](https://huggingface.co/timm/eva02_large_patch14_448.mim_m38m_ft_in1k)
 
 
 
