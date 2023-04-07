@@ -1,6 +1,6 @@
 <div align="center">
 
-<h2>EVA: Vision Foundation Model Fanatics from BAAI</h2>
+<h2>EVA: Visual Representation Fanatics from BAAI</h2>
 
 </div>
 
