@@ -24,4 +24,4 @@ wandb
 ftfy
 regex
 iopath
-yaml
+pyyaml
