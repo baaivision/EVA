@@ -83,7 +83,7 @@ conda create --name rei python=3.8 -y
 conda activate rei
 
 git clone git@github.com:baaivision/EVA.git
-cd EVA-CLIP
+cd EVA/EVA-CLIP
 pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 --extra-index-url https://download.pytorch.org/whl/cu116
 pip install -r requirements.txt
 ```
