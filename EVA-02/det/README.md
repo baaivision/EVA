@@ -66,7 +66,7 @@ To avoid data contamination, all LVIS models are initialized using IN-21K MIM pr
 | model name | init. ckpt | LSJ crop size | batch size | iter | AP box | AP mask | config | weight |
 | --- | --- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | ``eva02_B_lvis_bsl`` | ``eva02_B_pt_in21k_p14to16`` | ``1024x1024`` | 128 | 50k | 47.1 | 41.4 | [link](projects/ViTDet/configs/eva2_mim_to_lvis/eva2_lvis_cascade_mask_rcnn_vitdet_b_4attn_1024_lrd0p7.py) |  [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA-02/blob/main/eva02/det/eva02_B_lvis_bsl.pth) |
-| ``eva02_L_lvis_bsl`` | ``eva02_L_pt_in21k_p14to16``  | ``1024x1024`` | 128 | 40k | 55.3 | 48.6 | [link](projects/ViTDet/configs/eva2_mim_to_lvis/eva2_lvis_cascade_mask_rcnn_vitdet_l_4attn_1024_lrd0p8.py) |  [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA-02/blob/main/eva02/det/eva02_L_coco_bsl.pth) |
+| ``eva02_L_lvis_bsl`` | ``eva02_L_pt_in21k_p14to16``  | ``1024x1024`` | 128 | 40k | 55.3 | 48.6 | [link](projects/ViTDet/configs/eva2_mim_to_lvis/eva2_lvis_cascade_mask_rcnn_vitdet_l_4attn_1024_lrd0p8.py) |  [🤗 HF link](https://huggingface.co/Yuxin-CV/EVA-02/blob/main/eva02/det/eva02_L_lvis_bsl.pth) |
 
 </div>
 
