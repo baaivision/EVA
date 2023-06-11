@@ -7,17 +7,23 @@ import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
-from timm.models.layers import trunc_normal_
-from apex.normalization import FusedLayerNorm
-from apex.normalization.fused_layer_norm import FusedLayerNormAffineFunction, FusedLayerNormFunction
 
+try:
+    from timm.models.layers import trunc_normal_
+except:
+    from timm.layers import trunc_normal_
+    
 from .rope import VisionRotaryEmbedding, VisionRotaryEmbeddingFast
 from .utils import to_2tuple
 
-import deepspeed
-
 if os.getenv('ENV_TYPE') == 'deepspeed':
-    from deepspeed.runtime.activation_checkpointing.checkpointing import checkpoint
+    try:
+        import deepspeed
+        from deepspeed.runtime.activation_checkpointing.checkpointing import checkpoint
+    except:
+        print("Please 'pip install deepspeed'")
+        deepspeed = None
+        from torch.utils.checkpoint import checkpoint
 else:
     from torch.utils.checkpoint import checkpoint
 
@@ -26,34 +32,6 @@ try:
 except ImportError:
     xops = None
     print("Please 'pip install xformers'")
-
-
-class FusedLayerNormFp32(FusedLayerNorm):
-    """Subclass apex FusedLayerNorm to handle fp16 & bf16 (by casting to float32 and back)."""
-
-    def forward(self, input: torch.Tensor):
-
-        orig_type = input.dtype
-
-        if not input.is_cuda:
-            return F.layer_norm(
-                input.to(torch.float32), 
-                self.normalized_shape, 
-                self.weight.float() if self.weight is not None else None,
-                self.bias.float() if self.bias is not None else None,
-                self.eps)
-        
-        if self.elementwise_affine:
-            output = FusedLayerNormAffineFunction.apply(
-                input.to(torch.float32), 
-                self.weight.float(), 
-                self.bias.float(), 
-                self.normalized_shape, 
-                self.eps)
-        else:
-            output = FusedLayerNormFunction.apply(input.to(torch.float32), self.normalized_shape, self.eps)
-
-        return output.to(orig_type)
 
 class LayerNormFp32(nn.LayerNorm):
     """Subclass torch's LayerNorm to handle fp16 (by casting to float32 and back)."""
