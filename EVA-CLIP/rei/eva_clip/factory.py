@@ -6,15 +6,7 @@ import re
 from copy import deepcopy
 from pathlib import Path
 from typing import Optional, Tuple, Union, Dict, Any
-
-
 import torch
-import deepspeed
-
-try:
-    from deepspeed.runtime.utils import see_memory_usage
-except:
-    see_memory_usage = None
 
 from .constants import OPENAI_DATASET_MEAN, OPENAI_DATASET_STD
 from .model import CLIP, CustomCLIP, convert_weights_to_lp, convert_to_custom_text_state_dict,\
