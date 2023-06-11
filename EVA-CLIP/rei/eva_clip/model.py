@@ -11,7 +11,6 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn
-from apex.normalization import FusedLayerNorm
 
 try:
     from .hf_model import HFTextEncoder
@@ -21,6 +20,12 @@ from .modified_resnet import ModifiedResNet
 from .timm_model import TimmModel
 from .eva_vit_model import EVAVisionTransformer
 from .transformer import LayerNorm, QuickGELU, Attention, VisionTransformer, TextTransformer
+
+try:
+    from apex.normalization import FusedLayerNorm
+except:
+    FusedLayerNorm = LayerNorm
+    print("Please 'pip install apex'")
 
 try:
     import xformers.ops as xops
