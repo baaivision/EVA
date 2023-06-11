@@ -40,6 +40,13 @@ Summary of CLIP models' ImageNet-1K zero-shot classification performance.
 The diameter of each circle corresponds to forward GFLOPs x the number of training samples.
 
 ## Model Card
+> `model name` is the checkpoint name of EVA-CLIP. 
+
+> `image enc. init. ckpt` is the checkpoint name that is used to initialize the image encoder of EVA-CLIP. 
+
+> `text enc. init. ckpt` is the checkpoint name that is used to initialize the text encoder of EVA-CLIP.
+
+> `weight` is the link to download the checkpoint of EVA-CLIP.
 
 ### EVA-01-CLIP Series
 
