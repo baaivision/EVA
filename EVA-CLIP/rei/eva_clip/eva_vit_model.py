@@ -7,8 +7,11 @@ from functools import partial
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from timm.models.layers import drop_path, to_2tuple, trunc_normal_
-
+try:
+    from timm.models.layers import drop_path, to_2tuple, trunc_normal_
+except:
+    from timm.layers import drop_path, to_2tuple, trunc_normal_
+    
 from .transformer import PatchDropout
 from .rope import VisionRotaryEmbedding, VisionRotaryEmbeddingFast
 
