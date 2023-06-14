@@ -71,8 +71,8 @@ The diameter of each circle corresponds to forward GFLOPs x the number of traini
 | `EVA02_CLIP_B_psz16_s8B` | `EVA02_B_psz14to16` | `openai/clip-vit-base-patch16` | 149M | `fp16` | Merged-2B | 131K | 64 A100(40GB) | **74.7** | **66.9** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_B_psz16_s8B.pt) (`300MB`) |
 | `EVA02_CLIP_L_psz14_s4B` | `EVA02_L_psz14` | `openai/clip-vit-large-patch14` | 428M | `fp16` | Merged-2B | 131K | 128 A100(40GB) | **79.8** | **71.2** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_psz14_s4B.pt) (`856MB`) |
 | `EVA02_CLIP_L_336_psz14_s6B` | `EVA02_CLIP_L_psz14_224to336` | `EVA02_CLIP_L_psz14_224to336` | 428M | `fp16` | Merged-2B | 61K | 128 A100(40GB) | **80.4** | **71.7** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_L_336_psz14_s6B.pt) (`856MB`) |
-| `EVA02_CLIP_E_psz14_s4B.pt` | `EVA02_E_psz14` | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K` | 4.7B | `fp16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 115K | 144 A100(80GB) | **81.9** | **74.7** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_s4B.pt) (`9.4GB`) |
-| `EVA02_CLIP_E_psz14_plus_s9B.pt` | `EVA02_E_psz14` | `laion/CLIP-ViT-bigG-14-laion2B-39B-b160k` | 5.0B | `bf16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 144K | 144 A100(80GB) | **82.0** | **75.0** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_plus_s9B.pt) (`10.1GB`) |
+| `EVA02_CLIP_E_psz14_s4B` | `EVA02_E_psz14` | `laion/CLIP-ViT-H-14-laion2B-s32B-b79K` | 4.7B | `fp16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 115K | 144 A100(80GB) | **81.9** | **74.7** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_s4B.pt) (`9.4GB`) |
+| `EVA02_CLIP_E_psz14_plus_s9B` | `EVA02_E_psz14` | `laion/CLIP-ViT-bigG-14-laion2B-39B-b160k` | 5.0B | `bf16` | [LAION-2B](https://laion.ai/blog/laion-5b/) | 144K | 144 A100(80GB) | **82.0** | **75.0** | [🤗 HF link](https://huggingface.co/QuanSun/EVA-CLIP/blob/main/EVA02_CLIP_E_psz14_plus_s9B.pt) (`10.1GB`) |
 
 </div>
 
