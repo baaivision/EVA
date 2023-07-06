@@ -38,6 +38,15 @@ python -m pip install -e .
 
 Please prepare COCO 2017 & LVIS v1.0 datasets according to the [guidelines](https://detectron2.readthedocs.io/en/latest/tutorials/builtin_datasets.html) in Detectron2.
 
+Overall, the structure of ``DETECTRON2_DATASETS`` should look like:
+
+```bash
+DETECTRON2_DATASETS
+├── coco
+├── lvis
+└── ...
+```
+
 ## Prepare Objects365 pre-trained EVA weights
 
 <div align="center">
