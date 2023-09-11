@@ -680,7 +680,7 @@ merged_30m_pt
 <summary>We use 16 nodes (<code>total_bsz = 16*8*32 = 4096</code>) for pre-training (click to expand).</summary>
 
 ```bash
-MODEL_NAME=eva_g_patch14
+MODEL_NAME=eva_g_patch14_224
 
 DATA_PATH=/path/to/merged_30m_pt
 VAL_DATA_PATH=/path/to/ImageNet-1K # monitoring val loss 
