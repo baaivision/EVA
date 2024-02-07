@@ -201,7 +201,7 @@ You can leverage [deepspeed.zero.Init()](https://deepspeed.readthedocs.io/en/sta
 ## BibTeX & Citation
 
 ```
-@article{EVA-CLIP,
+@article{EVA-CLIP-18B,
   title={EVA-CLIP-18B: Scaling CLIP to 18 Billion Parameters}, 
   author={Quan Sun and Jinsheng Wang and Qiying Yu and Yufeng Cui and Fan Zhang and Xiaosong Zhang and Xinlong Wang},
   journal={arXiv preprint arXiv:2402.04252},
