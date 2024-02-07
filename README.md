@@ -13,6 +13,8 @@
 - [**EVA-02**](EVA-02) (Arxiv 2023) - A Visual Representation for Neon Genesis
 
 - [**EVA-CLIP**](EVA-CLIP) (Arxiv 2023) - Improved Training Techniques for CLIP at Scale
+
+- [**EVA-CLIP-18B**](EVA-CLIP-18B) (Arxiv 2024) - EVA-CLIP-18B: Scaling CLIP to 18 Billion Parameters
   
 - [**EVA @ Hugging Face 🤗 & `timm`**](https://huggingface.co/timm/eva02_large_patch14_448.mim_m38m_ft_in1k)
 
@@ -24,7 +26,7 @@
 
 ## Contact
 - **We are hiring** at all levels at BAAI Vision Team, including full-time researchers, engineers and interns. 
-If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Yue Cao](http://yue-cao.me/) (`caoyue@baai.ac.cn`) and [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
+If you are interested in working with us on **foundation model, self-supervised learning and multimodal learning**, please contact [Xinlong Wang](https://www.xloong.wang/) (`wangxinlong@baai.ac.cn`).
 
 
 ## License
