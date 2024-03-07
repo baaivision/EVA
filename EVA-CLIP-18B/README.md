@@ -32,7 +32,7 @@ Scaling behavior of EVA-CLIP with zero-shot classification performance averaged 
 
 ## Model Card
 
-### EVA-8B
+### EVA-8B and EVA-18B
 <div align="center">
 
 | model name | total #params | seen samples | pytorch weight |
