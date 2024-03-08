@@ -432,7 +432,8 @@ class EVAVisionTransformer(nn.Module):
         if isinstance(self.head, nn.Linear):
             trunc_normal_(self.head.weight, std=.02)
             self.head.weight.data.mul_(init_scale)
-            self.head.bias.data.mul_(init_scale)
+            if qkv_bias:
+                self.head.bias.data.mul_(init_scale)
 
         # setting a patch_dropout of 0. would mean it is disabled and this function would be the identity fn
         self.patch_dropout = PatchDropout(patch_dropout) if patch_dropout > 0. else nn.Identity()
