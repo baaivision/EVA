@@ -101,7 +101,7 @@ Core packages:
 
 ## Zero-Shot Evaluation
 
-We use [CLIP-Benchmark](https://github.com/LAION-AI/CLIP_benchmark) to evaluate the zero-shot performance of EVA-CLIP models. Following [vissl](https://github.com/facebookresearch/vissl/blob/main/extra_scripts/datasets/create_k700_data_files.py), we evauate the zero-shot video classification using 1 middle frame. Further details regarding the evaluation datasets can be found in our paper, particularly in Table 11.
+We use [CLIP-Benchmark](https://github.com/LAION-AI/CLIP_benchmark) to evaluate the zero-shot performance of EVA-CLIP models. Following [vissl](https://github.com/facebookresearch/vissl/blob/main/extra_scripts/datasets/create_k700_data_files.py), we evaluate the zero-shot video classification using 1 middle frame. Further details regarding the evaluation datasets can be found in our paper, particularly in Table 11.
 
 ## Usage
 
