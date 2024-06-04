@@ -314,7 +314,7 @@ def create_model(
             if pretrained_text:
                 pretrained_text_model = pretrained_text_model.replace('/', '-')  # for callers using old naming with / in ViT names
                 pretrained_text_cfg = get_pretrained_cfg(pretrained_text_model, pretrained_text)
-                if pretrained_image_cfg:
+                if pretrained_text_cfg:
                     text_checkpoint_path = download_pretrained(pretrained_text_cfg, cache_dir=cache_dir)
                 elif os.path.exists(pretrained_text):
                     text_checkpoint_path = pretrained_text
