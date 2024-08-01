@@ -42,11 +42,13 @@ We hope our efforts enable a broader range of the research community to advance 
 ## BibTeX & Citation
 
 ```
-@article{EVA02,
-  title={EVA-02: A Visual Representation for Neon Genesis},
+@article{eva02,
+  title={Eva-02: A visual representation for neon genesis},
   author={Fang, Yuxin and Sun, Quan and Wang, Xinggang and Huang, Tiejun and Wang, Xinlong and Cao, Yue},
-  journal={arXiv preprint arXiv:2303.11331},
-  year={2023}
+  journal={Image and Vision Computing},
+  pages={105171},
+  year={2024},
+  publisher={Elsevier}
 }
 ```
 
